@@ -11,6 +11,7 @@ interface NeomorphicCard3DProps extends Omit<HTMLMotionProps<"div">, "onDrag" | 
   shadow?: boolean;
   scale?: boolean;
   perspective?: number;
+  children?: React.ReactNode; // Explicitly define children as ReactNode
 }
 
 const NeomorphicCard3D: React.FC<NeomorphicCard3DProps> = ({
