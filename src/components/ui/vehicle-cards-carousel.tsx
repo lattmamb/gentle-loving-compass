@@ -1,4 +1,3 @@
-
 import React, {
   useEffect,
   useRef,
@@ -150,10 +149,12 @@ export const Card = ({
   vehicle,
   index,
   layout = false,
+  onSwipe,
 }: {
   vehicle: Vehicle;
   index: number;
   layout?: boolean;
+  onSwipe?: (direction: string) => void;
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -197,6 +198,10 @@ export const Card = ({
     e.stopPropagation();
     navigate(`/vehicles/${vehicle.id}`);
   };
+  
+  const handleSwipe = (direction: string) => {
+    if (onSwipe) onSwipe(direction);
+  };
 
   return (
     <>
@@ -208,6 +213,7 @@ export const Card = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="bg-black/80 backdrop-blur-lg h-full w-full fixed inset-0"
+              onClick={handleClose}
             />
             <motion.div
               initial={{ opacity: 0 }}
@@ -216,6 +222,14 @@ export const Card = ({
               ref={containerRef}
               layoutId={layout ? `card-${vehicle.id}` : undefined}
               className="max-w-5xl mx-auto neo-elevated bg-[#141821] h-fit z-[60] my-10 p-4 md:p-10 rounded-3xl relative"
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(e, info) => {
+                if (info.offset.y > 200) {
+                  handleClose();
+                }
+              }}
             >
               <button
                 className="sticky top-4 h-8 w-8 right-0 ml-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center"
@@ -291,6 +305,10 @@ export const Card = ({
                   </Button>
                 </div>
               </div>
+              
+              <div className="text-center pb-2 text-white/50 text-xs mt-4">
+                Pull down to close
+              </div>
             </motion.div>
           </div>
         )}
@@ -299,6 +317,7 @@ export const Card = ({
         layoutId={layout ? `card-${vehicle.id}` : undefined}
         onClick={handleOpen}
         className="rounded-3xl neo-elevated h-80 w-56 md:h-[30rem] md:w-80 overflow-hidden flex flex-col items-start justify-start relative z-10"
+        whileTap={{ scale: 0.98 }}
       >
         <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30 pointer-events-none" />
         <div className="relative z-40 p-8">
@@ -340,19 +359,27 @@ function Stat({
   icon: string;
 }) {
   return (
-    <div className="flex flex-col items-center text-center neo-pressed rounded-lg p-2">
+    <motion.div 
+      className="flex flex-col items-center text-center neo-pressed rounded-lg p-2"
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
+    >
       <span className="text-lg mb-1">{icon}</span>
       <p className="font-medium text-white/90 text-sm">{value} {unit}</p>
       <p className="text-xs text-white/60">{label}</p>
-    </div>
+    </motion.div>
   );
 }
 
 function PriceTag({ period, amount }: { period: string; amount: number }) {
   return (
-    <div className="flex flex-col items-center text-center neo-pressed rounded-lg p-3">
+    <motion.div 
+      className="flex flex-col items-center text-center neo-pressed rounded-lg p-3"
+      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
+    >
       <p className="text-sm text-white/60">{period}</p>
       <p className="font-bold text-white text-lg">{formatCurrency(amount)}</p>
-    </div>
+    </motion.div>
   );
 }

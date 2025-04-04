@@ -12,9 +12,15 @@ interface VehicleCardContentProps {
   vehicle: Vehicle;
   contentX?: any;
   contentY?: any;
+  onSwipe?: (direction: string) => void;
 }
 
-export function VehicleCardContent({ vehicle, contentX, contentY }: VehicleCardContentProps) {
+export function VehicleCardContent({ 
+  vehicle, 
+  contentX, 
+  contentY,
+  onSwipe
+}: VehicleCardContentProps) {
   return (
     <>
       <CardContent 

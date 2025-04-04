@@ -12,6 +12,7 @@ interface VehicleCardImageProps {
   contentX?: any;
   contentY?: any;
   isHovered?: boolean;
+  onSwipe?: (direction: string) => void;
 }
 
 export function VehicleCardImage({ 
@@ -21,10 +22,24 @@ export function VehicleCardImage({
   type,
   contentX, 
   contentY,
-  isHovered = false
+  isHovered = false,
+  onSwipe
 }: VehicleCardImageProps) {
   return (
-    <div className="relative w-full pt-[56.25%] bg-gradient-to-b from-gray-800 to-gray-900">
+    <motion.div 
+      className="relative w-full pt-[56.25%] bg-gradient-to-b from-gray-800 to-gray-900"
+      whileTap={{ scale: 0.98 }}
+      drag="x"
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.2}
+      onDragEnd={(e, info) => {
+        if (info.offset.x > 100 && onSwipe) {
+          onSwipe("right");
+        } else if (info.offset.x < -100 && onSwipe) {
+          onSwipe("left");
+        }
+      }}
+    >
       <div className="absolute inset-0 overflow-hidden">
         <motion.img
           src={image || "https://placehold.co/600x400?text=Tesla+Model"}
@@ -71,6 +86,11 @@ export function VehicleCardImage({
           </Badge>
         </motion.div>
       )}
-    </div>
+
+      {/* Swipe hint indicators */}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1 text-white/50 text-xs">
+        <span>← swipe →</span>
+      </div>
+    </motion.div>
   );
 }
