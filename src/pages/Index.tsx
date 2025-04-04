@@ -8,12 +8,31 @@ import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import ThreeDMarquee from "@/components/ThreeDMarquee";
+import { marqueeImages } from "@/data/marqueeImages";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Header />
       <HeroSection />
+      
+      {/* 3D Marquee Section */}
+      <section className="py-16 px-6 relative">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-white">
+            Experience Our Fleet
+          </h2>
+          <p className="text-xl text-white/70 max-w-2xl mx-auto text-center mb-12">
+            Browse through our premium Tesla collection
+          </p>
+          
+          <ThreeDMarquee 
+            images={marqueeImages} 
+            className="mt-8"
+          />
+        </div>
+      </section>
       
       <FeaturedVehicles />
       

@@ -204,6 +204,22 @@
     @apply appearance-none w-4 h-4 rounded-full bg-blue-500 cursor-pointer;
     box-shadow: -100vw 0 0 100vw #0a84ff;
   }
+  
+  /* 3D transform utility for ThreeDMarquee */
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+  
+  /* Size utility for ThreeDMarquee */
+  .size-full {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .size-\[1720px\] {
+    width: 1720px;
+    height: 1720px;
+  }
 }
 
 /* Animation utilities */
