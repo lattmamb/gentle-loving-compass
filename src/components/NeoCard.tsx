@@ -1,164 +1,93 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 
-interface NeoCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "flat" | "elevated" | "pressed";
+interface NeoCardProps {
+  children: React.ReactNode;
+  className?: string;
+  variant?: "elevated" | "pressed" | "flat";
   glow?: boolean;
-  glowColor?: "blue" | "green" | "purple" | "red" | "cyan";
-  depth?: "sm" | "md" | "lg";
   hover3D?: boolean;
   maxRotation?: number;
 }
 
-const NeoCard = ({ 
-  children, 
-  className, 
-  variant = "elevated", 
+export default function NeoCard({
+  children,
+  className = "",
+  variant = "elevated",
   glow = false,
-  glowColor = "blue",
-  depth = "md",
   hover3D = false,
-  maxRotation = 10,
-  ...props 
-}: NeoCardProps) => {
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  maxRotation = 10
+}: NeoCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   
-  // Determine variant classes
-  let variantClass = "";
-  switch (variant) {
-    case "flat":
-      variantClass = "neo-flat";
-      break;
-    case "pressed":
-      variantClass = "neo-pressed";
-      break;
-    case "elevated":
-    default:
-      variantClass = "neo-elevated";
-      break;
-  }
+  // Motion values for 3D effect
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
   
-  // Determine glow classes
-  let glowClass = "";
-  if (glow) {
-    switch (glowColor) {
-      case "green":
-        glowClass = "relative after:absolute after:inset-0 after:rounded-xl after:bg-green-500/20 after:blur-xl after:-z-10";
-        break;
-      case "purple":
-        glowClass = "relative after:absolute after:inset-0 after:rounded-xl after:bg-purple-500/20 after:blur-xl after:-z-10";
-        break;
-      case "red":
-        glowClass = "relative after:absolute after:inset-0 after:rounded-xl after:bg-red-500/20 after:blur-xl after:-z-10";
-        break;
-      case "cyan":
-        glowClass = "relative after:absolute after:inset-0 after:rounded-xl after:bg-cyan-500/20 after:blur-xl after:-z-10";
-        break;
-      case "blue":
-      default:
-        glowClass = "relative after:absolute after:inset-0 after:rounded-xl after:bg-blue-500/20 after:blur-xl after:-z-10";
-        break;
-    }
-  }
+  // Transform mouse position to rotation values
+  const rotateX = useTransform(y, [-0.5, 0.5], [maxRotation, -maxRotation]);
+  const rotateY = useTransform(x, [-0.5, 0.5], [-maxRotation, maxRotation]);
   
-  // Determine depth classes
-  let depthClass = "";
-  switch (depth) {
-    case "sm":
-      depthClass = "shadow-sm";
-      break;
-    case "lg":
-      depthClass = "shadow-xl";
-      break;
-    case "md":
-    default:
-      depthClass = "shadow-md";
-      break;
-  }
-  
-  // Handle mouse movement for 3D hover effect
+  // Handle mouse move for 3D effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!hover3D) return;
+    if (!cardRef.current || !hover3D) return;
     
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    const rect = cardRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
     
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
+    // Calculate normalized mouse position between -0.5 and 0.5
+    const xValue = (e.clientX - rect.left) / width - 0.5;
+    const yValue = (e.clientY - rect.top) / height - 0.5;
     
-    const rotateY = ((mouseX - centerX) / (rect.width / 2)) * maxRotation;
-    const rotateX = -((mouseY - centerY) / (rect.height / 2)) * maxRotation;
-    
-    setRotation({ x: rotateX, y: rotateY });
+    // Update motion values
+    x.set(xValue);
+    y.set(yValue);
   };
-  
-  // Reset rotation when mouse leaves
-  const resetRotation = () => {
-    setRotation({ x: 0, y: 0 });
+
+  // Reset on mouse leave
+  const handleMouseLeave = () => {
     setIsHovered(false);
+    x.set(0);
+    y.set(0);
   };
-  
-  if (hover3D) {
-    return (
-      <motion.div 
-        className={cn("p-6 rounded-xl transition-all duration-300", variantClass, glowClass, depthClass, className)} 
-        style={{
-          perspective: "1000px",
-          transformStyle: "preserve-3d",
-        }}
-        animate={{
-          rotateX: rotation.x,
-          rotateY: rotation.y,
-          scale: isHovered ? 1.02 : 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 400,
-          damping: 20,
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={resetRotation}
-        {...props}
-      >
-        <div className="relative" style={{ transform: "translateZ(20px)" }}>
-          {children}
-        </div>
-        
-        {isHovered && (
-          <motion.div 
-            className="absolute inset-0 rounded-xl pointer-events-none opacity-0"
-            animate={{ opacity: 0.5 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              background: `radial-gradient(circle at ${rotation.y}% ${rotation.x}%, ${
-                glowColor === "blue" ? "rgba(59, 130, 246, 0.3)" : 
-                glowColor === "green" ? "rgba(16, 185, 129, 0.3)" : 
-                glowColor === "purple" ? "rgba(139, 92, 246, 0.3)" : 
-                glowColor === "red" ? "rgba(239, 68, 68, 0.3)" : 
-                "rgba(6, 182, 212, 0.3)"
-              }, transparent 70%)`,
-              zIndex: 10,
-            }}
-          />
-        )}
-      </motion.div>
-    );
-  }
-  
+
+  // Base styles based on variant
+  const variantStyles = {
+    elevated: "shadow-lg border border-white/10 bg-gradient-to-br from-gray-900/90 to-gray-800",
+    pressed: "shadow-inner border border-white/5 bg-gradient-to-br from-gray-800 to-gray-900",
+    flat: "border border-white/10 bg-gray-900/80",
+  };
+
+  // Glow effect styles
+  const glowStyles = glow
+    ? "before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-blue-500/20 before:to-purple-500/20 before:opacity-0 before:transition-opacity hover:before:opacity-100"
+    : "";
+
   return (
-    <div 
-      className={cn("p-6 rounded-xl", variantClass, glowClass, depthClass, className)} 
-      {...props}
+    <motion.div
+      ref={cardRef}
+      className={cn(
+        "relative overflow-hidden rounded-2xl backdrop-blur-lg transition-all",
+        variantStyles[variant],
+        glowStyles,
+        className
+      )}
+      onMouseMove={hover3D ? handleMouseMove : undefined}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      style={hover3D ? {
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+        transition: "transform 0.1s ease"
+      } : undefined}
     >
       {children}
-    </div>
+    </motion.div>
   );
-};
-
-export default NeoCard;
+}

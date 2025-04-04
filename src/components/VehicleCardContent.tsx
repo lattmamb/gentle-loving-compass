@@ -10,65 +10,41 @@ import { CardContent, CardFooter } from "@/components/ui/card";
 
 interface VehicleCardContentProps {
   vehicle: Vehicle;
-  contentX: any;
-  contentY: any;
+  contentX?: any;
+  contentY?: any;
 }
 
 export function VehicleCardContent({ vehicle, contentX, contentY }: VehicleCardContentProps) {
   return (
     <>
       <CardContent 
-        className="p-6"
+        className="p-4"
         style={{ transformStyle: "preserve-3d" }}
       >
         <motion.div 
-          className="flex justify-between items-start mb-4"
+          className="flex justify-between items-start"
           style={{
             x: contentX,
             y: contentY,
             z: 20,
           }}
         >
-          <h3 className="text-xl font-bold text-gradient-blue">Tesla {vehicle.model}</h3>
-          <div className="text-right">
-            <p className="text-xs text-white/60">From</p>
-            <p className="text-lg font-bold text-white">
-              {formatCurrency(vehicle.price.daily)}
-              <span className="text-xs text-white/60 ml-1">/day</span>
-            </p>
-          </div>
+          <h3 className="text-2xl font-bold text-white">Tesla {vehicle.model}</h3>
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-3 gap-4 my-6"
+          className="text-sm text-white/70 mt-1"
           style={{
             x: contentX,
             y: contentY,
-            z: 30,
+            z: 20,
           }}
         >
-          <Stat
-            label="Range"
-            value={vehicle.specs.range}
-            unit="mi"
-            icon="⚡"
-          />
-          <Stat
-            label="Top Speed"
-            value={vehicle.specs.topSpeed}
-            unit="mph"
-            icon="🏎️"
-          />
-          <Stat
-            label="0-60"
-            value={vehicle.specs.acceleration}
-            unit="sec"
-            icon="⏱️"
-          />
+          From {formatCurrency(vehicle.price.daily)}<span className="text-xs text-white/60">/day</span>
         </motion.div>
       </CardContent>
       
-      <CardFooter className="px-6 pb-6 pt-0 flex justify-between">
+      <CardFooter className="px-4 pb-4 pt-0 flex justify-between">
         <motion.div
           style={{
             x: contentX,
@@ -77,11 +53,15 @@ export function VehicleCardContent({ vehicle, contentX, contentY }: VehicleCardC
           }}
           className="flex gap-3 w-full"
         >
-          <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 w-1/2">
-            <Link to={`/vehicles/${vehicle.id}`}>Details</Link>
+          <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 w-1/2 h-9 rounded-md px-2">
+            <Link to={`/vehicles/${vehicle.id}`}>
+              <span className="text-xs">Details</span>
+            </Link>
           </Button>
-          <Button asChild className="bg-blue-600 hover:bg-blue-700 w-1/2">
-            <Link to={`/book/${vehicle.id}`}>Book Now</Link>
+          <Button asChild className="bg-blue-600 hover:bg-blue-700 w-1/2 h-9 rounded-md px-2">
+            <Link to={`/book/${vehicle.id}`}>
+              <span className="text-xs">Book Now</span>
+            </Link>
           </Button>
         </motion.div>
       </CardFooter>
