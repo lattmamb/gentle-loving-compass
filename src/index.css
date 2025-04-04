@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -64,26 +65,25 @@
   html {
     @apply scroll-smooth;
   }
+  
+  /* Enhanced button and input styles */
+  button, 
+  .button {
+    @apply transition-all duration-200 ease-out active:scale-95;
+  }
+  
+  input,
+  select,
+  textarea {
+    @apply focus:ring-2 focus:ring-blue-500/50 outline-none transition-shadow duration-200;
+  }
 }
 
 @layer utilities {
-  .scrollbar-none {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
+  /* ... keep existing code (scrollbar utilities) */
 
   /* Previous glass utilities */
-  .glass-card {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
-  }
-  
-  .neo-blur {
-    @apply backdrop-blur-2xl bg-black/40 border border-white/10;
-  }
+  /* ... keep existing code (glass utilities) */
   
   /* Neomorphism utilities */
   .neo-flat {
@@ -148,14 +148,7 @@
   }
 
   /* Scrollbar utilities */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  /* ... keep existing code (scrollbar utilities) */
   
   /* Uiverse inspired utilities */
   .ui-checkbox {

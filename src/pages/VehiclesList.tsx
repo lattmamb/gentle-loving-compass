@@ -17,6 +17,10 @@ import {
   SheetTrigger 
 } from "@/components/ui/sheet";
 import AIAssistant from "@/components/AIAssistant";
+import VehicleHeroSection from "@/components/VehicleHeroSection";
+import { Checkbox } from "@/components/ui/checkbox";
+import NeoCard from "@/components/NeoCard";
+import { motion } from "framer-motion";
 
 const VehiclesList = () => {
   const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>(vehicles);
@@ -85,66 +89,63 @@ const VehiclesList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
       
-      <main className="pt-24 pb-16 px-6">
+      <VehicleHeroSection 
+        onSearchChange={setSearchQuery}
+        searchValue={searchQuery}
+      />
+      
+      <main className="pt-8 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between mb-8">
+          <div className="flex items-end justify-between mb-8">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                Tesla Vehicles
-              </h1>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">
+                Available Vehicles
+              </h2>
               <p className="text-white/70">
                 {filteredVehicles.length} vehicles available for subscription
               </p>
             </div>
             
-            <div className="flex items-center mt-4 md:mt-0">
-              <div className="relative flex-1 mr-2">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" size={18} />
-                <Input
-                  placeholder="Search vehicles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 bg-white/5 border-white/10 text-white w-full"
-                />
-              </div>
-              
-              {/* Mobile Filter Button */}
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" className="md:hidden border-white/10 text-white hover:bg-white/10">
-                    <SlidersHorizontal size={18} className="mr-2" />
-                    Filters
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[280px] backdrop-blur-xl bg-black/90 border-white/10">
-                  <SheetHeader>
-                    <SheetTitle className="text-white">Filters</SheetTitle>
-                  </SheetHeader>
-                  <div className="mt-6">
-                    <FilterContent 
-                      vehicleTypes={vehicleTypes} 
-                      selectedTypes={selectedTypes} 
-                      toggleType={toggleType}
-                      allFeatures={allFeatures}
-                      selectedFeatures={selectedFeatures}
-                      toggleFeature={toggleFeature}
-                      priceRange={priceRange}
-                      setPriceRange={setPriceRange}
-                      resetFilters={resetFilters}
-                    />
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
+            {/* Mobile Filter Button */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="md:hidden neo-button border-white/10 text-white hover:bg-white/10">
+                  <SlidersHorizontal size={18} className="mr-2" />
+                  Filters
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] backdrop-blur-xl bg-black/90 border-white/10">
+                <SheetHeader>
+                  <SheetTitle className="text-white">Filters</SheetTitle>
+                </SheetHeader>
+                <div className="mt-6">
+                  <FilterContent 
+                    vehicleTypes={vehicleTypes} 
+                    selectedTypes={selectedTypes} 
+                    toggleType={toggleType}
+                    allFeatures={allFeatures}
+                    selectedFeatures={selectedFeatures}
+                    toggleFeature={toggleFeature}
+                    priceRange={priceRange}
+                    setPriceRange={setPriceRange}
+                    resetFilters={resetFilters}
+                  />
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
           
           <div className="flex flex-col md:flex-row gap-8">
             {/* Desktop Filter Sidebar */}
             <aside className="hidden md:block w-64 shrink-0">
-              <div className="sticky top-24 backdrop-blur-xl bg-white/5 rounded-lg border border-white/10 p-6">
+              <NeoCard 
+                variant="elevated"
+                glow={true}
+                className="sticky top-24 h-auto"
+              >
                 <FilterContent 
                   vehicleTypes={vehicleTypes} 
                   selectedTypes={selectedTypes} 
@@ -156,28 +157,43 @@ const VehiclesList = () => {
                   setPriceRange={setPriceRange}
                   resetFilters={resetFilters}
                 />
-              </div>
+              </NeoCard>
             </aside>
             
             {/* Vehicle Grid */}
             <div className="flex-1">
               {filteredVehicles.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-64 text-center backdrop-blur-xl bg-white/5 rounded-lg border border-white/10 p-6">
+                <NeoCard 
+                  variant="pressed"
+                  className="flex flex-col items-center justify-center h-64 text-center"
+                >
                   <div className="text-5xl mb-4">🔍</div>
                   <h2 className="text-xl font-bold mb-2">No vehicles found</h2>
                   <p className="text-white/70 mb-4">
                     Try adjusting your search criteria to find more options.
                   </p>
-                  <Button onClick={resetFilters} className="bg-blue-600 hover:bg-blue-700">
+                  <Button onClick={resetFilters} className="bg-blue-600 hover:bg-blue-700 neo-button">
                     Reset Filters
                   </Button>
-                </div>
+                </NeoCard>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                  {filteredVehicles.map((vehicle) => (
-                    <VehicleCard key={vehicle.id} vehicle={vehicle} />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                >
+                  {filteredVehicles.map((vehicle, index) => (
+                    <motion.div
+                      key={vehicle.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.4 }}
+                    >
+                      <VehicleCard vehicle={vehicle} />
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               )}
             </div>
           </div>
@@ -236,14 +252,13 @@ function FilterContent({
         <h3 className="font-medium text-lg mb-3 text-white">Vehicle Type</h3>
         <div className="space-y-2">
           {vehicleTypes.map((type) => (
-            <label key={type} className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                className="rounded text-blue-600 focus:ring-blue-500 border-white/20 bg-transparent"
+            <label key={type} className="flex items-center cursor-pointer group">
+              <Checkbox
                 checked={selectedTypes.includes(type)}
-                onChange={() => toggleType(type)}
+                onCheckedChange={() => toggleType(type)}
+                className="ui-checkbox"
               />
-              <span className="ml-2 text-white/80">{type}</span>
+              <span className="ml-2 text-white/80 group-hover:text-white transition-colors">{type}</span>
             </label>
           ))}
         </div>
@@ -253,14 +268,13 @@ function FilterContent({
         <h3 className="font-medium text-lg mb-3 text-white">Features</h3>
         <div className="space-y-2">
           {allFeatures.slice(0, 5).map((feature) => (
-            <label key={feature} className="flex items-center cursor-pointer">
-              <input
-                type="checkbox"
-                className="rounded text-blue-600 focus:ring-blue-500 border-white/20 bg-transparent"
+            <label key={feature} className="flex items-center cursor-pointer group">
+              <Checkbox
                 checked={selectedFeatures.includes(feature)}
-                onChange={() => toggleFeature(feature)}
+                onCheckedChange={() => toggleFeature(feature)}
+                className="ui-checkbox"
               />
-              <span className="ml-2 text-white/80">{feature}</span>
+              <span className="ml-2 text-white/80 group-hover:text-white transition-colors">{feature}</span>
             </label>
           ))}
         </div>
@@ -269,7 +283,7 @@ function FilterContent({
       <Button 
         variant="outline" 
         onClick={resetFilters}
-        className="w-full mt-4 border-white/10 text-white hover:bg-white/10"
+        className="w-full mt-4 neo-button border-white/10 text-white hover:bg-white/10"
       >
         Reset Filters
       </Button>

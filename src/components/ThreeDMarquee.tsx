@@ -20,7 +20,7 @@ export const ThreeDMarquee = ({
   return (
     <div
       className={cn(
-        "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100",
+        "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100 neo-card",
         className,
       )}
     >
@@ -52,6 +52,7 @@ export const ThreeDMarquee = ({
                     <motion.img
                       whileHover={{
                         y: -10,
+                        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
                       }}
                       transition={{
                         duration: 0.3,
@@ -60,7 +61,7 @@ export const ThreeDMarquee = ({
                       key={imageIndex + image}
                       src={image}
                       alt={`Tesla Image ${imageIndex + 1}`}
-                      className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl"
+                      className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl neo-glow-blue"
                       width={970}
                       height={700}
                     />
