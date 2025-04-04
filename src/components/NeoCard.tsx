@@ -124,6 +124,10 @@ const NeoCard = ({
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={resetRotation}
+        // Explicitly remove the drag event handlers that are causing TypeScript errors
+        onDrag={undefined}
+        onDragEnd={undefined}
+        onDragStart={undefined}
         {...props}
       >
         <div className="relative" style={{ transform: "translateZ(20px)" }}>
