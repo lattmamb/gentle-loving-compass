@@ -8,13 +8,10 @@ import AnimatedFeatures from "@/components/AnimatedFeatures";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 import AnimatedStats from "@/components/AnimatedStats";
 import SubscriptionPlans from "@/components/SubscriptionPlans";
-import ThreeDMarquee from "@/components/ThreeDMarquee";
-import { marqueeImages } from "@/data/marqueeImages";
 import VehicleCardsCarousel from "@/components/VehicleCardsCarousel";
 import { vehicles } from "@/data/vehicles";
 import { motion } from "framer-motion";
-import TabsSection from "@/components/TabsSection";
-import GlassmorphicCardsSection from "@/components/GlassmorphicCardsSection";
+import CardDemo from "@/components/ui/cards-demo-1";
 
 const Index = () => {
   return (
@@ -24,9 +21,6 @@ const Index = () => {
       
       {/* Animated Stats Section */}
       <AnimatedStats />
-      
-      {/* Tabs Section with Animated Cards */}
-      <TabsSection />
       
       {/* Vehicle Cards Carousel Section */}
       <motion.section 
@@ -43,22 +37,16 @@ const Index = () => {
         />
       </motion.section>
       
-      {/* Glassmorphic Cards Section */}
-      <GlassmorphicCardsSection />
-      
-      {/* Features Section */}
-      <AnimatedFeatures />
-      
-      {/* 3D Marquee Section */}
-      <motion.section 
-        className="py-16 px-6 relative"
+      {/* Card Demo Section */}
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true }}
+        className="py-16 px-6 relative"
       >
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -66,19 +54,21 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient-blue">
-              Experience Our Fleet
+              Featured Vehicle
             </h2>
             <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Browse through our premium Tesla collection
+              Experience our premium Tesla Model S
             </p>
           </motion.div>
           
-          <ThreeDMarquee 
-            images={marqueeImages} 
-            className="mt-8"
-          />
+          <div className="flex justify-center">
+            <CardDemo />
+          </div>
         </div>
       </motion.section>
+      
+      {/* Features Section */}
+      <AnimatedFeatures />
       
       {/* Testimonials Section */}
       <AnimatedTestimonials />

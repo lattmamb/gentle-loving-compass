@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import NeomorphicCard3D from "./NeomorphicCard3D";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -23,15 +22,14 @@ export default function VehicleCard({
   const [isHovered, setIsHovered] = useState(false);
   
   return (
-    <NeomorphicCard3D
+    <Card
       className={cn(
-        "p-0 overflow-hidden",
+        "overflow-hidden border-white/10",
         featured ? "col-span-2 md:col-span-2" : "",
         className
       )}
-      maxRotation={8}
-      glowColor={vehicle.status === "available" ? "rgba(10, 132, 255, 0.3)" : "rgba(255, 200, 0, 0.2)"}
-      perspective={1200}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative w-full pt-[56.25%]">
         <div className="absolute inset-0 overflow-hidden">
@@ -51,7 +49,7 @@ export default function VehicleCard({
         <div className="absolute top-4 right-4 z-10">
           <Badge
             className={cn(
-              "text-xs font-medium rounded-full px-3 py-1 neo-glow",
+              "text-xs font-medium rounded-full px-3 py-1",
               vehicle.status === "available"
                 ? "bg-green-500/20 text-green-400 border-green-500/50"
                 : "bg-amber-500/20 text-amber-400 border-amber-500/50"
@@ -97,14 +95,14 @@ export default function VehicleCard({
       </CardContent>
       
       <CardFooter className="px-6 pb-6 pt-0 flex justify-between">
-        <Button asChild variant="outline" className="neo-button border-white/20 text-white hover:bg-white/10">
+        <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
           <Link to={`/vehicles/${vehicle.id}`}>Details</Link>
         </Button>
-        <Button asChild className="neo-button bg-blue-600 hover:bg-blue-700">
+        <Button asChild className="bg-blue-600 hover:bg-blue-700">
           <Link to={`/book/${vehicle.id}`}>Book Now</Link>
         </Button>
       </CardFooter>
-    </NeomorphicCard3D>
+    </Card>
   );
 }
 
@@ -120,7 +118,7 @@ function Stat({
   icon: string;
 }) {
   return (
-    <div className="flex flex-col items-center text-center neo-pressed rounded-lg p-2">
+    <div className="flex flex-col items-center text-center rounded-lg p-2 bg-white/5">
       <span className="text-lg mb-1">{icon}</span>
       <p className="font-medium text-white/90 text-sm">{value} {unit}</p>
       <p className="text-xs text-white/60">{label}</p>
