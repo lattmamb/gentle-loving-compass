@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface NeomorphicCard3DProps extends React.HTMLAttributes<HTMLDivElement> {
+interface NeomorphicCard3DProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onDrag'> {
   maxRotation?: number;
   glowColor?: string;
   shadow?: boolean;
