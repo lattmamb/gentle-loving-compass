@@ -1,12 +1,11 @@
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Vehicle } from "@/types";
-import { cn, formatCurrency } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { VehicleCardImage } from "./VehicleCardImage";
+import { VehicleCardContent } from "./VehicleCardContent";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -48,7 +47,7 @@ export default function VehicleCard({
     x.set(xValue);
     y.set(yValue);
   };
-  
+
   return (
     <motion.div
       className={cn(
@@ -62,7 +61,6 @@ export default function VehicleCard({
       }}
       whileHover={{
         scale: 1.02,
-        transition: { duration: 0.2 },
       }}
       animate={{
         scale: isHovered ? 1.02 : 1,
@@ -81,132 +79,21 @@ export default function VehicleCard({
       }}
     >
       <Card className="neo-elevated border-white/10 overflow-hidden h-full">
-        <div className="relative w-full pt-[56.25%]">
-          <div className="absolute inset-0 overflow-hidden">
-            <motion.img
-              src={vehicle.image || "https://placehold.co/600x400?text=Tesla+Model"}
-              alt={vehicle.model}
-              className="w-full h-full object-cover"
-              style={{
-                x: useTransform(contentX, v => v * -1.5),
-                y: useTransform(contentY, v => v * -1.5),
-                scale: isHovered ? 1.05 : 1,
-              }}
-              transition={{
-                duration: 0.4,
-                ease: "easeOut",
-              }}
-            />
-          </div>
-          <motion.div 
-            className="absolute top-4 right-4 z-10"
-            style={{
-              x: useTransform(contentX, v => v * 1.5),
-              y: useTransform(contentY, v => v * 1.5),
-            }}
-          >
-            <Badge
-              className={cn(
-                "text-xs font-medium rounded-full px-3 py-1",
-                vehicle.status === "available"
-                  ? "bg-green-500/20 text-green-400 border-green-500/50"
-                  : "bg-amber-500/20 text-amber-400 border-amber-500/50"
-              )}
-            >
-              {vehicle.status === "available" ? "Available" : "Booked"}
-            </Badge>
-          </motion.div>
-        </div>
+        <VehicleCardImage 
+          image={vehicle.image} 
+          status={vehicle.status}
+          model={vehicle.model}
+          contentX={contentX}
+          contentY={contentY}
+          isHovered={isHovered}
+        />
         
-        <CardContent 
-          className="p-6"
-          style={{ transformStyle: "preserve-3d" }}
-        >
-          <motion.div 
-            className="flex justify-between items-start mb-4"
-            style={{
-              x: contentX,
-              y: contentY,
-              z: 20,
-            }}
-          >
-            <h3 className="text-xl font-bold text-gradient-blue">Tesla {vehicle.model}</h3>
-            <div className="text-right">
-              <p className="text-xs text-white/60">From</p>
-              <p className="text-lg font-bold text-white">
-                {formatCurrency(vehicle.price.daily)}
-                <span className="text-xs text-white/60 ml-1">/day</span>
-              </p>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            className="grid grid-cols-3 gap-4 my-6"
-            style={{
-              x: useTransform(contentX, v => v * 1.2),
-              y: useTransform(contentY, v => v * 1.2),
-              z: 30,
-            }}
-          >
-            <Stat
-              label="Range"
-              value={vehicle.specs.range}
-              unit="mi"
-              icon="⚡"
-            />
-            <Stat
-              label="Top Speed"
-              value={vehicle.specs.topSpeed}
-              unit="mph"
-              icon="🏎️"
-            />
-            <Stat
-              label="0-60"
-              value={vehicle.specs.acceleration}
-              unit="sec"
-              icon="⏱️"
-            />
-          </motion.div>
-        </CardContent>
-        
-        <CardFooter className="px-6 pb-6 pt-0 flex justify-between">
-          <motion.div
-            style={{
-              x: useTransform(contentX, v => v * 1.5),
-              y: useTransform(contentY, v => v * 1.5),
-              z: 40,
-            }}
-            className="flex gap-3 w-full"
-          >
-            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 w-1/2">
-              <Link to={`/vehicles/${vehicle.id}`}>Details</Link>
-            </Button>
-            <Button asChild className="bg-blue-600 hover:bg-blue-700 w-1/2">
-              <Link to={`/book/${vehicle.id}`}>Book Now</Link>
-            </Button>
-          </motion.div>
-        </CardFooter>
+        <VehicleCardContent 
+          vehicle={vehicle} 
+          contentX={contentX}
+          contentY={contentY}
+        />
       </Card>
     </motion.div>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  unit,
-  icon,
-}: {
-  label: string;
-  value: number;
-  unit: string;
-  icon: string;
-}) {
-  return (
-    <div className="flex flex-col items-center text-center rounded-lg p-2 neo-pressed">
-      <span className="text-lg mb-1">{icon}</span>
-      <p className="font-medium text-white/90 text-sm">{value} {unit}</p>
-      <p className="text-xs text-white/60">{label}</p>
-    </div>
   );
 }
