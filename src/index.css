@@ -40,6 +40,12 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Neomorphism specific variables */
+    --neo-bg: 220 10% 12%;
+    --neo-shadow-light: 220 10% 16%;
+    --neo-shadow-dark: 220 10% 8%;
+    --neo-highlight: 220 10% 20%;
   }
 }
 
@@ -47,12 +53,12 @@
   * {
     @apply border-border selection:bg-blue-900/30 selection:text-white;
   }
-
+  
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-    background-color: #000000;
-    background-image: radial-gradient(circle at center top, #10101a, #000000);
+    background-color: #141821;
+    background-image: radial-gradient(circle at center top, #1e2432, #0f131c);
     background-attachment: fixed;
   }
 
@@ -71,6 +77,7 @@
     display: none;
   }
 
+  /* Previous glass utilities */
   .glass-card {
     @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
   }
@@ -79,6 +86,60 @@
     @apply backdrop-blur-2xl bg-black/40 border border-white/10;
   }
   
+  /* Neomorphism utilities */
+  .neo-flat {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: none;
+  }
+  
+  .neo-pressed {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: inset 5px 5px 10px #0a0c12,
+                inset -5px -5px 10px #1e2430;
+  }
+  
+  .neo-elevated {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: 5px 5px 10px #0a0c12,
+                -5px -5px 10px #1e2430;
+  }
+  
+  .neo-button {
+    @apply neo-elevated transition-all duration-200 hover:scale-105 active:neo-pressed;
+  }
+  
+  .neo-input {
+    @apply neo-pressed focus:ring-2 focus:ring-blue-500/50 outline-none;
+  }
+  
+  .neo-card {
+    @apply neo-elevated p-6 relative overflow-hidden;
+  }
+  
+  .neo-glow {
+    @apply relative;
+  }
+  
+  .neo-glow::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 bottom-0 rounded-xl;
+    background: linear-gradient(225deg, #1a2030, #0c0f15);
+    z-index: -1;
+    filter: blur(24px);
+  }
+  
+  .neo-glow-blue {
+    @apply relative;
+  }
+  
+  .neo-glow-blue::before {
+    content: '';
+    @apply absolute -inset-1 rounded-xl bg-blue-500/20;
+    z-index: -1;
+    filter: blur(16px);
+  }
+
+  /* Text styling utilities */
   .text-gradient {
     @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
   }
@@ -87,6 +148,7 @@
     @apply bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent;
   }
 
+  /* Scrollbar utilities */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -94,6 +156,54 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  
+  /* Uiverse inspired utilities */
+  .ui-checkbox {
+    @apply appearance-none h-5 w-5 neo-pressed rounded cursor-pointer checked:bg-blue-500 transition-all duration-300 relative;
+  }
+  
+  .ui-checkbox:checked::before {
+    content: '✓';
+    @apply absolute inset-0 text-white flex items-center justify-center text-xs font-bold;
+  }
+  
+  .ui-toggle {
+    @apply relative inline-flex h-6 w-12 items-center rounded-full neo-pressed transition-colors focus:outline-none;
+  }
+  
+  .ui-toggle-thumb {
+    @apply inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200;
+  }
+  
+  .ui-glow-button {
+    @apply relative inline-flex overflow-hidden rounded-full p-[2px];
+  }
+  
+  .ui-glow-button::before {
+    @apply absolute inset-0 rounded-full;
+    content: '';
+    background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+    z-index: -2;
+  }
+  
+  .ui-glow-button::after {
+    @apply absolute inset-[2px] rounded-full bg-[#141821];
+    content: '';
+    z-index: -1;
+  }
+  
+  .ui-card-3d {
+    @apply rounded-2xl neo-elevated transition-all duration-300 transform perspective-[1000px];
+  }
+  
+  .ui-range {
+    @apply neo-pressed rounded-full h-2 w-full overflow-hidden appearance-none;
+  }
+  
+  .ui-range::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full bg-blue-500 cursor-pointer;
+    box-shadow: -100vw 0 0 100vw #0a84ff;
   }
 }
 
@@ -113,6 +223,18 @@
   
   .pulse-glow {
     animation: pulseGlow 2s infinite;
+  }
+
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+  }
+  
+  .rotate-3d {
+    transition: transform 0.3s ease;
+  }
+  
+  .rotate-3d:hover {
+    transform: rotateX(10deg) rotateY(-10deg);
   }
 }
 
@@ -142,5 +264,14 @@
   }
   50% {
     box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.5);
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }

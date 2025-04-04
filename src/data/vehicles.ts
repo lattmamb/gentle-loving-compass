@@ -154,5 +154,38 @@ export const vehicles: Vehicle[] = [
       "Supercharger Access"
     ],
     status: "available"
+  },
+  {
+    id: "roadster",
+    model: "Roadster",
+    type: "Sports",
+    image: "/tesla-roadster.png",
+    colorVariants: [
+      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-roadster-red.png" },
+      { name: "Midnight Silver", color: "#393c41", image: "/tesla-roadster-silver.png" },
+      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-roadster-blue.png" },
+      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-roadster-white.png" }
+    ],
+    price: {
+      daily: 399,
+      monthly: 7999,
+      yearly: 79999
+    },
+    specs: {
+      range: 620,
+      topSpeed: 250,
+      acceleration: 1.9
+    },
+    features: [
+      "0-60 mph in 1.9 seconds",
+      "Top speed over 250 mph",
+      "620 mile range",
+      "Removable Glass Roof",
+      "All-Wheel Drive",
+      "Torque Vectoring",
+      "Premium Sound System",
+      "Exclusive Supercharger Access"
+    ],
+    status: "available"
   }
 ];

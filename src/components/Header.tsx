@@ -1,13 +1,15 @@
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, Car, Calendar, Map } from "lucide-react";
+import { Menu, X, User, Car, Calendar, Map, CreditCard, Info } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,12 +20,16 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-6 py-4",
         scrolled
-          ? "bg-black/70 backdrop-blur-xl border-b border-white/10"
+          ? "backdrop-blur-xl border-b border-white/10"
           : "bg-transparent"
       )}
     >
@@ -36,38 +42,45 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <NavLink to="/vehicles">Vehicles</NavLink>
-          <NavLink to="/pricing">Pricing</NavLink>
-          <NavLink to="/locations">Locations</NavLink>
-          <NavLink to="/about">About</NavLink>
-          <Button asChild className="bg-blue-600 hover:bg-blue-700">
-            <Link to="/dashboard">Dashboard</Link>
-          </Button>
+          <NavLink to="/vehicles" isActive={isActive("/vehicles")}>Vehicles</NavLink>
+          <NavLink to="/pricing" isActive={isActive("/pricing")}>Pricing</NavLink>
+          <NavLink to="/locations" isActive={isActive("/locations")}>Locations</NavLink>
+          <NavLink to="/about" isActive={isActive("/about")}>About</NavLink>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button asChild className="ui-glow-button">
+              <Link to="/dashboard">
+                <span className="py-2 px-4">Dashboard</span>
+              </Link>
+            </Button>
+          </motion.div>
         </nav>
 
         {/* Mobile Menu */}
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden text-white">
+            <Button variant="ghost" size="icon" className="md:hidden text-white neo-button">
               <Menu size={24} />
             </Button>
           </SheetTrigger>
           <SheetContent className="w-80 backdrop-blur-2xl bg-black/80 border-white/10">
             <div className="flex flex-col space-y-6 mt-8">
-              <MobileNavLink to="/" icon={<Car size={18} />}>
+              <MobileNavLink to="/vehicles" icon={<Car size={18} />} isActive={isActive("/vehicles")}>
                 Vehicles
               </MobileNavLink>
-              <MobileNavLink to="/pricing" icon={<Calendar size={18} />}>
+              <MobileNavLink to="/pricing" icon={<CreditCard size={18} />} isActive={isActive("/pricing")}>
                 Pricing
               </MobileNavLink>
-              <MobileNavLink to="/locations" icon={<Map size={18} />}>
+              <MobileNavLink to="/locations" icon={<Map size={18} />} isActive={isActive("/locations")}>
                 Locations
               </MobileNavLink>
-              <MobileNavLink to="/dashboard" icon={<User size={18} />}>
+              <MobileNavLink to="/about" icon={<Info size={18} />} isActive={isActive("/about")}>
+                About
+              </MobileNavLink>
+              <MobileNavLink to="/dashboard" icon={<User size={18} />} isActive={isActive("/dashboard")}>
                 Dashboard
               </MobileNavLink>
-              <Button className="mt-4 w-full bg-blue-600 hover:bg-blue-700">
-                Book Now
+              <Button className="mt-4 w-full ui-glow-button">
+                <span className="py-2 px-4 w-full inline-block">Book Now</span>
               </Button>
             </div>
           </SheetContent>
@@ -77,13 +90,24 @@ export default function Header() {
   );
 }
 
-function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
+function NavLink({ to, children, isActive }: { to: string; children: React.ReactNode; isActive: boolean }) {
   return (
     <Link
       to={to}
-      className="text-white/80 hover:text-white transition-colors relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-blue-500 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+      className={`relative ${
+        isActive 
+          ? "text-blue-400" 
+          : "text-white/80 hover:text-white"
+      } transition-colors`}
     >
-      {children}
+      <span className="relative z-10">{children}</span>
+      {isActive && (
+        <motion.span
+          layoutId="navbar-indicator"
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full"
+          transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+        />
+      )}
     </Link>
   );
 }
@@ -92,17 +116,23 @@ function MobileNavLink({
   to,
   children,
   icon,
+  isActive,
 }: {
   to: string;
   children: React.ReactNode;
   icon: React.ReactNode;
+  isActive: boolean;
 }) {
   return (
     <Link
       to={to}
-      className="flex items-center space-x-2 text-lg text-white/80 hover:text-white p-2 rounded-md transition-colors hover:bg-white/5"
+      className={`flex items-center space-x-2 text-lg ${
+        isActive 
+          ? "neo-pressed text-blue-400" 
+          : "text-white/80 hover:text-white neo-elevated hover:scale-[1.02]"
+      } p-3 rounded-md transition-all duration-200`}
     >
-      <span className="text-blue-500">{icon}</span>
+      <span className={isActive ? "text-blue-400" : "text-white/60"}>{icon}</span>
       <span>{children}</span>
     </Link>
   );

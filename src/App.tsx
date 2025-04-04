@@ -10,6 +10,7 @@ import VehiclesList from "./pages/VehiclesList";
 import VehicleDetail from "./pages/VehicleDetail";
 import BookVehicle from "./pages/BookVehicle";
 import Dashboard from "./pages/Dashboard";
+import Pricing from "./pages/Pricing";
 import React from "react";
 
 // Create a client
@@ -29,6 +30,7 @@ function App() {
             <Route path="/vehicles/:id" element={<VehicleDetail />} />
             <Route path="/book/:id" element={<BookVehicle />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/pricing" element={<Pricing />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

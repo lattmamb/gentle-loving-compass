@@ -2,7 +2,7 @@
 export interface Vehicle {
   id: string;
   model: string;
-  type: string;
+  type: "Sedan" | "SUV" | "Truck" | "Sports";
   image: string;
   colorVariants: ColorVariant[];
   price: {
