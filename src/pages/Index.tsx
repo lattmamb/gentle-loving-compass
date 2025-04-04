@@ -14,7 +14,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import NeomorphicCard3D from "@/components/NeomorphicCard3D";
 import NeoCard from "@/components/NeoCard";
 import ThreeDMarquee from "@/components/ThreeDMarquee";
-import { marqueeImages } from "@/data/marqueeImages";
+import { marqueeImages, featuredImages } from "@/data/marqueeImages";
+import AnimatedBackground from "@/components/AnimatedBackground";
+import GlassmorphicCardsSection from "@/components/GlassmorphicCardsSection";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -57,206 +59,202 @@ const Index = () => {
   }, []);
 
   return (
-    <div ref={scrollRef} className="min-h-screen bg-black text-white overflow-hidden" style={perspectiveStyle}>
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141821] to-[#0a0c12]"></div>
-        <div className="absolute top-0 left-0 w-full h-full opacity-30">
-          <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-40 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-[100px]"></div>
-          <div className="absolute top-1/3 right-1/5 w-72 h-72 bg-cyan-600/10 rounded-full blur-[90px]"></div>
+    <AnimatedBackground intensity="medium">
+      <div ref={scrollRef} className="min-h-screen overflow-hidden" style={perspectiveStyle}>
+        {/* Header with glassmorphism */}
+        <div className="sticky top-0 z-50">
+          <Header />
         </div>
-      </div>
-      
-      {/* Header with glassmorphism */}
-      <div className="sticky top-0 z-50">
-        <Header />
-      </div>
-      
-      {/* Hero Section with 3D transformation */}
-      <motion.section 
-        style={{ 
-          scale: heroScale, 
-          opacity: heroOpacity,
-          translateZ: "20px" 
-        }}
-        className="relative"
-      >
-        <HeroSection />
-      </motion.section>
-      
-      {/* 3D Marquee Gallery Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="py-16 relative"
-        style={{ translateZ: "40px" }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient-blue">
-              Experience Tesla Fleet
-            </h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Our premium collection of Tesla vehicles
-            </p>
-          </motion.div>
-          
-          <ThreeDMarquee images={marqueeImages} />
-        </div>
-      </motion.section>
-      
-      {/* Animated Stats Section with parallax */}
-      <motion.section
-        style={{ y: statsY, translateZ: "30px" }}
-        className="relative"
-      >
-        <AnimatedStats />
-      </motion.section>
-      
-      {/* Vehicle Cards Carousel Section with 3D rotation */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="py-16 relative"
-        style={{ 
-          rotateY: carouselRotateY,
-          translateZ: "10px"
-        }}
-      >
-        <VehicleCardsCarousel 
-          title="Experience Tesla Electrified"
-          subtitle="Browse through our premium Tesla collection with flexible subscription options"
-          vehiclesToShow={vehicles.slice(0, 6)}
-        />
-      </motion.section>
-      
-      {/* 3D Featured Vehicle Card */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="py-16 px-6 relative"
-        style={{ translateZ: "50px" }}
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient-blue">
-              Premium Tesla Experience
-            </h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Discover what makes our vehicles exceptional
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <NeomorphicCard3D
-              maxRotation={15}
-              glowColor="rgba(10, 132, 255, 0.4)"
-              className="p-0 rounded-2xl overflow-hidden h-[400px]"
+        
+        {/* Hero Section with 3D transformation */}
+        <motion.section 
+          style={{ 
+            scale: heroScale, 
+            opacity: heroOpacity,
+            translateZ: "20px" 
+          }}
+          className="relative"
+        >
+          <HeroSection />
+        </motion.section>
+        
+        {/* 3D Marquee Gallery Section */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="py-16 relative"
+          style={{ translateZ: "40px" }}
+        >
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="text-center mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
-              <img 
-                src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=2071&auto=format&fit=crop" 
-                alt="Tesla Interior" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">Luxury Interior</h3>
-                <p className="text-white/80">Premium materials and advanced technology</p>
-              </div>
-            </NeomorphicCard3D>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient-blue">
+                Experience Tesla Fleet
+              </h2>
+              <p className="text-xl text-white/70 max-w-2xl mx-auto">
+                Our premium collection of Tesla vehicles
+              </p>
+            </motion.div>
             
-            <div className="grid grid-rows-2 gap-8 h-[400px]">
+            <ThreeDMarquee images={marqueeImages} />
+          </div>
+        </motion.section>
+        
+        {/* Animated Stats Section with parallax */}
+        <motion.section
+          style={{ y: statsY, translateZ: "30px" }}
+          className="relative"
+        >
+          <AnimatedStats />
+        </motion.section>
+        
+        {/* Vehicle Cards Carousel Section with 3D rotation */}
+        <motion.section 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="py-16 relative"
+          style={{ 
+            rotateY: carouselRotateY,
+            translateZ: "10px"
+          }}
+        >
+          <VehicleCardsCarousel 
+            title="Experience Tesla Electrified"
+            subtitle="Browse through our premium Tesla collection with flexible subscription options"
+            vehiclesToShow={vehicles.slice(0, 6)}
+          />
+        </motion.section>
+        
+        {/* Glassmorphic Cards Section */}
+        <GlassmorphicCardsSection />
+        
+        {/* 3D Featured Vehicle Card */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="py-16 px-6 relative"
+          style={{ translateZ: "50px" }}
+        >
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient-blue">
+                Premium Tesla Experience
+              </h2>
+              <p className="text-xl text-white/70 max-w-2xl mx-auto">
+                Discover what makes our vehicles exceptional
+              </p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <NeomorphicCard3D
-                maxRotation={10}
-                glowColor="rgba(94, 92, 230, 0.4)"
-                className="p-0 rounded-2xl overflow-hidden"
+                maxRotation={15}
+                glowColor="rgba(10, 132, 255, 0.4)"
+                className="p-0 rounded-2xl overflow-hidden h-[400px]"
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1560958089-94ba362a88da?q=80&w=2071&auto=format&fit=crop" 
-                  alt="Tesla Performance" 
+                  src={featuredImages[0].url}
+                  alt={featuredImages[0].title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
-                  <h3 className="text-xl font-bold text-white">Unmatched Performance</h3>
-                  <p className="text-white/80 text-sm">0-60 mph in as little as 1.99 seconds</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-6">
+                  <h3 className="text-2xl font-bold text-white mb-2">{featuredImages[0].title}</h3>
+                  <p className="text-white/80">{featuredImages[0].description}</p>
                 </div>
               </NeomorphicCard3D>
               
-              <NeomorphicCard3D
-                maxRotation={10}
-                glowColor="rgba(16, 185, 129, 0.4)"
-                className="p-0 rounded-2xl overflow-hidden"
-              >
-                <img 
-                  src="https://images.unsplash.com/photo-1553260168-69f3c017f2cd?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Tesla Range" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
-                  <h3 className="text-xl font-bold text-white">Impressive Range</h3>
-                  <p className="text-white/80 text-sm">Up to 405 miles on a single charge</p>
-                </div>
-              </NeomorphicCard3D>
+              <div className="grid grid-rows-2 gap-8 h-[400px]">
+                <NeomorphicCard3D
+                  maxRotation={10}
+                  glowColor="rgba(94, 92, 230, 0.4)"
+                  className="p-0 rounded-2xl overflow-hidden"
+                >
+                  <img 
+                    src={featuredImages[1].url}
+                    alt={featuredImages[1].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+                    <h3 className="text-xl font-bold text-white">{featuredImages[1].title}</h3>
+                    <p className="text-white/80 text-sm">{featuredImages[1].description}</p>
+                  </div>
+                </NeomorphicCard3D>
+                
+                <NeomorphicCard3D
+                  maxRotation={10}
+                  glowColor="rgba(16, 185, 129, 0.4)"
+                  className="p-0 rounded-2xl overflow-hidden"
+                >
+                  <img 
+                    src={featuredImages[2].url}
+                    alt={featuredImages[2].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+                    <h3 className="text-xl font-bold text-white">{featuredImages[2].title}</h3>
+                    <p className="text-white/80 text-sm">{featuredImages[2].description}</p>
+                  </div>
+                </NeomorphicCard3D>
+              </div>
             </div>
           </div>
-        </div>
-      </motion.section>
-      
-      {/* Features Section with scale effect */}
-      <motion.section
-        style={{ 
-          scale: featuresScale,
-          translateZ: "25px" 
-        }}
-        className="relative"
-      >
-        <AnimatedFeatures />
-      </motion.section>
-      
-      {/* Testimonials with 3D depth */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative"
-        style={{ translateZ: "35px" }}
-      >
-        <AnimatedTestimonials />
-      </motion.section>
-      
-      {/* Subscription Plans with neomorphism */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="relative"
-        style={{ translateZ: "15px" }}
-      >
-        <SubscriptionPlans />
-      </motion.div>
-      
-      <Footer />
-      <AIAssistant />
-    </div>
+        </motion.section>
+        
+        {/* Features Section with scale effect */}
+        <motion.section
+          style={{ 
+            scale: featuresScale,
+            translateZ: "25px" 
+          }}
+          className="relative"
+        >
+          <AnimatedFeatures />
+        </motion.section>
+        
+        {/* Testimonials with 3D depth */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="relative"
+          style={{ translateZ: "35px" }}
+        >
+          <AnimatedTestimonials />
+        </motion.section>
+        
+        {/* Subscription Plans with neomorphism */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative"
+          style={{ translateZ: "15px" }}
+        >
+          <SubscriptionPlans />
+        </motion.div>
+        
+        <Footer />
+        <AIAssistant />
+      </div>
+    </AnimatedBackground>
   );
 };
 

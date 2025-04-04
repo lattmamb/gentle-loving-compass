@@ -65,8 +65,7 @@ export default function VehicleCard({
         transition: { duration: 0.2 },
       }}
       animate={{
-        rotateX: isHovered ? rotateX : 0,
-        rotateY: isHovered ? rotateY : 0,
+        scale: isHovered ? 1.02 : 1,
       }}
       transition={{
         type: "spring",
