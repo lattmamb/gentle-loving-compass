@@ -13,6 +13,8 @@ import { marqueeImages } from "@/data/marqueeImages";
 import VehicleCardsCarousel from "@/components/VehicleCardsCarousel";
 import { vehicles } from "@/data/vehicles";
 import { motion } from "framer-motion";
+import TabsSection from "@/components/TabsSection";
+import GlassmorphicCardsSection from "@/components/GlassmorphicCardsSection";
 
 const Index = () => {
   return (
@@ -22,6 +24,9 @@ const Index = () => {
       
       {/* Animated Stats Section */}
       <AnimatedStats />
+      
+      {/* Tabs Section with Animated Cards */}
+      <TabsSection />
       
       {/* Vehicle Cards Carousel Section */}
       <motion.section 
@@ -37,6 +42,9 @@ const Index = () => {
           vehiclesToShow={vehicles.slice(0, 6)}
         />
       </motion.section>
+      
+      {/* Glassmorphic Cards Section */}
+      <GlassmorphicCardsSection />
       
       {/* Features Section */}
       <AnimatedFeatures />
