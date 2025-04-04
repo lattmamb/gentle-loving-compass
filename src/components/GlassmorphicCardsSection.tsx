@@ -1,14 +1,22 @@
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import GlassmorphicCard from "./ui/glassmorphic-card";
 
 export default function GlassmorphicCardsSection() {
+  const { scrollY } = useScroll();
+  
+  // Create parallax effect based on scroll position
+  const y1 = useTransform(scrollY, [0, 1000], [0, -150]);
+  const y2 = useTransform(scrollY, [0, 1000], [0, -100]);
+  const y3 = useTransform(scrollY, [0, 1000], [0, -200]);
+  const y4 = useTransform(scrollY, [0, 1000], [0, -120]);
+  
   const cards = [
-    { title: "Premium Interior", content: "Luxury materials and finishes" },
-    { title: "Long Range", content: "Up to 405 miles on a single charge" },
-    { title: "Performance", content: "0-60 mph in as little as 1.99 seconds" },
-    { title: "Autopilot", content: "Advanced driver assistance features" },
+    { title: "Premium Interior", content: "Luxury materials and finishes", y: y1 },
+    { title: "Long Range", content: "Up to 405 miles on a single charge", y: y2 },
+    { title: "Performance", content: "0-60 mph in as little as 1.99 seconds", y: y3 },
+    { title: "Autopilot", content: "Advanced driver assistance features", y: y4 },
   ];
 
   return (
@@ -43,10 +51,14 @@ export default function GlassmorphicCardsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
+              style={{ y: card.y }}
+              className="shadow-3d"
             >
               <GlassmorphicCard 
                 title={card.title}
                 expanded={true}
+                mouseTracking={true}
+                parallaxIntensity={15}
               >
                 <p className="px-4 pb-4">{card.content}</p>
               </GlassmorphicCard>
