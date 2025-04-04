@@ -21,6 +21,7 @@ import VehicleHeroSection from "@/components/VehicleHeroSection";
 import { Checkbox } from "@/components/ui/checkbox";
 import NeoCard from "@/components/NeoCard";
 import { motion } from "framer-motion";
+import VehicleCardsCarousel from "@/components/VehicleCardsCarousel";
 
 const VehiclesList = () => {
   const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>(vehicles);
@@ -95,6 +96,13 @@ const VehiclesList = () => {
       <VehicleHeroSection 
         onSearchChange={setSearchQuery}
         searchValue={searchQuery}
+      />
+      
+      {/* Featured Vehicles Carousel */}
+      <VehicleCardsCarousel 
+        title="Featured Vehicles"
+        subtitle="Explore our most popular Tesla models available for subscription"
+        vehiclesToShow={vehicles.filter(v => v.status === "available").slice(0, 4)}
       />
       
       <main className="pt-8 pb-16 px-6">

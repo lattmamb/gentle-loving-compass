@@ -1,21 +1,23 @@
-
 import React from "react";
 import HeroSection from "@/components/HeroSection";
 import Header from "@/components/Header";
-import FeaturedVehicles from "@/components/FeaturedVehicles";
-import SubscriptionPlans from "@/components/SubscriptionPlans";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ThreeDMarquee from "@/components/ThreeDMarquee";
 import { marqueeImages } from "@/data/marqueeImages";
+import VehicleCardsCarousel from "@/components/VehicleCardsCarousel";
+import SubscriptionPlans from "@/components/SubscriptionPlans";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <Header />
       <HeroSection />
+      
+      {/* Vehicle Cards Carousel Section */}
+      <VehicleCardsCarousel />
       
       {/* 3D Marquee Section */}
       <section className="py-16 px-6 relative">
@@ -33,8 +35,6 @@ const Index = () => {
           />
         </div>
       </section>
-      
-      <FeaturedVehicles />
       
       {/* Key Features Section */}
       <section className="py-16 px-6 bg-gradient-to-b from-black to-blue-950/50">
@@ -120,8 +120,6 @@ const Index = () => {
       </section>
       
       <SubscriptionPlans />
-      
-      {/* Testimonials would go here */}
       
       <Footer />
       <AIAssistant />
