@@ -17,6 +17,7 @@ import ThreeDMarquee from "@/components/ThreeDMarquee";
 import { marqueeImages, featuredImages } from "@/data/marqueeImages";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import GlassmorphicCardsSection from "@/components/GlassmorphicCardsSection";
+import { SparklesPreviewColorful } from "@/components/ui/sparkles-demo";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
@@ -77,6 +78,11 @@ const Index = () => {
         >
           <HeroSection />
         </motion.section>
+        
+        {/* NEW: Sparkles Preview Section */}
+        <section className="py-16 relative">
+          <SparklesPreviewColorful />
+        </section>
         
         {/* 3D Marquee Gallery Section */}
         <motion.section
