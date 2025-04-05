@@ -3,8 +3,12 @@ import * as React from "react"
 import { motion, useMotionValue, type HTMLMotionProps, MotionStyle } from "framer-motion"
 import { cn } from "@/lib/utils"
 
-// Custom type that specifically omits all drag events from HTMLMotionProps
-type CardProps = Omit<HTMLMotionProps<"div">, "onDrag" | "onDragStart" | "onDragEnd"> & React.HTMLAttributes<HTMLDivElement>;
+// Create a comprehensive type that omits all drag-related events to prevent conflicts
+type CardProps = Omit<HTMLMotionProps<"div">, 
+  "onDrag" | "onDragStart" | "onDragEnd" | "onDragEnter" | "onDragLeave" | 
+  "onDragOver" | "onDragExit" | "drag" | "dragControls" | "dragListener" | 
+  "dragMomentum" | "dragElastic" | "dragTransition" | "dragConstraints" | 
+  "dragDirectionLock" | "dragPropagation" | "_dragX" | "_dragY">;
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -52,8 +56,12 @@ const CardHeader = React.forwardRef<
 ))
 CardHeader.displayName = "CardHeader"
 
-// Update the CardTitle type definition to omit all drag events 
-type CardTitleProps = Omit<HTMLMotionProps<"h3">, "onDrag" | "onDragStart" | "onDragEnd"> & React.HTMLAttributes<HTMLHeadingElement>;
+// Update the CardTitle type to use the comprehensive omit type
+type CardTitleProps = Omit<HTMLMotionProps<"h3">,
+  "onDrag" | "onDragStart" | "onDragEnd" | "onDragEnter" | "onDragLeave" | 
+  "onDragOver" | "onDragExit" | "drag" | "dragControls" | "dragListener" | 
+  "dragMomentum" | "dragElastic" | "dragTransition" | "dragConstraints" | 
+  "dragDirectionLock" | "dragPropagation" | "_dragX" | "_dragY">;
 
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
