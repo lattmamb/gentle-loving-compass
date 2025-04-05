@@ -24,7 +24,7 @@ export function VehicleCardContent({
   return (
     <>
       <CardContent 
-        className="p-4"
+        className="p-4 bg-gradient-to-b from-blue-900/30 to-blue-800/10"
         style={{ transformStyle: "preserve-3d" }}
       >
         <motion.div 
@@ -39,18 +39,18 @@ export function VehicleCardContent({
         </motion.div>
         
         <motion.div 
-          className="text-sm text-white/70 mt-1"
+          className="text-sm text-blue-200 mt-1"
           style={{
             x: contentX,
             y: contentY,
             z: 20,
           }}
         >
-          From {formatCurrency(vehicle.price.daily)}<span className="text-xs text-white/60">/day</span>
+          From {formatCurrency(vehicle.price.daily)}<span className="text-xs text-blue-200/80">/day</span>
         </motion.div>
       </CardContent>
       
-      <CardFooter className="px-4 pb-4 pt-0 flex justify-between">
+      <CardFooter className="px-4 pb-4 pt-0 flex justify-between bg-gradient-to-t from-blue-900/40 to-transparent">
         <motion.div
           style={{
             x: contentX,
@@ -59,12 +59,12 @@ export function VehicleCardContent({
           }}
           className="flex gap-3 w-full"
         >
-          <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 w-1/2 h-9 rounded-md px-2">
+          <Button asChild variant="outline" className="border-white/40 text-white hover:bg-white/20 w-1/2 h-9 rounded-md px-2">
             <Link to={`/vehicles/${vehicle.id}`}>
               <span className="text-xs">Details</span>
             </Link>
           </Button>
-          <Button asChild className="bg-blue-600 hover:bg-blue-700 w-1/2 h-9 rounded-md px-2">
+          <Button asChild className="bg-blue-500 hover:bg-blue-600 w-1/2 h-9 rounded-md px-2">
             <Link to={`/book/${vehicle.id}`}>
               <span className="text-xs">Book Now</span>
             </Link>

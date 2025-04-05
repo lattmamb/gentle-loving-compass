@@ -11,14 +11,14 @@ interface NeomorphicCard3DProps extends Omit<HTMLMotionProps<"div">, "onDrag" | 
   shadow?: boolean;
   scale?: boolean;
   perspective?: number;
-  children?: React.ReactNode; // Explicitly define children as ReactNode
+  children?: React.ReactNode;
 }
 
 const NeomorphicCard3D: React.FC<NeomorphicCard3DProps> = ({
   children,
   className,
   maxRotation = 10,
-  glowColor = "rgba(10, 132, 255, 0.3)", // Tesla blue with opacity
+  glowColor = "rgba(59, 130, 246, 0.3)", // Brighter blue with opacity
   shadow = true,
   scale = true,
   perspective = 1000,
@@ -60,7 +60,7 @@ const NeomorphicCard3D: React.FC<NeomorphicCard3DProps> = ({
     <motion.div
       ref={cardRef}
       className={cn(
-        "neo-elevated rounded-xl overflow-hidden",
+        "neo-elevated rounded-xl overflow-hidden bg-[#1a2436]",
         shadow && "shadow-lg",
         className
       )}

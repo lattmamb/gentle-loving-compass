@@ -17,12 +17,12 @@ export default function AnimatedBackground({
   const getIntensityValues = () => {
     switch (intensity) {
       case "low":
-        return { movement: 40, duration: 20, opacity: 0.15 };
+        return { movement: 40, duration: 20, opacity: 0.2 };
       case "high":
-        return { movement: 100, duration: 15, opacity: 0.3 };
+        return { movement: 100, duration: 15, opacity: 0.4 };
       case "medium":
       default:
-        return { movement: 70, duration: 18, opacity: 0.2 };
+        return { movement: 70, duration: 18, opacity: 0.3 };
     }
   };
   
@@ -45,7 +45,7 @@ export default function AnimatedBackground({
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Fixed background gradient */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141821] to-[#0a0c12]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1a2436] to-[#111827]"></div>
       </div>
 
       {/* Animated background elements */}
@@ -53,11 +53,11 @@ export default function AnimatedBackground({
         <motion.div
           animate={{
             background: [
-              "radial-gradient(circle at 30% 20%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
-              "radial-gradient(circle at 70% 60%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
-              "radial-gradient(circle at 30% 80%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
-              "radial-gradient(circle at 70% 20%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
-              "radial-gradient(circle at 30% 20%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.25) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.25) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 30% 80%, rgba(59, 130, 246, 0.25) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 70% 20%, rgba(59, 130, 246, 0.25) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.25) 0%, rgba(0, 0, 0, 0) 70%)",
             ],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
@@ -68,7 +68,7 @@ export default function AnimatedBackground({
         <motion.div 
           className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
           style={{ 
-            background: `radial-gradient(circle at center, rgba(59, 130, 246, ${opacity}) 0%, rgba(59, 130, 246, 0) 70%)`,
+            background: `radial-gradient(circle at center, rgba(96, 165, 250, ${opacity}) 0%, rgba(96, 165, 250, 0) 70%)`,
             filter: "blur(120px)", 
             opacity: opacity * 2 
           }}
@@ -78,7 +78,7 @@ export default function AnimatedBackground({
         <motion.div 
           className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full"
           style={{ 
-            background: `radial-gradient(circle at center, rgba(139, 92, 246, ${opacity}) 0%, rgba(139, 92, 246, 0) 70%)`,
+            background: `radial-gradient(circle at center, rgba(167, 139, 250, ${opacity}) 0%, rgba(167, 139, 250, 0) 70%)`,
             filter: "blur(100px)", 
             opacity: opacity * 1.8
           }}
@@ -96,7 +96,7 @@ export default function AnimatedBackground({
         <motion.div 
           className="absolute top-2/3 right-1/3 w-64 h-64 rounded-full"
           style={{ 
-            background: `radial-gradient(circle at center, rgba(6, 182, 212, ${opacity}) 0%, rgba(6, 182, 212, 0) 70%)`,
+            background: `radial-gradient(circle at center, rgba(56, 189, 248, ${opacity}) 0%, rgba(56, 189, 248, 0) 70%)`,
             filter: "blur(90px)", 
             opacity: opacity * 1.7
           }}
