@@ -20,6 +20,7 @@ import LoadingOverlay from "./components/LoadingOverlay";
 import { LoadingRouteGuard } from "./components/LoadingRouteGuard";
 import VisionOS from "./pages/VisionOS";
 import TokenizedOwnership from "./pages/TokenizedOwnership";
+import TaskadeChat from "./components/TaskadeChat";
 import React from "react";
 
 // Create a client
@@ -42,6 +43,7 @@ function App() {
             <LoadingOverlay />
             <Toaster />
             <Sonner />
+            <TaskadeChat />
             <LoadingRouteGuard>
               <Routes>
                 <Route path="/" element={<Index />} />
