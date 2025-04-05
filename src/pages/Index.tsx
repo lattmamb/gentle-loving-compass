@@ -13,6 +13,7 @@ import ThreeDMarquee from "@/components/ThreeDMarquee";
 import TabsSection from "@/components/TabsSection";
 import { motion } from "framer-motion";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import { marqueeImages } from "@/data/marqueeImages";
 
 export default function Index() {
   // Track scroll position for parallax effects
@@ -60,7 +61,7 @@ export default function Index() {
           </motion.div>
           
           <div className="my-20">
-            <ThreeDMarquee />
+            <ThreeDMarquee images={marqueeImages} />
           </div>
           
           <motion.div 

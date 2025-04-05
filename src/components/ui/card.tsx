@@ -1,10 +1,10 @@
 
 import * as React from "react"
-import { motion, useMotionValue, type MotionProps } from "framer-motion"
+import { motion, useMotionValue, type HTMLMotionProps } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 // Custom type to resolve conflicts between React's drag events and framer-motion's drag events
-type CardProps = Omit<MotionProps, "onDrag"> & React.HTMLAttributes<HTMLDivElement>;
+type CardProps = Omit<HTMLMotionProps<"div">, "onDrag"> & React.HTMLAttributes<HTMLDivElement>;
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -53,7 +53,7 @@ const CardHeader = React.forwardRef<
 CardHeader.displayName = "CardHeader"
 
 // Custom type for CardTitle to resolve conflicts with framer-motion
-type CardTitleProps = Omit<MotionProps, "onDrag"> & React.HTMLAttributes<HTMLHeadingElement>;
+type CardTitleProps = Omit<HTMLMotionProps<"h3">, "onDrag"> & React.HTMLAttributes<HTMLHeadingElement>;
 
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
