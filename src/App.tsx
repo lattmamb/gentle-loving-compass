@@ -18,6 +18,8 @@ import ParallaxDemo from "./pages/ParallaxDemo";
 import { LoadingProvider } from "./context/LoadingContext";
 import LoadingOverlay from "./components/LoadingOverlay";
 import { LoadingRouteGuard } from "./components/LoadingRouteGuard";
+import VisionOS from "./pages/VisionOS";
+import TokenizedOwnership from "./pages/TokenizedOwnership";
 import React from "react";
 
 // Create a client
@@ -48,9 +50,13 @@ function App() {
                 <Route path="/book/:id" element={<BookVehicle />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/pricing" element={<Pricing />} />
+                <Route path="/subscription-plans" element={<Pricing />} />
                 <Route path="/locations" element={<Locations />} />
+                <Route path="/charging-hubs" element={<Locations />} />
                 <Route path="/sparkles" element={<SparklesDemo />} />
                 <Route path="/parallax" element={<ParallaxDemo />} />
+                <Route path="/visionos" element={<VisionOS />} />
+                <Route path="/tokenized-ownership" element={<TokenizedOwnership />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

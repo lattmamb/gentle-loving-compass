@@ -38,20 +38,18 @@ export default function HeroSection() {
       {/* Animated background elements */}
       <div className="absolute inset-0 z-0">
         {/* Animated gradient background */}
-        <div className="absolute inset-0 opacity-20">
-          <motion.div
-            animate={{
-              background: [
-                "radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
-                "radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
-                "radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
-                "radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)"
-              ]
-            }}
-            transition={{ duration: 10, repeat: Infinity }}
-            className="absolute inset-0"
-          />
-        </div>
+        <motion.div
+          animate={{
+            background: [
+              "radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 20% 80%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)",
+              "radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15) 0%, rgba(0, 0, 0, 0) 70%)"
+            ]
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute inset-0"
+        />
         
         {/* Animated grid lines */}
         <div className="absolute inset-0 flex flex-col opacity-20">
@@ -132,7 +130,7 @@ export default function HeroSection() {
               rotateY: mousePosition.x * -5,
             }}
           >
-            Your Tesla Experience Awaits
+            Drive The Future. Own The Network.
           </motion.h1>
         </motion.div>
         
@@ -146,7 +144,7 @@ export default function HeroSection() {
           }}
         >
           <p className="text-xl md:text-2xl text-blue-100/80 mb-8 max-w-2xl mx-auto">
-            Subscribe to drive the world's most advanced electric vehicles with flexible plans and no long-term commitments.
+            Experience premium electric vehicles with flexible subscription plans, powered by our innovative tokenized ownership system.
           </p>
         </motion.div>
         
@@ -163,18 +161,18 @@ export default function HeroSection() {
           <Button asChild size="lg" className="text-lg bg-blue-600 hover:bg-blue-700 group">
             <Link to="/vehicles">
               <span className="inline-block transition-transform group-hover:translate-x-1">
-                Browse Vehicles
+                Book Your EV Now
               </span>
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="text-lg border-white/20 text-white hover:bg-white/10">
-            <Link to="/pricing">
-              View Pricing
+            <Link to="/visionos">
+              Experience Atlas VisionOS
             </Link>
           </Button>
         </motion.div>
 
-        {/* Enhanced animated car illustration */}
+        {/* Enhanced animated car illustration with Unity Link branding */}
         <motion.div 
           className="relative w-full h-64 mt-20 perspective-1000"
           initial={{ opacity: 0 }}
@@ -199,9 +197,18 @@ export default function HeroSection() {
           >
             <img 
               src="/unity-fleet.webp" 
-              alt="Tesla Fleet" 
+              alt="Unity Link Fleet" 
               className="h-full object-contain neo-glow-blue"
             />
+            
+            {/* Unity Link Logo Overlay */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl font-bold text-white/90"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              Unity Link
+            </motion.div>
             
             {/* Reflection effect */}
             <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-blue-500/10 to-transparent blur-sm opacity-80" />
