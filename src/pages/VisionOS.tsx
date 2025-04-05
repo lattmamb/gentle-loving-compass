@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Button } from "@/components/ui/button";
 import { motion, useAnimation, useScroll, useTransform } from "framer-motion";
-import { BrainCircuit, Eye, VoiceNetwork, Cpu, Zap, Layers } from "lucide-react";
+import { BrainCircuit, Eye, Speaker, Cpu, Zap, Layers } from "lucide-react";
 import AIAssistant from "@/components/AIAssistant";
 import { LoadingAnimation } from "@/components/ui/loading-animation";
 
@@ -121,7 +121,7 @@ export default function VisionOS() {
                   {/* Interface overlay elements */}
                   <div className="absolute top-8 right-8 flex space-x-4">
                     <div className="h-16 w-16 rounded-full bg-purple-700/20 backdrop-blur-sm flex items-center justify-center neo-glow-blue">
-                      <VoiceNetwork size={24} className="text-purple-400" />
+                      <Speaker size={24} className="text-purple-400" />
                     </div>
                     <div className="h-16 w-16 rounded-full bg-blue-700/20 backdrop-blur-sm flex items-center justify-center neo-glow-blue">
                       <Eye size={24} className="text-blue-400" />
@@ -244,3 +244,4 @@ export default function VisionOS() {
 }
 
 import { Car, Coins, Map } from "lucide-react";
+
