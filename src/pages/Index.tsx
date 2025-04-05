@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from "react";
-import HeroSection from "@/components/HeroSection";
+import Parallax3DHero from "@/components/Parallax3DHero";
 import FeaturedVehicles from "@/components/FeaturedVehicles";
 import GlassmorphicCardsSection from "@/components/GlassmorphicCardsSection";
 import AnimatedFeatures from "@/components/AnimatedFeatures";
@@ -14,6 +13,7 @@ import TabsSection from "@/components/TabsSection";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { marqueeImages } from "@/data/marqueeImages";
+import GridBackground from "@/components/ui/grid-background";
 
 export default function Index() {
   // Track scroll position for parallax effects
@@ -52,7 +52,8 @@ export default function Index() {
 
   return (
     <div ref={pageRef} className="relative space-3d min-h-screen w-full overflow-hidden">
-      {/* Enhanced 3D animated background */}
+      {/* Enhanced 3D animated background with grid */}
+      <GridBackground containerClassName="fixed inset-0 -z-20" />
       <AnimatedBackground intensity="low" />
       
       <div className="relative z-10 perspective-2000 transform-style-3d">
@@ -65,8 +66,8 @@ export default function Index() {
             rotateY
           }}
         >
-          {/* Hero section with full bleed */}
-          <HeroSection />
+          {/* Hero section with full bleed - NOW USING THE NEW PARALLAX 3D HERO */}
+          <Parallax3DHero />
           
           {/* Featured Vehicles - Tesla inspired card section */}
           <motion.section 
@@ -224,7 +225,7 @@ export default function Index() {
         </motion.div>
       </div>
       
-      {/* Sleek footer spacer */}
+      {/* Footer spacer */}
       <div className="h-20"></div>
     </div>
   );

@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import ParticleAnimation from "./ParticleAnimation";
+import GridBackground from "@/components/ui/grid-background";
 
 interface VehicleHeroSectionProps {
   onSearchChange?: (value: string) => void;
@@ -24,7 +25,7 @@ export default function VehicleHeroSection({
   };
   
   return (
-    <div className="relative min-h-[50vh] py-16 flex flex-col justify-center overflow-hidden bg-[#11151e]">
+    <GridBackground containerClassName="min-h-[50vh] py-16 flex flex-col justify-center bg-[#11151e]">
       {/* Subtle particle animation in background */}
       <ParticleAnimation 
         count={20}
@@ -88,6 +89,6 @@ export default function VehicleHeroSection({
           </motion.div>
         </div>
       </div>
-    </div>
+    </GridBackground>
   );
 }
