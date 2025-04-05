@@ -58,7 +58,7 @@ type CardTitleProps = Omit<HTMLMotionProps<"h3">, "onDrag" | "onDragStart" | "on
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   CardTitleProps
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <motion.h3
     ref={ref}
     className={cn(
@@ -78,8 +78,9 @@ const CardTitle = React.forwardRef<
       stiffness: 400,
       damping: 10
     }}
-    {...props}
-  />
+  >
+    {children}
+  </motion.h3>
 ))
 CardTitle.displayName = "CardTitle"
 
