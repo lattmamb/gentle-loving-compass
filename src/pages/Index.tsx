@@ -3,7 +3,6 @@ import React, { useRef, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
-import HeroSection from "@/components/HeroSection";
 import AnimatedFeatures from "@/components/AnimatedFeatures";
 import AnimatedTestimonials from "@/components/AnimatedTestimonials";
 import AnimatedStats from "@/components/AnimatedStats";
@@ -18,17 +17,16 @@ import { marqueeImages, featuredImages } from "@/data/marqueeImages";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import GlassmorphicCardsSection from "@/components/GlassmorphicCardsSection";
 import { SparklesPreviewColorful } from "@/components/ui/sparkles-demo";
+import HeroParallaxDemo from "@/components/hero-parallax-demo";
 
 const Index = () => {
   const { scrollYProgress } = useScroll();
   const scrollRef = useRef<HTMLDivElement>(null);
   
   // Parallax effects for different sections
-  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.5]);
+  const featuresScale = useTransform(scrollYProgress, [0.4, 0.6], [0.95, 1]);
   const statsY = useTransform(scrollYProgress, [0.1, 0.3], [100, 0]);
   const carouselRotateY = useTransform(scrollYProgress, [0.2, 0.4], [5, 0]);
-  const featuresScale = useTransform(scrollYProgress, [0.4, 0.6], [0.95, 1]);
 
   // 3D perspective styles
   const perspectiveStyle = {
@@ -67,19 +65,12 @@ const Index = () => {
           <Header />
         </div>
         
-        {/* Hero Section with 3D transformation */}
-        <motion.section 
-          style={{ 
-            scale: heroScale, 
-            opacity: heroOpacity,
-            translateZ: "20px" 
-          }}
-          className="relative"
-        >
-          <HeroSection />
-        </motion.section>
+        {/* Hero Parallax Section */}
+        <section className="w-full relative">
+          <HeroParallaxDemo />
+        </section>
         
-        {/* NEW: Sparkles Preview Section */}
+        {/* Sparkles Preview Section */}
         <section className="py-16 relative">
           <SparklesPreviewColorful />
         </section>

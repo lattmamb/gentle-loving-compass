@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import Pricing from "./pages/Pricing";
 import Locations from "./pages/Locations";
 import SparklesDemo from "./pages/SparklesDemo";
+import HeroParallaxDemo from "./components/hero-parallax-demo";
 import React from "react";
 
 // Create a client
@@ -35,6 +36,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="/sparkles" element={<SparklesDemo />} />
+            <Route path="/parallax" element={<HeroParallaxDemo />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
