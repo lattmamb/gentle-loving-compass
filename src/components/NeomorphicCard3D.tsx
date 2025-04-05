@@ -3,9 +3,8 @@ import React, { useState, useRef } from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// Create a new interface that extends from HTMLMotionProps from framer-motion
-// This ensures proper compatibility with motion.div's event handlers
-interface NeomorphicCard3DProps extends Omit<HTMLMotionProps<"div">, "onDrag" | "onDragEnd" | "onDragStart" | "onDragEnter" | "onDragLeave" | "onDragOver" | "onDragExit"> {
+// Create a new interface that extends from HTMLMotionProps but omits problematic drag event types
+interface NeomorphicCard3DProps extends Omit<HTMLMotionProps<"div">, "onDrag" | "onDragEnd" | "onDragStart"> {
   maxRotation?: number;
   glowColor?: string;
   shadow?: boolean;

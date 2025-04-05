@@ -1,11 +1,14 @@
 
 import * as React from "react"
-import { motion } from "framer-motion"
+import { motion, useMotionValue, type MotionProps } from "framer-motion"
 import { cn } from "@/lib/utils"
+
+// Custom type to resolve conflicts between React's drag events and framer-motion's drag events
+type CardProps = Omit<MotionProps, "onDrag"> & React.HTMLAttributes<HTMLDivElement>;
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
+  CardProps
 >(({ className, ...props }, ref) => {
   const [hovered, setHovered] = React.useState(false);
   
@@ -42,15 +45,19 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6 transform-style-3d", className)}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    style={{ transformStyle: "preserve-3d" }}
     {...props}
   />
 ))
 CardHeader.displayName = "CardHeader"
 
+// Custom type for CardTitle to resolve conflicts with framer-motion
+type CardTitleProps = Omit<MotionProps, "onDrag"> & React.HTMLAttributes<HTMLHeadingElement>;
+
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
+  CardTitleProps
 >(({ className, ...props }, ref) => (
   <motion.h3
     ref={ref}
@@ -82,7 +89,8 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground transform-style-3d", className)}
+    className={cn("text-sm text-muted-foreground", className)}
+    style={{ transformStyle: "preserve-3d" }}
     {...props}
   />
 ))
@@ -92,7 +100,12 @@ const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0 transform-style-3d", className)} {...props} />
+  <div 
+    ref={ref} 
+    className={cn("p-6 pt-0", className)} 
+    style={{ transformStyle: "preserve-3d" }} 
+    {...props} 
+  />
 ))
 CardContent.displayName = "CardContent"
 
@@ -102,7 +115,8 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-6 pt-0 transform-style-3d", className)}
+    className={cn("flex items-center p-6 pt-0", className)}
+    style={{ transformStyle: "preserve-3d" }}
     {...props}
   />
 ))
