@@ -8,6 +8,7 @@ interface NeoCardProps {
   className?: string;
   variant?: "elevated" | "pressed" | "flat";
   glow?: boolean;
+  glowColor?: string; // Added glowColor property
   hover3D?: boolean;
   maxRotation?: number;
 }
@@ -17,6 +18,7 @@ export default function NeoCard({
   className = "",
   variant = "elevated",
   glow = false,
+  glowColor = "blue", // Default to blue
   hover3D = false,
   maxRotation = 10
 }: NeoCardProps) {
@@ -62,9 +64,9 @@ export default function NeoCard({
     flat: "border border-white/10 bg-gray-900/80",
   };
 
-  // Glow effect styles
+  // Glow effect styles with dynamic color
   const glowStyles = glow
-    ? "before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-blue-500/20 before:to-purple-500/20 before:opacity-0 before:transition-opacity hover:before:opacity-100"
+    ? `before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-${glowColor}-500/20 before:to-purple-500/20 before:opacity-0 before:transition-opacity hover:before:opacity-100`
     : "";
 
   return (
