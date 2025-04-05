@@ -1,33 +1,18 @@
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CardDemo from "@/components/ui/cards-demo-1";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import NeoCard from "@/components/NeoCard";
-import { vehicles } from "@/data/vehicles";
-import { cn } from "@/lib/utils";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import AIAssistant from "@/components/AIAssistant";
 import VehicleCardsCarousel from "@/components/VehicleCardsCarousel";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, MapPin } from "lucide-react";
-import AnimatedBackground from "@/components/AnimatedBackground";
-import ParticleAnimation from "@/components/ParticleAnimation";
-import NeomorphicCard3D from "@/components/NeomorphicCard3D";
+import { vehicles } from "@/data/vehicles";
+import { Location } from "@/types/locations";
+import LocationsHero from "@/components/locations/LocationsHero";
+import LocationsGrid from "@/components/locations/LocationsGrid";
+import LocationDetails from "@/components/locations/LocationDetails";
 
-interface Location {
-  id: string;
-  name: string;
-  address: string;
-  image: string;
-  hoverImage: string;
-  availableCars: number;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-}
-
+// Location data
 const locations: Location[] = [
   {
     id: "loc1",
@@ -127,79 +112,6 @@ export default function Locations() {
     }
   }, []);
 
-  // Create a simple map visualization using coordinates
-  const MapVisualization = useMemo(() => {
-    if (!selectedLocation) return null;
-    
-    return (
-      <div className="w-full h-80 relative overflow-hidden rounded-xl neo-elevated">
-        {/* Simple visualization using coordinates as positioning */}
-        <div 
-          className="absolute inset-0 bg-[#141821] overflow-hidden"
-          style={{
-            backgroundImage: `url(${selectedLocation.image})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        >
-          <div className="absolute inset-0 bg-black/40"></div>
-          
-          {/* Grid lines */}
-          <div className="absolute inset-0">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div 
-                key={`h-line-${i}`}
-                className="absolute h-px bg-white/10 w-full"
-                style={{ top: `${i * 10}%` }}
-              />
-            ))}
-            
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div 
-                key={`v-line-${i}`}
-                className="absolute w-px bg-white/10 h-full"
-                style={{ left: `${i * 10}%` }}
-              />
-            ))}
-          </div>
-          
-          {/* Location marker */}
-          <motion.div 
-            className="absolute"
-            style={{ 
-              left: '50%', 
-              top: '50%',
-              x: '-50%',
-              y: '-50%'
-            }}
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ 
-              scale: [1, 1.1, 1],
-              opacity: 1 
-            }}
-            transition={{ 
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          >
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-full bg-blue-500/20 animate-pulse" />
-              <div className="absolute -inset-2 rounded-full bg-blue-500/30 animate-pulse" style={{ animationDelay: '0.5s' }} />
-              <MapPin size={30} className="text-blue-500" />
-            </div>
-          </motion.div>
-          
-          {/* Location name */}
-          <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-md p-3 rounded-lg">
-            <h3 className="font-bold text-white">{selectedLocation.name}</h3>
-            <p className="text-sm text-white/80">{selectedLocation.address}</p>
-          </div>
-        </div>
-      </div>
-    );
-  }, [selectedLocation]);
-
   return (
     <AnimatedBackground intensity="low">
       <div className="min-h-screen">
@@ -207,174 +119,18 @@ export default function Locations() {
         
         <main className="pt-24 pb-16">
           {/* Hero Section */}
-          <section className="relative py-20 overflow-hidden">
-            <ParticleAnimation count={30} speed="slow" />
-            
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center mb-10"
-                style={{
-                  x: mousePosition.x * -15,
-                  y: mousePosition.y * -15,
-                }}
-              >
-                <h1 className="text-4xl md:text-6xl font-bold text-gradient-blue mb-4">
-                  Charging Locations
-                </h1>
-                <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-                  Find Tesla charging stations and service centers near you
-                </p>
-              </motion.div>
-            </div>
-          </section>
+          <LocationsHero mousePosition={mousePosition} />
           
           {/* Locations Grid */}
-          <section className="py-10 px-6">
-            <div className="max-w-7xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gradient-blue">Available Locations</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {locations.map((location, index) => (
-                  <motion.div
-                    key={location.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                  >
-                    <NeomorphicCard3D
-                      maxRotation={10}
-                      className="overflow-hidden p-0 cursor-pointer h-60"
-                      onClick={() => setSelectedLocation(location)}
-                    >
-                      <div
-                        className={cn(
-                          "group w-full h-full overflow-hidden relative flex flex-col justify-end p-4",
-                          `bg-[url(${location.image})] bg-cover bg-center`,
-                          "before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-t before:from-black/80 before:to-transparent before:z-10",
-                          selectedLocation?.id === location.id ? "ring-2 ring-blue-500" : ""
-                        )}
-                      >
-                        <div className="text relative z-20">
-                          <h3 className="font-bold text-xl text-white">{location.name}</h3>
-                          <p className="font-normal text-sm text-white/80 my-1">{location.address}</p>
-                          <div className="flex items-center justify-between mt-2">
-                            <span className="text-sm text-white/70">{location.availableCars} vehicles available</span>
-                            <Button variant="outline" size="sm" className="neo-button bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/20">
-                              Details
-                            </Button>
-                          </div>
-                        </div>
-                        
-                        {/* Overlay animation on hover */}
-                        <motion.div 
-                          className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                          style={{
-                            backgroundImage: `url(${location.hoverImage})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                          }}
-                        >
-                          <div className="absolute inset-0 bg-black/50" />
-                        </motion.div>
-                      </div>
-                    </NeomorphicCard3D>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <LocationsGrid 
+            locations={locations} 
+            selectedLocation={selectedLocation} 
+            onSelectLocation={setSelectedLocation}
+          />
           
           {/* Selected Location Details */}
           {selectedLocation && (
-            <section className="py-16 px-6 bg-black/20">
-              <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row gap-10">
-                  <div className="w-full md:w-1/2">
-                    <NeoCard variant="elevated" glow={true} glowColor="blue" hover3D={true} className="h-full">
-                      <motion.h3 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-2xl font-bold text-gradient-blue mb-4"
-                      >
-                        {selectedLocation.name} Center
-                      </motion.h3>
-                      
-                      <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="space-y-4"
-                      >
-                        <p className="text-white/80">{selectedLocation.address}</p>
-                        
-                        <div className="grid grid-cols-2 gap-4 py-4">
-                          <div className="neo-pressed rounded-lg p-4 text-center">
-                            <p className="text-sm text-white/60">Available Cars</p>
-                            <p className="text-2xl font-bold text-white">{selectedLocation.availableCars}</p>
-                          </div>
-                          <div className="neo-pressed rounded-lg p-4 text-center">
-                            <p className="text-sm text-white/60">Chargers</p>
-                            <p className="text-2xl font-bold text-white">12</p>
-                          </div>
-                        </div>
-                        
-                        <div className="mt-4">
-                          <h4 className="text-lg font-semibold text-white mb-2">Hours of Operation</h4>
-                          <div className="grid grid-cols-2 gap-2 text-sm">
-                            <div>
-                              <p className="text-white/60">Monday - Friday</p>
-                              <p className="text-white">9:00 AM - 9:00 PM</p>
-                            </div>
-                            <div>
-                              <p className="text-white/60">Saturday - Sunday</p>
-                              <p className="text-white">10:00 AM - 7:00 PM</p>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="pt-4">
-                          <Button className="w-full bg-blue-600 hover:bg-blue-700 neo-button">
-                            Book a Service <ArrowRight className="ml-2 h-4 w-4" />
-                          </Button>
-                        </div>
-                      </motion.div>
-                    </NeoCard>
-                  </div>
-                  
-                  <div className="w-full md:w-1/2">
-                    {/* Map Visualization */}
-                    {MapVisualization}
-                    
-                    <div className="mt-6">
-                      <h4 className="text-xl font-bold text-white mb-4">Available Vehicles</h4>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {vehicles.slice(0, 4).map((vehicle, idx) => (
-                          <motion.div
-                            key={vehicle.id}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.1, duration: 0.5 }}
-                          >
-                            <NeoCard variant="pressed" className="p-3 flex gap-3" hover3D={true} maxRotation={5}>
-                              <div className="w-16 h-16 rounded overflow-hidden">
-                                <img src={vehicle.image} alt={vehicle.model} className="w-full h-full object-cover" />
-                              </div>
-                              <div className="flex-1">
-                                <h5 className="font-medium text-white">Tesla {vehicle.model}</h5>
-                                <p className="text-xs text-white/60">{vehicle.specs.range} mi range</p>
-                              </div>
-                            </NeoCard>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+            <LocationDetails location={selectedLocation} vehicles={vehicles} />
           )}
           
           {/* Demo Card Section */}
