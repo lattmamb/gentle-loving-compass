@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// Create a new interface that extends from HTMLMotionProps but omits problematic drag event types
+// Update the interface to omit all drag events to prevent type conflicts
 interface NeomorphicCard3DProps extends Omit<HTMLMotionProps<"div">, "onDrag" | "onDragEnd" | "onDragStart"> {
   maxRotation?: number;
   glowColor?: string;
