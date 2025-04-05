@@ -45,15 +45,15 @@ export default function Index() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Enhanced 3D transforms based on mouse movement
+  // Enhanced 3D transforms based on mouse movement - more subtle for polish
   const baseTransform = useMotionValue(0);
-  const rotateX = useTransform(baseTransform, [0, 1], [mousePosition.y * -3, mousePosition.y * 3]);
-  const rotateY = useTransform(baseTransform, [0, 1], [mousePosition.x * 3, mousePosition.x * -3]);
+  const rotateX = useTransform(baseTransform, [0, 1], [mousePosition.y * -2, mousePosition.y * 2]);
+  const rotateY = useTransform(baseTransform, [0, 1], [mousePosition.x * 2, mousePosition.x * -2]);
 
   return (
     <div ref={pageRef} className="relative space-3d min-h-screen w-full overflow-hidden">
       {/* Enhanced 3D animated background */}
-      <AnimatedBackground intensity="high" />
+      <AnimatedBackground intensity="low" />
       
       <div className="relative z-10 perspective-2000 transform-style-3d">
         {/* Main content with 3D space */}
@@ -65,121 +65,166 @@ export default function Index() {
             rotateY
           }}
         >
+          {/* Hero section with full bleed */}
           <HeroSection />
           
-          {/* FeaturedVehicles - enhanced floating effect */}
+          {/* Featured Vehicles - Tesla inspired card section */}
           <motion.section 
-            className="floating-element-lg magic-dust"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(50px) translateY(${scrollY * 0.03}px)`,
-            }}
-          >
-            <FeaturedVehicles />
-          </motion.section>
-          
-          {/* GlassmorphicCardsSection - enhanced with glass effect */}
-          <motion.section
-            className="floating-element-sm mt-20 md:mt-32 magic-dust"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(30px) translateY(${scrollY * -0.02}px)`,
-            }}
-          >
-            <GlassmorphicCardsSection />
-          </motion.section>
-          
-          {/* Marquee section elevated and floating */}
-          <motion.section 
-            className="my-20 md:my-32 floating-element"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(40px) translateY(${scrollY * 0.01}px)`,
-            }}
-          >
-            <ThreeDMarquee images={marqueeImages} />
-          </motion.section>
-          
-          {/* AnimatedFeatures with stronger floating effect */}
-          <motion.section 
-            className="floating-element-lg magic-dust"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(60px) translateY(${scrollY * 0.04}px)`,
-            }}
-          >
-            <AnimatedFeatures />
-          </motion.section>
-          
-          {/* AnimatedStats with subtle motion */}
-          <motion.section 
-            className="floating-element-sm my-20 md:my-32"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(25px) translateY(${scrollY * -0.015}px)`,
-            }}
-          >
-            <AnimatedStats />
-          </motion.section>
-          
-          {/* TabsSection with enhanced depth */}
-          <motion.section 
-            className="my-20 md:my-32 floating-element"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(35px) translateY(${scrollY * 0.025}px)`,
-            }}
-          >
-            <TabsSection />
-          </motion.section>
-          
-          {/* ChargingHubsSection with maximum depth */}
-          <motion.section 
-            className="floating-element-lg my-20 md:my-32 magic-dust"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(70px) translateY(${scrollY * 0.05}px)`,
-            }}
-          >
-            <ChargingHubsSection />
-          </motion.section>
-          
-          {/* AtlasVisionOSSection as a prominent feature */}
-          <motion.section 
-            className="floating-element-lg my-20 md:my-40 magic-dust"
-            style={{ 
-              transformStyle: "preserve-3d",
-              transform: `translateZ(80px) translateY(${scrollY * 0.03}px)`,
-            }}
-          >
-            <AtlasVisionOSSection />
-          </motion.section>
-          
-          {/* TokenizedOwnershipSection with depth */}
-          <motion.section 
-            className="floating-element my-20 md:my-32"
+            className="py-20 md:py-32"
             style={{ 
               transformStyle: "preserve-3d",
               transform: `translateZ(40px) translateY(${scrollY * 0.02}px)`,
             }}
           >
-            <TokenizedOwnershipSection />
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Featured Vehicles</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">Explore our premium selection of electric vehicles available for subscription.</p>
+              <FeaturedVehicles />
+            </div>
           </motion.section>
           
-          {/* AnimatedTestimonials with subtle floating */}
-          <motion.section 
-            className="floating-element-sm mb-20 md:mb-32"
+          {/* Clean Glassmorphic section inspired by Apple */}
+          <motion.section
+            className="py-20 md:py-32 bg-gradient-to-b from-black/20 to-transparent"
             style={{ 
               transformStyle: "preserve-3d",
               transform: `translateZ(30px) translateY(${scrollY * -0.01}px)`,
             }}
           >
-            <AnimatedTestimonials />
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Experience Refined Mobility</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">A new standard in premium electric vehicle ownership.</p>
+              <GlassmorphicCardsSection />
+            </div>
+          </motion.section>
+          
+          {/* Tesla-inspired marquee section */}
+          <motion.section 
+            className="py-20 md:py-32 relative overflow-hidden"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(20px)`,
+              background: "linear-gradient(to bottom, rgba(0,0,0,0.2), transparent, rgba(0,0,0,0.2))"
+            }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 z-10 pointer-events-none"></div>
+            <div className="container mx-auto px-4 mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">The Tesla Experience</h2>
+              <p className="text-white/70 mb-8 max-w-2xl text-lg">Our vehicles in action across the world.</p>
+            </div>
+            <ThreeDMarquee images={marqueeImages} />
+          </motion.section>
+          
+          {/* Features with Apple-inspired clean cards */}
+          <motion.section 
+            className="py-20 md:py-32"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(30px) translateY(${scrollY * 0.015}px)`,
+            }}
+          >
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Intelligent Features</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">Advanced technology that enhances your driving experience.</p>
+              <AnimatedFeatures />
+            </div>
+          </motion.section>
+          
+          {/* Stats with subtle motion */}
+          <motion.section 
+            className="py-20 md:py-32 bg-gradient-to-b from-black/20 to-transparent"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(25px) translateY(${scrollY * -0.01}px)`,
+            }}
+          >
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Performance Metrics</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">The numbers that define our electric fleet.</p>
+              <AnimatedStats />
+            </div>
+          </motion.section>
+          
+          {/* TabsSection with enhanced depth */}
+          <motion.section 
+            className="py-20 md:py-32"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(35px) translateY(${scrollY * 0.015}px)`,
+            }}
+          >
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Ownership Options</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">Choose the plan that works best for your lifestyle.</p>
+              <TabsSection />
+            </div>
+          </motion.section>
+          
+          {/* Charging network - inspired by Tesla supercharger UX */}
+          <motion.section 
+            className="py-20 md:py-32 bg-gradient-to-b from-black/20 to-transparent"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(40px) translateY(${scrollY * 0.02}px)`,
+            }}
+          >
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Charging Network</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">Fast, convenient charging stations across the country.</p>
+              <ChargingHubsSection />
+            </div>
+          </motion.section>
+          
+          {/* AtlasVisionOS - Apple Vision Pro inspired section */}
+          <motion.section 
+            className="py-20 md:py-40 relative overflow-hidden"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(50px) translateY(${scrollY * 0.025}px)`,
+              background: "linear-gradient(to bottom, rgba(0,0,0,0.3), transparent)"
+            }}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1),transparent_70%)] z-0"></div>
+            <div className="container mx-auto px-4 relative z-10">
+              <h2 className="text-3xl md:text-5xl font-bold mb-2 text-gradient-blue">Atlas VisionOS</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg md:text-xl">The next generation of vehicle interface technology.</p>
+              <AtlasVisionOSSection />
+            </div>
+          </motion.section>
+          
+          {/* TokenizedOwnership with depth */}
+          <motion.section 
+            className="py-20 md:py-32"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(40px) translateY(${scrollY * 0.02}px)`,
+            }}
+          >
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Tokenized Ownership</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">Revolutionary blockchain technology for vehicle ownership.</p>
+              <TokenizedOwnershipSection />
+            </div>
+          </motion.section>
+          
+          {/* Testimonials with subtle floating */}
+          <motion.section 
+            className="py-20 md:py-32 bg-gradient-to-b from-black/20 to-transparent"
+            style={{ 
+              transformStyle: "preserve-3d",
+              transform: `translateZ(30px) translateY(${scrollY * -0.01}px)`,
+            }}
+          >
+            <div className="container mx-auto px-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient-blue">Customer Experiences</h2>
+              <p className="text-white/70 mb-12 max-w-2xl text-lg">Hear what our members have to say.</p>
+              <AnimatedTestimonials />
+            </div>
           </motion.section>
         </motion.div>
       </div>
       
-      {/* Footer spacer to ensure everything floats above the ground */}
+      {/* Sleek footer spacer */}
       <div className="h-20"></div>
     </div>
   );

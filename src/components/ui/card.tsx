@@ -1,6 +1,6 @@
 
 import * as React from "react"
-import { motion, useMotionValue, type HTMLMotionProps } from "framer-motion"
+import { motion, useMotionValue, type HTMLMotionProps, MotionStyle } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 // Custom type that specifically omits all drag events from HTMLMotionProps
