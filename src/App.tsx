@@ -14,34 +14,50 @@ import Pricing from "./pages/Pricing";
 import Locations from "./pages/Locations";
 import SparklesDemo from "./pages/SparklesDemo";
 import HeroParallaxDemo from "./components/hero-parallax-demo";
+import ParallaxDemo from "./pages/ParallaxDemo";
+import { LoadingProvider } from "./context/LoadingContext";
+import LoadingOverlay from "./components/LoadingOverlay";
+import { LoadingRouteGuard } from "./components/LoadingRouteGuard";
 import React from "react";
 
 // Create a client
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 // Define the App component as a proper functional component
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/vehicles" element={<VehiclesList />} />
-            <Route path="/vehicles/:id" element={<VehicleDetail />} />
-            <Route path="/book/:id" element={<BookVehicle />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/locations" element={<Locations />} />
-            <Route path="/sparkles" element={<SparklesDemo />} />
-            <Route path="/parallax" element={<HeroParallaxDemo />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </TooltipProvider>
-      </BrowserRouter>
+      <LoadingProvider>
+        <BrowserRouter>
+          <TooltipProvider>
+            <LoadingOverlay />
+            <Toaster />
+            <Sonner />
+            <LoadingRouteGuard>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/vehicles" element={<VehiclesList />} />
+                <Route path="/vehicles/:id" element={<VehicleDetail />} />
+                <Route path="/book/:id" element={<BookVehicle />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/locations" element={<Locations />} />
+                <Route path="/sparkles" element={<SparklesDemo />} />
+                <Route path="/parallax" element={<ParallaxDemo />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </LoadingRouteGuard>
+          </TooltipProvider>
+        </BrowserRouter>
+      </LoadingProvider>
     </QueryClientProvider>
   );
 }
