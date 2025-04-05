@@ -6,52 +6,52 @@
   
   /* Glass Effects - for content containers, modals, overlays */
   .glass-panel {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl;
-    box-shadow: 0 4px 24px -6px rgba(0, 0, 0, 0.2);
+    @apply backdrop-blur-xl bg-white/5 border-none rounded-xl transform-style-3d translate-z-10;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
   }
   
   .glass-panel-dark {
-    @apply backdrop-blur-xl bg-black/40 border border-white/5 rounded-xl;
-    box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.3);
+    @apply backdrop-blur-xl bg-black/40 border-none rounded-xl transform-style-3d translate-z-20;
+    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.4);
   }
   
   .glass-card {
-    @apply backdrop-blur-lg bg-white/10 border border-white/10 rounded-lg overflow-hidden;
-    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.15);
+    @apply backdrop-blur-lg bg-white/10 border-none rounded-lg overflow-hidden transform-style-3d translate-z-10;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
   }
   
   /* Neomorphic Effects - for interactive elements, buttons, inputs */
   .neo-button {
-    @apply bg-gradient-to-b from-[#1A2436]/80 to-[#0F131C]/80 rounded-lg border border-white/5 shadow-lg;
+    @apply bg-gradient-to-b from-[#1A2436]/80 to-[#0F131C]/80 rounded-lg border-none transform-style-3d translate-z-10;
     box-shadow: 
-      2px 2px 8px rgba(0, 0, 0, 0.25),
-      -2px -2px 8px rgba(255, 255, 255, 0.05);
+      5px 5px 15px rgba(0, 0, 0, 0.3),
+      -2px -2px 10px rgba(255, 255, 255, 0.05);
   }
   
   .neo-button-active {
-    @apply bg-gradient-to-t from-[#1A2436]/80 to-[#0F131C]/80;
+    @apply bg-gradient-to-t from-[#1A2436]/80 to-[#0F131C]/80 transform-style-3d;
     box-shadow: 
-      inset 2px 2px 6px rgba(0, 0, 0, 0.3),
-      inset -2px -2px 6px rgba(255, 255, 255, 0.03);
+      inset 3px 3px 8px rgba(0, 0, 0, 0.4),
+      inset -2px -2px 8px rgba(255, 255, 255, 0.03);
   }
   
   .neo-card {
-    @apply bg-gradient-to-br from-[#1A2436]/90 to-[#141821]/90 rounded-xl shadow-lg;
+    @apply bg-gradient-to-br from-[#1A2436]/90 to-[#141821]/90 rounded-xl border-none transform-style-3d translate-z-20;
     box-shadow: 
-      5px 5px 15px rgba(0, 0, 0, 0.3),
-      -5px -5px 15px rgba(255, 255, 255, 0.03);
+      8px 8px 25px rgba(0, 0, 0, 0.35),
+      -5px -5px 20px rgba(255, 255, 255, 0.03);
   }
   
   .neo-input {
-    @apply rounded-lg bg-[#141821] border border-white/5 px-4 py-2;
+    @apply rounded-lg bg-[#141821] border-none px-4 py-2 transform-style-3d translate-z-0;
     box-shadow: 
-      inset 2px 2px 6px rgba(0, 0, 0, 0.2),
-      inset -2px -2px 6px rgba(255, 255, 255, 0.03);
+      inset 3px 3px 8px rgba(0, 0, 0, 0.25),
+      inset -2px -2px 8px rgba(255, 255, 255, 0.03);
   }
 
   /* Interactive Elements */
   .hover-glow {
-    @apply relative overflow-hidden transition-all duration-300;
+    @apply relative overflow-hidden transition-all duration-300 transform-style-3d translate-z-0 hover:translate-z-20;
   }
   
   .hover-glow::after {
@@ -86,39 +86,71 @@
 
   /* Iconography and Accents */
   .icon-container {
-    @apply flex items-center justify-center rounded-full;
+    @apply flex items-center justify-center rounded-full transform-style-3d translate-z-10;
   }
   
   .icon-neo {
-    @apply bg-[#1A2436] p-2 rounded-full;
+    @apply bg-[#1A2436] p-2 rounded-full transform-style-3d translate-z-10;
     box-shadow: 
-      2px 2px 8px rgba(0, 0, 0, 0.25),
+      3px 3px 10px rgba(0, 0, 0, 0.3),
       -2px -2px 8px rgba(255, 255, 255, 0.05);
   }
   
   .icon-glass {
-    @apply bg-white/5 backdrop-blur-lg p-2 rounded-full;
+    @apply bg-white/5 backdrop-blur-lg p-2 rounded-full transform-style-3d translate-z-10;
   }
   
   /* Status Indicators */
   .status-active {
-    @apply bg-green-500/20 text-green-400 border border-green-500/30;
+    @apply bg-green-500/20 text-green-400 border-none;
   }
   
   .status-pending {
-    @apply bg-amber-500/20 text-amber-400 border border-amber-500/30;
+    @apply bg-amber-500/20 text-amber-400 border-none;
   }
   
   .status-offline {
-    @apply bg-gray-500/20 text-gray-400 border border-gray-500/30;
+    @apply bg-gray-500/20 text-gray-400 border-none;
   }
   
-  /* Borders and Dividers */
-  .border-subtle {
-    @apply border-white/5;
+  /* 3D Floating Elements */
+  .floating-element {
+    @apply transform-style-3d transition-all duration-300 hover:translate-z-30;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
   }
   
-  .divider {
-    @apply h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent;
+  .floating-element-sm {
+    @apply transform-style-3d transition-all duration-300 hover:translate-z-10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .floating-element-lg {
+    @apply transform-style-3d transition-all duration-300 hover:translate-z-50;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* 3D Space Styles */
+  .space-3d {
+    @apply perspective-1000 transform-style-3d;
+  }
+  
+  .level-1 {
+    transform: translateZ(10px);
+  }
+  
+  .level-2 {
+    transform: translateZ(20px);
+  }
+  
+  .level-3 {
+    transform: translateZ(30px);
+  }
+  
+  .level-4 {
+    transform: translateZ(40px);
+  }
+  
+  .level-5 {
+    transform: translateZ(50px);
   }
 }

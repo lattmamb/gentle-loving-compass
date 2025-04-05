@@ -25,24 +25,32 @@ const Index = () => {
   const { scrollYProgress } = useScroll();
   const scrollRef = useRef<HTMLDivElement>(null);
   
-  // Parallax effects for different sections
-  const featuresScale = useTransform(scrollYProgress, [0.4, 0.6], [0.95, 1]);
+  // Parallax effects for different sections with enhanced depth
+  const featuresScale = useTransform(scrollYProgress, [0.4, 0.6], [0.95, 1.05]);
+  const featuresZ = useTransform(scrollYProgress, [0.4, 0.6], [0, 50]);
   const statsY = useTransform(scrollYProgress, [0.1, 0.3], [100, 0]);
-  const carouselRotateY = useTransform(scrollYProgress, [0.2, 0.4], [5, 0]);
-
+  const statsZ = useTransform(scrollYProgress, [0.1, 0.3], [0, 50]); 
+  const carouselRotateY = useTransform(scrollYProgress, [0.2, 0.4], [8, 0]);
+  const carouselZ = useTransform(scrollYProgress, [0.2, 0.4], [0, 40]);
+  
+  // Mouse tracking for 3D effects
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
   // 3D perspective styles
   const perspectiveStyle = {
-    perspective: "1000px",
+    perspective: "2000px",
     transformStyle: "preserve-3d" as "preserve-3d",
   };
   
-  // Initialize glow effects
+  // Initialize glow effects and track mouse
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!scrollRef.current) return;
       
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
+      
+      setMousePosition({ x, y });
       
       const glowElements = scrollRef.current.querySelectorAll('.neo-glow-blue');
       glowElements.forEach((el) => {
@@ -61,7 +69,11 @@ const Index = () => {
 
   return (
     <AnimatedBackground intensity="medium">
-      <div ref={scrollRef} className="min-h-screen overflow-hidden" style={perspectiveStyle}>
+      <div 
+        ref={scrollRef} 
+        className="min-h-screen overflow-hidden perspective-2000" 
+        style={perspectiveStyle}
+      >
         {/* Header with glassmorphism */}
         <div className="sticky top-0 z-50">
           <Header />
@@ -72,24 +84,31 @@ const Index = () => {
           <HeroSection />
         </section>
         
-        {/* Animated Stats Section with parallax */}
+        {/* Animated Stats Section with parallax and floating effect */}
         <motion.section
-          style={{ y: statsY, translateZ: "30px" }}
-          className="relative"
+          style={{ 
+            y: statsY, 
+            z: statsZ,
+            rotateX: mousePosition.y * -5,
+            rotateY: mousePosition.x * 5,
+          }}
+          className="relative transform-style-3d"
         >
           <AnimatedStats />
         </motion.section>
         
-        {/* Vehicle Cards Carousel Section with 3D rotation */}
+        {/* Vehicle Cards Carousel Section with enhanced 3D rotation */}
         <motion.section 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="py-16 relative"
+          className="py-16 relative transform-style-3d"
           style={{ 
             rotateY: carouselRotateY,
-            translateZ: "10px"
+            z: carouselZ,
+            transformStyle: "preserve-3d",
+            rotateX: mousePosition.y * -3,
           }}
         >
           <VehicleCardsCarousel 
@@ -99,45 +118,74 @@ const Index = () => {
           />
         </motion.section>
         
-        {/* Subscription Plans Section */}
+        {/* Subscription Plans Section with hover effects */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="relative"
-          style={{ translateZ: "15px" }}
+          className="relative transform-style-3d"
+          style={{ 
+            z: 30 + mousePosition.x * 20,
+            rotateX: mousePosition.y * -2,
+            rotateY: mousePosition.x * 2,
+          }}
         >
           <SubscriptionPlans />
         </motion.div>
         
-        {/* Atlas VisionOS Section */}
-        <AtlasVisionOSSection />
+        {/* Atlas VisionOS Section with enhanced depth */}
+        <motion.section
+          className="transform-style-3d"
+          style={{
+            z: 40,
+            rotateX: mousePosition.y * -3,
+            rotateY: mousePosition.x * 3,
+          }}
+        >
+          <AtlasVisionOSSection />
+        </motion.section>
         
-        {/* Features Section with scale effect */}
+        {/* Features Section with scale and depth effect */}
         <motion.section
           style={{ 
             scale: featuresScale,
-            translateZ: "25px" 
+            z: featuresZ,
+            rotateX: mousePosition.y * -2,
+            rotateY: mousePosition.x * 2,
+            transformStyle: "preserve-3d",
           }}
           className="relative"
         >
           <AnimatedFeatures />
         </motion.section>
         
-        {/* Charging Hubs Section */}
-        <ChargingHubsSection />
+        {/* Charging Hubs Section with 3D transform */}
+        <motion.section
+          className="transform-style-3d"
+          style={{
+            z: 50,
+            rotateX: mousePosition.y * -2,
+            rotateY: mousePosition.x * 2,
+          }}
+        >
+          <ChargingHubsSection />
+        </motion.section>
         
-        {/* 3D Marquee Gallery Section */}
+        {/* 3D Marquee Gallery Section with enhanced depth */}
         <motion.section
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="py-16 relative"
-          style={{ translateZ: "40px" }}
+          className="py-16 relative transform-style-3d"
+          style={{ 
+            z: 60,
+            rotateX: mousePosition.y * -3,
+            rotateY: mousePosition.x * 3,
+          }}
         >
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto transform-style-3d">
             <motion.div
               className="text-center mb-8"
               initial={{ opacity: 0, y: 20 }}
@@ -157,22 +205,42 @@ const Index = () => {
           </div>
         </motion.section>
         
-        {/* Tokenized Ownership Section */}
-        <TokenizedOwnershipSection />
+        {/* Tokenized Ownership Section with 3D hover effect */}
+        <motion.section
+          className="transform-style-3d"
+          style={{
+            z: 30,
+            rotateX: mousePosition.y * -2,
+            rotateY: mousePosition.x * 2,
+          }}
+        >
+          <TokenizedOwnershipSection />
+        </motion.section>
         
-        {/* Testimonials with 3D depth */}
+        {/* Testimonials with enhanced 3D depth */}
         <motion.section
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="relative"
-          style={{ translateZ: "35px" }}
+          className="relative transform-style-3d"
+          style={{ 
+            z: 50,
+            rotateX: mousePosition.y * -2,
+            rotateY: mousePosition.x * 2,
+          }}
         >
           <AnimatedTestimonials />
         </motion.section>
         
-        <Footer />
+        <motion.div
+          className="relative transform-style-3d"
+          style={{
+            z: 20,
+          }}
+        >
+          <Footer />
+        </motion.div>
         <AIAssistant />
       </div>
     </AnimatedBackground>
