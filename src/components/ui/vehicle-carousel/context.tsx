@@ -1,83 +1,67 @@
 
-import React, { createContext, useContext, useState } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import React, { createContext, useState, useContext, useCallback } from "react";
+import { Vehicle } from "@/types";
 
-interface CarouselContextProps {
-  onCardClose: (index: number) => void;
-  currentIndex: number;
+interface CarouselContextType {
+  activeIndex: number;
+  setActiveIndex: (index: number) => void;
+  goToNext: () => void;
+  goToPrev: () => void;
+  items: Vehicle[];
+  setItems: React.Dispatch<React.SetStateAction<Vehicle[]>>;
+  length: number;
 }
 
-export const CarouselContext = createContext<CarouselContextProps>({
-  onCardClose: () => {},
-  currentIndex: 0,
-});
+const CarouselContext = createContext<CarouselContextType | undefined>(undefined);
 
-export const useCarouselContext = () => useContext(CarouselContext);
-
-export const CarouselProvider: React.FC<{
+interface CarouselProviderProps {
   children: React.ReactNode;
-  initialScroll?: number;
-}> = ({ children, initialScroll = 0 }) => {
-  const carouselRef = React.useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = React.useState(false);
-  const [canScrollRight, setCanScrollRight] = React.useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const isMobile = useIsMobile();
+  items?: Vehicle[];
+  defaultIndex?: number;
+}
 
-  React.useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = initialScroll;
-      checkScrollability();
-    }
-  }, [initialScroll]);
-
-  const checkScrollability = () => {
-    if (carouselRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth);
-    }
+const CarouselProvider = ({
+  children,
+  items: initialItems = [],
+  defaultIndex = 0,
+}: CarouselProviderProps) => {
+  const [activeIndex, setActiveIndex] = useState(defaultIndex);
+  const [items, setItems] = useState<Vehicle[]>(initialItems);
+  
+  const goToNext = useCallback(() => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % items.length);
+  }, [items.length]);
+  
+  const goToPrev = useCallback(() => {
+    setActiveIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
+  }, [items.length]);
+  
+  const value = {
+    activeIndex,
+    setActiveIndex,
+    goToNext,
+    goToPrev,
+    items,
+    setItems,
+    length: items.length,
   };
-
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
-    }
-  };
-
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
-    }
-  };
-
-  const handleCardClose = (index: number) => {
-    if (carouselRef.current) {
-      const cardWidth = isMobile ? 230 : 384; // (md:w-96)
-      const gap = isMobile ? 4 : 8;
-      const scrollPosition = (cardWidth + gap) * (index + 1);
-      carouselRef.current.scrollTo({
-        left: scrollPosition,
-        behavior: "smooth",
-      });
-      setCurrentIndex(index);
-    }
-  };
-
-  const contextValue = {
-    carouselRef,
-    canScrollLeft,
-    canScrollRight,
-    scrollLeft,
-    scrollRight,
-    currentIndex,
-    onCardClose: handleCardClose,
-    checkScrollability
-  };
-
+  
   return (
-    <CarouselContext.Provider value={{ onCardClose: handleCardClose, currentIndex }}>
-      {typeof children === 'function' ? children(contextValue) : children}
+    <CarouselContext.Provider value={value}>
+      {children}
     </CarouselContext.Provider>
   );
 };
+
+// Custom hook to use the carousel context
+const useCarousel = (): CarouselContextType => {
+  const context = useContext(CarouselContext);
+  
+  if (context === undefined) {
+    throw new Error('useCarousel must be used within a CarouselProvider');
+  }
+  
+  return context;
+};
+
+export { CarouselContext, CarouselProvider, useCarousel };

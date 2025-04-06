@@ -5,7 +5,7 @@ interface IntersectionOptions extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
 }
 
-function useIntersectionObserver(
+export default function useIntersectionObserver(
   elementRef: RefObject<Element>,
   {
     threshold = 0,
@@ -51,6 +51,3 @@ function useIntersectionObserver(
 
   return isVisible;
 }
-
-export default useIntersectionObserver;
-

@@ -1,7 +1,7 @@
 
-import React, { memo } from "react";
+import React, { memo, useRef } from "react";
 import { DefaultLoadingFallback } from "@/components/LazyLoadComponents";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 // Dynamic imports for performance
 const LazyHeroSection = React.lazy(() => import("@/components/HeroSection"));
@@ -18,7 +18,8 @@ const LazyTabsFeatureSection = React.lazy(() => import("@/components/index/TabsF
 
 // Use Intersection Observer to lazy load components
 const LazyLoadSection = ({ children, threshold = 0.1 }: { children: React.ReactNode; threshold?: number }) => {
-  const [ref, isIntersecting] = useIntersectionObserver({
+  const ref = useRef<HTMLDivElement>(null);
+  const isIntersecting = useIntersectionObserver(ref, {
     threshold,
     triggerOnce: true
   });
