@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import VehicleHeroHeader from "./VehicleHeroHeader";
 import ModelSelector from "./ModelSelector";
 import HeroBackground from "./HeroBackground";
+import FlyingVehicle from "./FlyingVehicle";
 
 interface VehicleHeroSectionProps {
   onSearchChange?: (value: string) => void;
@@ -15,16 +16,32 @@ export default function VehicleHeroSection({
   searchValue = ""
 }: VehicleHeroSectionProps) {
   const [selectedModel, setSelectedModel] = useState("");
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   const handleModelClick = (model: string) => {
     setSelectedModel(model);
     onSearchChange?.(model);
   };
+
+  // Track mouse position for parallax effect
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    
+    // Calculate normalized position (-0.5 to 0.5)
+    const x = ((clientX - left) / width - 0.5) * 2;
+    const y = ((clientY - top) / height - 0.5) * 2;
+    
+    setMousePosition({ x, y });
+  };
   
   return (
     <HeroBackground>
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col items-center text-center">
+      <div 
+        className="container mx-auto px-6 relative z-10"
+        onMouseMove={handleMouseMove}
+      >
+        <div className="flex flex-col items-center text-center perspective-2000">
           <VehicleHeroHeader />
           
           <SearchBar 
@@ -36,6 +53,8 @@ export default function VehicleHeroSection({
             selectedModel={selectedModel}
             onModelClick={handleModelClick}
           />
+
+          <FlyingVehicle mousePosition={mousePosition} />
         </div>
       </div>
     </HeroBackground>

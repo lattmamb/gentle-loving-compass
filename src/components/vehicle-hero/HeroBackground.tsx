@@ -10,17 +10,46 @@ interface HeroBackgroundProps {
 
 export default function HeroBackground({ children }: HeroBackgroundProps) {
   return (
-    <GridBackground containerClassName="min-h-[50vh] py-16 flex flex-col justify-center bg-[#11151e]">
-      {/* Subtle particle animation in background */}
+    <GridBackground containerClassName="min-h-[70vh] py-16 flex flex-col justify-center bg-gradient-to-b from-[#11151e] to-[#1a1f2e]">
+      {/* Enhanced particle animation for sky feeling */}
       <ParticleAnimation 
-        count={20}
-        colors={["#3b82f6", "#60a5fa"]}
+        count={30}
+        colors={["#3b82f6", "#60a5fa", "#93c5fd"]}
         speed="slow"
       />
       
-      {/* Background gradient */}
+      {/* Sky gradient overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 to-transparent opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 via-blue-800/5 to-transparent opacity-40" />
+        
+        {/* Animated light streaks for flying effect */}
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.3 }}
+          transition={{ duration: 2 }}
+        >
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute h-[1px] bg-gradient-to-r from-transparent via-blue-400/50 to-transparent"
+              style={{
+                top: `${20 + i * 15}%`,
+                left: 0,
+                right: 0,
+              }}
+              animate={{
+                x: ['-100%', '100%'],
+              }}
+              transition={{
+                duration: 2 + i,
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 0.5,
+              }}
+            />
+          ))}
+        </motion.div>
       </div>
       
       {children}
