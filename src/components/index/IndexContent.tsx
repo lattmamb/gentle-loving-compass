@@ -1,19 +1,21 @@
-
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import Parallax3DHero from "@/components/Parallax3DHero";
-import FeaturedVehiclesSection from "./FeaturedVehiclesSection";
-import GlassmorphicSection from "./GlassmorphicSection";
-import MarqueeSection from "./MarqueeSection";
-import FeaturesSection from "./FeaturesSection";
-import StatsSection from "./StatsSection";
-import TabsFeatureSection from "./TabsFeatureSection";
-import ChargingSection from "./ChargingSection";
-import VisionSection from "./VisionSection";
-import TokenizedSection from "./TokenizedSection";
-import TestimonialsSection from "./TestimonialsSection";
+import { LazyParallax3DHero } from "@/components/LazyLoadComponents";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import GridBackground from "@/components/ui/grid-background";
+import { DefaultLoadingFallback } from "@/components/LazyLoadComponents";
+
+// Lazy load sections for better performance
+const FeaturedVehiclesSection = React.lazy(() => import("./FeaturedVehiclesSection"));
+const GlassmorphicSection = React.lazy(() => import("./GlassmorphicSection"));
+const MarqueeSection = React.lazy(() => import("./MarqueeSection"));
+const FeaturesSection = React.lazy(() => import("./FeaturesSection"));
+const StatsSection = React.lazy(() => import("./StatsSection"));
+const TabsFeatureSection = React.lazy(() => import("./TabsFeatureSection"));
+const ChargingSection = React.lazy(() => import("./ChargingSection"));
+const VisionSection = React.lazy(() => import("./VisionSection"));
+const TokenizedSection = React.lazy(() => import("./TokenizedSection"));
+const TestimonialsSection = React.lazy(() => import("./TestimonialsSection"));
 
 export default function IndexContent() {
   // Track scroll position for parallax effects
@@ -38,10 +40,15 @@ export default function IndexContent() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
   
-  // Scroll tracking for parallax
+  // Scroll tracking for parallax with throttling for performance
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      window.requestAnimationFrame(() => {
+        setScrollY(window.scrollY);
+      });
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -66,38 +73,51 @@ export default function IndexContent() {
             rotateY
           }}
         >
-          {/* Hero section with full bleed */}
-          <Parallax3DHero />
+          {/* Hero section with full bleed - Lazy loaded */}
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <LazyParallax3DHero />
+          </Suspense>
           
-          {/* Featured Vehicles - Tesla inspired card section */}
-          <FeaturedVehiclesSection scrollY={scrollY} />
+          {/* Other sections - All lazy loaded */}
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <FeaturedVehiclesSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* Clean Glassmorphic section inspired by Apple */}
-          <GlassmorphicSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <GlassmorphicSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* Tesla-inspired marquee section */}
-          <MarqueeSection />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <MarqueeSection />
+          </Suspense>
           
-          {/* Features with Apple-inspired clean cards */}
-          <FeaturesSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <FeaturesSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* Stats with subtle motion */}
-          <StatsSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <StatsSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* TabsSection with enhanced depth */}
-          <TabsFeatureSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <TabsFeatureSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* Charging network - inspired by Tesla supercharger UX */}
-          <ChargingSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <ChargingSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* AtlasVisionOS - Apple Vision Pro inspired section */}
-          <VisionSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <VisionSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* TokenizedOwnership with depth */}
-          <TokenizedSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <TokenizedSection scrollY={scrollY} />
+          </Suspense>
           
-          {/* Testimonials with subtle floating */}
-          <TestimonialsSection scrollY={scrollY} />
+          <Suspense fallback={<DefaultLoadingFallback />}>
+            <TestimonialsSection scrollY={scrollY} />
+          </Suspense>
         </motion.div>
       </div>
       

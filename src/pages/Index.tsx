@@ -1,7 +1,14 @@
 
-import React from "react";
-import IndexContent from "@/components/index/IndexContent";
+import React, { Suspense } from "react";
+import { DefaultLoadingFallback } from "@/components/LazyLoadComponents";
+
+// Lazy load the main content for better initial load performance
+const IndexContent = React.lazy(() => import("@/components/index/IndexContent"));
 
 export default function Index() {
-  return <IndexContent />;
+  return (
+    <Suspense fallback={<DefaultLoadingFallback />}>
+      <IndexContent />
+    </Suspense>
+  );
 }

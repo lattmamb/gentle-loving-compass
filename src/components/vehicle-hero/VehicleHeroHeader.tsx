@@ -1,8 +1,9 @@
 
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 
-export default function VehicleHeroHeader() {
+// Memoize the component to prevent unnecessary re-renders
+const VehicleHeroHeader = memo(function VehicleHeroHeader() {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -33,4 +34,6 @@ export default function VehicleHeroHeader() {
       </motion.div>
     </motion.div>
   );
-}
+});
+
+export default VehicleHeroHeader;

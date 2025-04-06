@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import ParticleAnimation from "@/components/ParticleAnimation";
 import GridBackground from "@/components/ui/grid-background";
@@ -8,7 +8,8 @@ interface HeroBackgroundProps {
   children: React.ReactNode;
 }
 
-export default function HeroBackground({ children }: HeroBackgroundProps) {
+// Optimize with memoization to prevent unnecessary re-renders
+const HeroBackground = memo(function HeroBackground({ children }: HeroBackgroundProps) {
   return (
     <GridBackground containerClassName="min-h-[70vh] py-16 flex flex-col justify-center bg-gradient-to-b from-[#11151e] to-[#1a1f2e]">
       {/* Enhanced particle animation for sky feeling */}
@@ -22,7 +23,7 @@ export default function HeroBackground({ children }: HeroBackgroundProps) {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 via-blue-800/5 to-transparent opacity-40" />
         
-        {/* Animated light streaks for flying effect */}
+        {/* Animated light streaks for flying effect - optimized animation */}
         <motion.div 
           className="absolute inset-0"
           initial={{ opacity: 0 }}
@@ -37,6 +38,7 @@ export default function HeroBackground({ children }: HeroBackgroundProps) {
                 top: `${20 + i * 15}%`,
                 left: 0,
                 right: 0,
+                willChange: 'transform', // Hint for browser optimization
               }}
               animate={{
                 x: ['-100%', '100%'],
@@ -55,4 +57,6 @@ export default function HeroBackground({ children }: HeroBackgroundProps) {
       {children}
     </GridBackground>
   );
-}
+});
+
+export default HeroBackground;

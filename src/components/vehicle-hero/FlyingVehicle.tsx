@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface FlyingVehicleProps {
   mousePosition: { x: number; y: number };
@@ -12,6 +13,7 @@ interface FlyingVehicleProps {
 export default function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
   const isMobile = useIsMobile();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
   
   // Images for the carousel
   const vehicles = [
@@ -19,14 +21,28 @@ export default function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
     "/unity-fleet.webp"
   ];
 
-  // Auto-rotate the carousel
+  // Initialize image load status
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % vehicles.length);
-    }, 5000);
-    
-    return () => clearInterval(interval);
+    setImagesLoaded(new Array(vehicles.length).fill(false));
   }, [vehicles.length]);
+  
+  // Handle image loading
+  const handleImageLoad = (index: number) => {
+    const newLoadState = [...imagesLoaded];
+    newLoadState[index] = true;
+    setImagesLoaded(newLoadState);
+  };
+
+  // Auto-rotate the carousel only when images are loaded
+  useEffect(() => {
+    if (imagesLoaded.every(loaded => loaded)) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % vehicles.length);
+      }, 5000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [vehicles.length, imagesLoaded]);
 
   // Scale factor for vehicles based on screen size
   const vehicleScale = isMobile ? 0.8 : 1;
@@ -63,29 +79,42 @@ export default function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
                   ease: "easeInOut"
                 }}
               >
+                {!imagesLoaded[index] && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Skeleton className="h-40 w-40 rounded-full" />
+                  </div>
+                )}
+                
                 <img 
                   src={vehicle} 
                   alt={`Electric Vehicle ${index + 1}`}
-                  className="h-full object-contain"
+                  className={`h-full object-contain ${!imagesLoaded[index] ? 'opacity-0' : ''}`}
                   style={{ 
                     filter: "drop-shadow(0 25px 25px rgba(0, 0, 0, 0.5))",
                     transformStyle: "preserve-3d",
                     maxHeight: "100%",
                   }}
+                  loading="lazy"
+                  onLoad={() => handleImageLoad(index)}
                 />
                 
-                {/* Realistic shadow reflection */}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-12 w-3/4 bg-gradient-radial from-black/30 to-transparent opacity-50 blur-xl rounded-full"></div>
-                
-                {/* Animated glow effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-blue-500/10 blur-3xl"
-                  animate={{
-                    opacity: [0.3, 0.6, 0.3],
-                    scale: [0.8, 1.1, 0.8],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                />
+                {/* Only show effects when image is loaded */}
+                {imagesLoaded[index] && (
+                  <>
+                    {/* Realistic shadow reflection */}
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-12 w-3/4 bg-gradient-radial from-black/30 to-transparent opacity-50 blur-xl rounded-full"></div>
+                    
+                    {/* Animated glow effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full bg-blue-500/10 blur-3xl"
+                      animate={{
+                        opacity: [0.3, 0.6, 0.3],
+                        scale: [0.8, 1.1, 0.8],
+                      }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    />
+                  </>
+                )}
               </motion.div>
             </CarouselItem>
           ))}
@@ -106,7 +135,7 @@ export default function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
       </Carousel>
 
       {/* Navigation arrows for desktop */}
-      {!isMobile && (
+      {!isMobile && imagesLoaded.some(loaded => loaded) && (
         <>
           <button
             onClick={() => setCurrentIndex((prev) => (prev - 1 + vehicles.length) % vehicles.length)}
