@@ -1,12 +1,12 @@
 
 import React, { useState } from "react";
-import { Carousel, Card } from "@/components/ui/vehicle-cards-carousel";
 import { vehicles } from "@/data/vehicles";
-import { motion, useAnimation } from "framer-motion";
 import { Vehicle } from "@/types";
+import { motion, useAnimation } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { useSwipeable } from "react-swipeable";
+import { Carousel, Card } from "./ui/vehicle-carousel";
 
 interface VehicleCardsCarouselProps {
   title?: string;
