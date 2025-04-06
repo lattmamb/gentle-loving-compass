@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import SearchBar from "./SearchBar";
 import VehicleHeroHeader from "./VehicleHeroHeader";
 import ModelSelector from "./ModelSelector";
@@ -11,7 +11,8 @@ interface VehicleHeroSectionProps {
   searchValue?: string;
 }
 
-export default function VehicleHeroSection({ 
+// Use memo to prevent unnecessary re-renders of the entire section
+const VehicleHeroSection = memo(function VehicleHeroSection({ 
   onSearchChange,
   searchValue = ""
 }: VehicleHeroSectionProps) {
@@ -42,6 +43,8 @@ export default function VehicleHeroSection({
   
   // Use Intersection Observer for better performance
   useEffect(() => {
+    if (!sectionRef.current) return;
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
@@ -49,14 +52,10 @@ export default function VehicleHeroSection({
       { threshold: 0.1 }
     );
     
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    observer.observe(sectionRef.current);
     
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      observer.disconnect();
     };
   }, []);
 
@@ -87,4 +86,7 @@ export default function VehicleHeroSection({
       </HeroBackground>
     </div>
   );
-}
+});
+
+export default VehicleHeroSection;
+

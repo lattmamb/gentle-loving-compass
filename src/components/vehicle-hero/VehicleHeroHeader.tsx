@@ -37,3 +37,4 @@ const VehicleHeroHeader = memo(function VehicleHeroHeader() {
 });
 
 export default VehicleHeroHeader;
+

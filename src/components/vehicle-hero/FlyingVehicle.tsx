@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,7 +10,8 @@ interface FlyingVehicleProps {
   mousePosition: { x: number; y: number };
 }
 
-export default function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
+// Use memo to prevent unnecessary re-renders
+const FlyingVehicle = memo(function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
   const isMobile = useIsMobile();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
@@ -35,13 +36,17 @@ export default function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
 
   // Auto-rotate the carousel only when images are loaded
   useEffect(() => {
+    let intervalId: NodeJS.Timeout | undefined;
+    
     if (imagesLoaded.every(loaded => loaded)) {
-      const interval = setInterval(() => {
+      intervalId = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % vehicles.length);
       }, 5000);
-      
-      return () => clearInterval(interval);
     }
+    
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
   }, [vehicles.length, imagesLoaded]);
 
   // Scale factor for vehicles based on screen size
@@ -155,4 +160,7 @@ export default function FlyingVehicle({ mousePosition }: FlyingVehicleProps) {
       )}
     </motion.div>
   );
-}
+});
+
+export default FlyingVehicle;
+
