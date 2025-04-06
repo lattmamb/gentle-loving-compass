@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { Vehicle } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
-import { useCarouselContext } from "./context";
+import { useCarousel } from "./context";
 import { Stat, PriceTag } from "./card-stats";
 
 interface CardProps {
@@ -25,7 +24,7 @@ export const Card = ({
 }: CardProps) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose, currentIndex } = useCarouselContext();
+  const { onCardClose, currentIndex } = useCarousel();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,7 +52,7 @@ export const Card = ({
 
   const handleClose = () => {
     setOpen(false);
-    onCardClose(index);
+    if (onCardClose) onCardClose(index);
   };
 
   const handleBookNow = (e: React.MouseEvent) => {

@@ -44,7 +44,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   };
 
   return (
-    <CarouselProvider initialScroll={initialScroll}>
+    <CarouselProvider defaultIndex={0} initialScroll={initialScroll}>
       <div className="relative w-full">
         <div
           className="flex w-full overflow-x-scroll overscroll-x-auto py-10 md:py-20 scroll-smooth [scrollbar-width:none] hide-scrollbar"

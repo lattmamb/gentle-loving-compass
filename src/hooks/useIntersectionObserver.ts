@@ -51,3 +51,6 @@ export default function useIntersectionObserver(
 
   return isVisible;
 }
+
+// Export named alias for backward compatibility
+export const useIntersectionObserver = useIntersectionObserver;

@@ -1,7 +1,8 @@
 
-import React, { memo, useRef } from "react";
+import React, { memo, useRef, useEffect } from "react";
 import { DefaultLoadingFallback } from "@/components/LazyLoadComponents";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+import { useMotionValue } from "framer-motion";
 
 // Dynamic imports for performance
 const LazyHeroSection = React.lazy(() => import("@/components/HeroSection"));
@@ -21,7 +22,7 @@ const LazyLoadSection = ({ children, threshold = 0.1 }: { children: React.ReactN
   const ref = useRef<HTMLDivElement>(null);
   const isIntersecting = useIntersectionObserver(ref, {
     threshold,
-    triggerOnce: true
+    freezeOnceVisible: true, // Using freezeOnceVisible instead of triggerOnce
   });
 
   return (
@@ -39,6 +40,16 @@ const LazyLoadSection = ({ children, threshold = 0.1 }: { children: React.ReactN
 
 // Memoize the entire component for performance
 const IndexContent = memo(function IndexContent() {
+  // Shared scroll value for animations
+  const scrollY = useMotionValue(0);
+  
+  // Update scrollY on scroll
+  useEffect(() => {
+    const handleScroll = () => scrollY.set(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollY]);
+
   return (
     <main className="bg-[#080c14] text-white min-h-screen">
       {/* Hero section - always loaded immediately */}
@@ -48,31 +59,31 @@ const IndexContent = memo(function IndexContent() {
       
       {/* Lazily load the rest of the sections as user scrolls */}
       <LazyLoadSection>
-        <LazyFeaturedVehiclesSection />
+        <LazyFeaturedVehiclesSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyFeaturesSection />
+        <LazyFeaturesSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyStatsSection />
+        <LazyStatsSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyChargingSection />
+        <LazyChargingSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyTestimonialsSection />
+        <LazyTestimonialsSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyVisionSection />
+        <LazyVisionSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyTokenizedSection />
+        <LazyTokenizedSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
@@ -80,11 +91,11 @@ const IndexContent = memo(function IndexContent() {
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyGlassmorphicSection />
+        <LazyGlassmorphicSection scrollY={scrollY} />
       </LazyLoadSection>
       
       <LazyLoadSection>
-        <LazyTabsFeatureSection />
+        <LazyTabsFeatureSection scrollY={scrollY} />
       </LazyLoadSection>
     </main>
   );
