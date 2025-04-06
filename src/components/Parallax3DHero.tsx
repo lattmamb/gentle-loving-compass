@@ -54,6 +54,8 @@ export default function Parallax3DHero() {
             filter: 'blur(100px)',
             opacity: 0.6,
             transformStyle: "preserve-3d",
+            x: mousePosition.x * -30,
+            y: mousePosition.y * -30,
           }}
           animate={{
             y: [0, -30, 0],
@@ -64,10 +66,6 @@ export default function Parallax3DHero() {
             duration: 8,
             repeat: Infinity,
             ease: "easeInOut"
-          }}
-          style={{
-            x: mousePosition.x * -30,
-            y: mousePosition.y * -30,
           }}
         />
         
@@ -206,6 +204,9 @@ export default function Parallax3DHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
+          style={{
+            z: 30 + mousePosition.y * 10
+          }}
         >
           <Button 
             variant="ghost" 
