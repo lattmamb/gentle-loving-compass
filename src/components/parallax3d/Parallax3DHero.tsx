@@ -58,7 +58,7 @@ export default function Parallax3DHero() {
         }}
       >
         <ParallaxHeading 
-          mousePosition={mousePosition} 
+          mousePosition={mousePosition}
           scrollY={scrollY}
           opacity={opacity}
           y={y}
