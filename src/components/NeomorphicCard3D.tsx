@@ -3,26 +3,25 @@ import React, { useState, useRef } from "react";
 import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// Update the interface to omit all drag events to prevent type conflicts
-interface NeomorphicCard3DProps extends Omit<HTMLMotionProps<"div">, "onDrag" | "onDragEnd" | "onDragStart"> {
+// Create a new interface that extends from HTMLMotionProps from framer-motion
+// This ensures proper compatibility with motion.div's event handlers
+interface NeomorphicCard3DProps extends Omit<HTMLMotionProps<"div">, "onDrag" | "onDragEnd" | "onDragStart" | "onDragEnter" | "onDragLeave" | "onDragOver" | "onDragExit"> {
   maxRotation?: number;
   glowColor?: string;
   shadow?: boolean;
   scale?: boolean;
   perspective?: number;
-  children?: React.ReactNode;
-  depth?: number; // New prop for z-translation
+  children?: React.ReactNode; // Explicitly define children as ReactNode
 }
 
 const NeomorphicCard3D: React.FC<NeomorphicCard3DProps> = ({
   children,
   className,
   maxRotation = 10,
-  glowColor = "rgba(59, 130, 246, 0.3)", // Brighter blue with opacity
+  glowColor = "rgba(10, 132, 255, 0.3)", // Tesla blue with opacity
   shadow = true,
   scale = true,
   perspective = 1000,
-  depth = 30, // Default depth value for 3D effect
   ...props
 }) => {
   const [rotation, setRotation] = useState({ x: 0, y: 0, z: 0 });
@@ -61,20 +60,18 @@ const NeomorphicCard3D: React.FC<NeomorphicCard3DProps> = ({
     <motion.div
       ref={cardRef}
       className={cn(
-        "rounded-xl overflow-hidden bg-[#1a2436]/40 backdrop-blur-sm",
-        shadow && "shadow-2xl shadow-blue-500/10",
+        "neo-elevated rounded-xl overflow-hidden",
+        shadow && "shadow-lg",
         className
       )}
       style={{
         perspective: `${perspective}px`,
         transformStyle: "preserve-3d",
-        transform: `translateZ(${depth}px)`,
       }}
       animate={{
         rotateX: rotation.x,
         rotateY: rotation.y,
         scale: isHovered && scale ? 1.05 : 1,
-        z: isHovered ? depth + 15 : depth,
       }}
       transition={{
         type: "spring",
@@ -95,7 +92,7 @@ const NeomorphicCard3D: React.FC<NeomorphicCard3DProps> = ({
               opacity: isHovered ? 1 : 0,
             }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered ? 0.9 : 0 }}
+            animate={{ opacity: isHovered ? 0.8 : 0 }}
             transition={{ duration: 0.3 }}
           />
         )}

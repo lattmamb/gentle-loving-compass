@@ -93,70 +93,21 @@ export default {
 				'glow': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.6' }
-				},
-				'rotate-3d': {
-					'0%, 100%': { transform: 'rotateX(0) rotateY(0)' },
-					'50%': { transform: 'rotateX(10deg) rotateY(10deg)' },
-				},
-				'depth-shift': {
-					'0%, 100%': { transform: 'translateZ(0px)' },
-					'50%': { transform: 'translateZ(50px)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'float': 'float 3s infinite ease-in-out',
-				'glow': 'glow 2s infinite ease-in-out',
-				'rotate-3d': 'rotate-3d 6s infinite ease-in-out',
-				'depth-shift': 'depth-shift 8s infinite ease-in-out'
+				'glow': 'glow 2s infinite ease-in-out'
 			},
 			perspective: {
 				'none': 'none',
 				'500': '500px',
 				'1000': '1000px',
 				'2000': '2000px',
-			},
-			transformStyle: {
-				'flat': 'flat',
-				'3d': 'preserve-3d',
-			},
-			translate: {
-				'z-0': 'translateZ(0px)',
-				'z-10': 'translateZ(10px)',
-				'z-20': 'translateZ(20px)',
-				'z-30': 'translateZ(30px)',
-				'z-40': 'translateZ(40px)',
-				'z-50': 'translateZ(50px)',
-			},
-			boxShadow: {
-				'neo-sm': '3px 3px 6px #0a0c12, -3px -3px 6px #1e2430',
-				'neo-md': '5px 5px 10px #0a0c12, -5px -5px 10px #1e2430',
-				'neo-lg': '10px 10px 20px #0a0c12, -10px -10px 20px #1e2430',
-				'neo-inner-sm': 'inset 3px 3px 6px #0a0c12, inset -3px -3px 6px #1e2430',
-				'neo-inner-md': 'inset 5px 5px 10px #0a0c12, inset -5px -5px 10px #1e2430',
-				'3d-hover': '0 30px 60px -15px rgba(0, 0, 0, 0.5)',
 			}
 		}
 	},
-	plugins: [
-		require("tailwindcss-animate"),
-		function({ addUtilities }: { addUtilities: Function }) {
-			const newUtilities = {
-				'.transform-style-3d': {
-					'transform-style': 'preserve-3d',
-				},
-				'.transform-style-flat': {
-					'transform-style': 'flat',
-				},
-				'.backface-hidden': {
-					'backface-visibility': 'hidden',
-				},
-				'.backface-visible': {
-					'backface-visibility': 'visible',
-				},
-			}
-			addUtilities(newUtilities)
-		}
-	],
+	plugins: [require("tailwindcss-animate")],
 } satisfies Config;

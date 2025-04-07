@@ -22,8 +22,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import NeoCard from "@/components/NeoCard";
 import { motion } from "framer-motion";
 import VehicleCardsCarousel from "@/components/VehicleCardsCarousel";
-import AnimatedBackground from "@/components/AnimatedBackground";
-import ParticleAnimation from "@/components/ParticleAnimation";
 
 const VehiclesList = () => {
   const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>(vehicles);
@@ -92,73 +90,46 @@ const VehiclesList = () => {
   };
 
   return (
-    <AnimatedBackground intensity="low">
-      <div className="min-h-screen">
-        <Header />
-        
-        <VehicleHeroSection 
-          onSearchChange={setSearchQuery}
-          searchValue={searchQuery}
-        />
-        
-        {/* Featured Vehicles Carousel */}
-        <VehicleCardsCarousel 
-          title="Featured Vehicles"
-          subtitle="Explore our most popular Tesla models available for subscription"
-          vehiclesToShow={vehicles.filter(v => v.status === "available").slice(0, 4)}
-        />
-        
-        <main className="pt-8 pb-16 px-6 relative">
-          <ParticleAnimation count={20} speed="slow" />
-          
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-8">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                  Available Vehicles
-                </h2>
-                <p className="text-white/70">
-                  {filteredVehicles.length} vehicles available for subscription
-                </p>
-              </div>
-              
-              {/* Mobile Filter Button */}
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" className="md:hidden neo-button border-white/10 text-white hover:bg-white/10">
-                    <SlidersHorizontal size={18} className="mr-2" />
-                    Filters
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[280px] backdrop-blur-xl bg-black/90 border-white/10">
-                  <SheetHeader>
-                    <SheetTitle className="text-white">Filters</SheetTitle>
-                  </SheetHeader>
-                  <div className="mt-6">
-                    <FilterContent 
-                      vehicleTypes={vehicleTypes} 
-                      selectedTypes={selectedTypes} 
-                      toggleType={toggleType}
-                      allFeatures={allFeatures}
-                      selectedFeatures={selectedFeatures}
-                      toggleFeature={toggleFeature}
-                      priceRange={priceRange}
-                      setPriceRange={setPriceRange}
-                      resetFilters={resetFilters}
-                    />
-                  </div>
-                </SheetContent>
-              </Sheet>
+    <div className="min-h-screen bg-background text-foreground">
+      <Header />
+      
+      <VehicleHeroSection 
+        onSearchChange={setSearchQuery}
+        searchValue={searchQuery}
+      />
+      
+      {/* Featured Vehicles Carousel */}
+      <VehicleCardsCarousel 
+        title="Featured Vehicles"
+        subtitle="Explore our most popular Tesla models available for subscription"
+        vehiclesToShow={vehicles.filter(v => v.status === "available").slice(0, 4)}
+      />
+      
+      <main className="pt-8 pb-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">
+                Available Vehicles
+              </h2>
+              <p className="text-white/70">
+                {filteredVehicles.length} vehicles available for subscription
+              </p>
             </div>
             
-            <div className="flex flex-col md:flex-row gap-8">
-              {/* Desktop Filter Sidebar */}
-              <aside className="hidden md:block w-64 shrink-0">
-                <NeoCard 
-                  variant="elevated"
-                  glow={true}
-                  className="sticky top-24 h-auto"
-                >
+            {/* Mobile Filter Button */}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="md:hidden neo-button border-white/10 text-white hover:bg-white/10">
+                  <SlidersHorizontal size={18} className="mr-2" />
+                  Filters
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] backdrop-blur-xl bg-black/90 border-white/10">
+                <SheetHeader>
+                  <SheetTitle className="text-white">Filters</SheetTitle>
+                </SheetHeader>
+                <div className="mt-6">
                   <FilterContent 
                     vehicleTypes={vehicleTypes} 
                     selectedTypes={selectedTypes} 
@@ -170,57 +141,79 @@ const VehiclesList = () => {
                     setPriceRange={setPriceRange}
                     resetFilters={resetFilters}
                   />
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+          
+          <div className="flex flex-col md:flex-row gap-8">
+            {/* Desktop Filter Sidebar */}
+            <aside className="hidden md:block w-64 shrink-0">
+              <NeoCard 
+                variant="elevated"
+                glow={true}
+                className="sticky top-24 h-auto"
+              >
+                <FilterContent 
+                  vehicleTypes={vehicleTypes} 
+                  selectedTypes={selectedTypes} 
+                  toggleType={toggleType}
+                  allFeatures={allFeatures}
+                  selectedFeatures={selectedFeatures}
+                  toggleFeature={toggleFeature}
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange}
+                  resetFilters={resetFilters}
+                />
+              </NeoCard>
+            </aside>
+            
+            {/* Vehicle Grid */}
+            <div className="flex-1">
+              {filteredVehicles.length === 0 ? (
+                <NeoCard 
+                  variant="pressed"
+                  className="flex flex-col items-center justify-center h-64 text-center"
+                >
+                  <div className="text-5xl mb-4">🔍</div>
+                  <h2 className="text-xl font-bold mb-2">No vehicles found</h2>
+                  <p className="text-white/70 mb-4">
+                    Try adjusting your search criteria to find more options.
+                  </p>
+                  <Button onClick={resetFilters} className="bg-blue-600 hover:bg-blue-700 neo-button">
+                    Reset Filters
+                  </Button>
                 </NeoCard>
-              </aside>
-              
-              {/* Vehicle Grid */}
-              <div className="flex-1">
-                {filteredVehicles.length === 0 ? (
-                  <NeoCard 
-                    variant="pressed"
-                    className="flex flex-col items-center justify-center h-64 text-center"
-                  >
-                    <div className="text-5xl mb-4">🔍</div>
-                    <h2 className="text-xl font-bold mb-2">No vehicles found</h2>
-                    <p className="text-white/70 mb-4">
-                      Try adjusting your search criteria to find more options.
-                    </p>
-                    <Button onClick={resetFilters} className="bg-blue-600 hover:bg-blue-700 neo-button">
-                      Reset Filters
-                    </Button>
-                  </NeoCard>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                  >
-                    {filteredVehicles.map((vehicle, index) => (
-                      <motion.div
-                        key={vehicle.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1, duration: 0.4 }}
-                      >
-                        <VehicleCard vehicle={vehicle} />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                )}
-              </div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                >
+                  {filteredVehicles.map((vehicle, index) => (
+                    <motion.div
+                      key={vehicle.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.4 }}
+                    >
+                      <VehicleCard vehicle={vehicle} />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
             </div>
           </div>
-        </main>
-        
-        <Footer />
-        <AIAssistant />
-      </div>
-    </AnimatedBackground>
+        </div>
+      </main>
+      
+      <Footer />
+      <AIAssistant />
+    </div>
   );
 };
 
-// Separate the FilterContent component for better organization
 function FilterContent({
   vehicleTypes,
   selectedTypes,

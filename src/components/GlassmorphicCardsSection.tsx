@@ -2,7 +2,6 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import GlassmorphicCard from "./ui/glassmorphic-card";
-import { cn } from "@/lib/utils";
 
 export default function GlassmorphicCardsSection() {
   const { scrollY } = useScroll();
@@ -14,34 +13,10 @@ export default function GlassmorphicCardsSection() {
   const y4 = useTransform(scrollY, [0, 1000], [0, -120]);
   
   const cards = [
-    { 
-      title: "Premium Interior", 
-      content: "Luxury materials and finishes", 
-      y: y1,
-      bgImage: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1740&auto=format&fit=crop",
-      hoverBgImage: "https://i.giphy.com/media/26DN5pBQzhqgAufPq/giphy.gif"
-    },
-    { 
-      title: "Long Range", 
-      content: "Up to 405 miles on a single charge", 
-      y: y2,
-      bgImage: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=1740&auto=format&fit=crop",
-      hoverBgImage: "https://i.giphy.com/media/3o7ZetIsjtbkgNE1I4/giphy.gif"
-    },
-    { 
-      title: "Performance", 
-      content: "0-60 mph in as little as 1.99 seconds", 
-      y: y3,
-      bgImage: "https://images.unsplash.com/photo-1567808291548-fc3ee04dbcf0?q=80&w=1587&auto=format&fit=crop",
-      hoverBgImage: "https://i.giphy.com/media/l41lVsYDBC0UVQJCE/giphy.gif"
-    },
-    { 
-      title: "Autopilot", 
-      content: "Advanced driver assistance features", 
-      y: y4,
-      bgImage: "https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?q=80&w=1588&auto=format&fit=crop",
-      hoverBgImage: "https://i.giphy.com/media/3o7btNa0RUYa5E7iiQ/giphy.gif"
-    },
+    { title: "Premium Interior", content: "Luxury materials and finishes", y: y1 },
+    { title: "Long Range", content: "Up to 405 miles on a single charge", y: y2 },
+    { title: "Performance", content: "0-60 mph in as little as 1.99 seconds", y: y3 },
+    { title: "Autopilot", content: "Advanced driver assistance features", y: y4 },
   ];
 
   return (
@@ -79,27 +54,14 @@ export default function GlassmorphicCardsSection() {
               style={{ y: card.y }}
               className="shadow-3d"
             >
-              <div
-                className={cn(
-                  "group cursor-pointer overflow-hidden rounded-xl shadow-xl",
-                  "transition-all duration-500"
-                )}
+              <GlassmorphicCard 
+                title={card.title}
+                expanded={true}
+                mouseTracking={true}
+                parallaxIntensity={15}
               >
-                <GlassmorphicCard 
-                  title={card.title}
-                  expanded={true}
-                  mouseTracking={true}
-                  parallaxIntensity={15}
-                  className={cn(
-                    `bg-[url(${card.bgImage})] bg-cover`,
-                    `before:bg-[url(${card.hoverBgImage})] before:fixed before:inset-0 before:opacity-0 before:z-[-1]`,
-                    `hover:bg-[url(${card.hoverBgImage})]`,
-                    "hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-black hover:after:opacity-30",
-                  )}
-                >
-                  <p className="px-4 pb-4 relative z-10">{card.content}</p>
-                </GlassmorphicCard>
-              </div>
+                <p className="px-4 pb-4">{card.content}</p>
+              </GlassmorphicCard>
             </motion.div>
           ))}
         </div>
