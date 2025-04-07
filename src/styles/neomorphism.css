@@ -1,0 +1,178 @@
+
+@tailwind components;
+
+@layer utilities {
+  /* Neomorphism utilities */
+  .neo-flat {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: none;
+  }
+  
+  .neo-pressed {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: inset 5px 5px 10px #0a0c12,
+                inset -5px -5px 10px #1e2430;
+  }
+  
+  .neo-elevated {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: 5px 5px 10px #0a0c12,
+                -5px -5px 10px #1e2430;
+  }
+  
+  .neo-shadow {
+    box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.28);
+  }
+  
+  .neo-shadow-hover {
+    box-shadow: -20px 30px 45px rgba(0, 0, 0, 0.35);
+  }
+  
+  .neo-button {
+    @apply neo-elevated transition-all duration-200 hover:scale-105 active:neo-pressed;
+  }
+  
+  .neo-input {
+    @apply neo-pressed focus:ring-2 focus:ring-blue-500/50 outline-none;
+  }
+  
+  .neo-card {
+    @apply neo-elevated p-6 relative overflow-hidden;
+  }
+  
+  /* Enhanced glow effects */
+  .neo-glow {
+    @apply relative;
+    background: linear-gradient(
+      145deg, 
+      rgba(255, 255, 255, 0.03), 
+      rgba(0, 0, 0, 0.2)
+    );
+  }
+  
+  .neo-glow::before {
+    content: '';
+    @apply absolute -inset-0.5 rounded-xl;
+    background: linear-gradient(225deg, #1a2030, #0c0f15);
+    z-index: -1;
+    filter: blur(24px);
+  }
+  
+  .neo-glow-blue {
+    @apply relative;
+  }
+  
+  .neo-glow-blue::before {
+    content: '';
+    @apply absolute -inset-1 rounded-xl;
+    background: radial-gradient(
+      circle at var(--mouse-x) var(--mouse-y),
+      rgba(10, 132, 255, 0.5),
+      rgba(10, 132, 255, 0) 70%
+    );
+    z-index: -1;
+    filter: blur(16px);
+  }
+  
+  /* Enhanced 3D effects */
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .perspective-2000 {
+    perspective: 2000px;
+  }
+  
+  .translate-z-10 {
+    transform: translateZ(10px);
+  }
+  
+  .translate-z-20 {
+    transform: translateZ(20px);
+  }
+  
+  .translate-z-30 {
+    transform: translateZ(30px);
+  }
+  
+  /* Uiverse inspired utilities */
+  .ui-checkbox {
+    @apply appearance-none h-5 w-5 neo-pressed rounded cursor-pointer checked:bg-blue-500 transition-all duration-300 relative;
+  }
+  
+  .ui-checkbox:checked::before {
+    content: '✓';
+    @apply absolute inset-0 text-white flex items-center justify-center text-xs font-bold;
+  }
+  
+  .ui-toggle {
+    @apply relative inline-flex h-6 w-12 items-center rounded-full neo-pressed transition-colors focus:outline-none;
+  }
+  
+  .ui-toggle-thumb {
+    @apply inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200;
+  }
+  
+  .ui-glow-button {
+    @apply relative inline-flex overflow-hidden rounded-full p-[2px];
+  }
+  
+  .ui-glow-button::before {
+    @apply absolute inset-0 rounded-full;
+    content: '';
+    background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+    z-index: -2;
+  }
+  
+  .ui-glow-button::after {
+    @apply absolute inset-[2px] rounded-full bg-[#141821];
+    content: '';
+    z-index: -1;
+  }
+  
+  /* Enhanced 3D card */
+  .card-3d {
+    @apply rounded-xl neo-elevated transition-all duration-300;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .card-3d-content {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .card-3d:hover .card-3d-content {
+    transform: translateZ(30px);
+  }
+  
+  .card-3d::before {
+    content: '';
+    @apply absolute -inset-0.5 rounded-xl opacity-0 transition-opacity duration-300;
+    background: linear-gradient(
+      45deg,
+      rgba(10, 132, 255, 0.5),
+      rgba(94, 92, 230, 0.5),
+      rgba(10, 132, 255, 0)
+    );
+    z-index: -1;
+    filter: blur(8px);
+  }
+  
+  .card-3d:hover::before {
+    opacity: 1;
+  }
+  
+  .ui-range {
+    @apply neo-pressed rounded-full h-2 w-full overflow-hidden appearance-none;
+  }
+  
+  .ui-range::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full bg-blue-500 cursor-pointer;
+    box-shadow: -100vw 0 0 100vw #0a84ff;
+  }
+}

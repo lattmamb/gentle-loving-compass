@@ -1,0 +1,149 @@
+
+@tailwind components;
+
+/* Animation utilities */
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+  
+  .pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+  }
+  
+  .rotate-3d {
+    transition: transform 0.3s ease;
+  }
+  
+  .rotate-3d:hover {
+    transform: rotateX(10deg) rotateY(-10deg);
+  }
+  
+  /* Enhanced 3D shadow effect */
+  .shadow-3d {
+    position: relative;
+  }
+  
+  .shadow-3d::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    bottom: -30px;
+    width: 80%;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    filter: blur(15px);
+    transform: perspective(100px) rotateX(60deg);
+    z-index: -1;
+    border-radius: 50%;
+    transform-origin: center;
+  }
+  
+  /* New 3D text effect */
+  .text-3d {
+    text-shadow: 0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b9b9b9,
+                0 5px 0 #aaa,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px 0 rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.5);
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Enhanced reflections for 3D cards */
+@keyframes reflectionMove {
+  0% {
+    background-position: -100% -100%;
+  }
+  50% {
+    background-position: 200% 200%;
+  }
+  100% {
+    background-position: -100% -100%;
+  }
+}
+
+.reflection {
+  position: relative;
+  overflow: hidden;
+}
+
+.reflection::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  opacity: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: opacity 0.3s;
+  transform: rotate(45deg);
+  animation: reflectionMove 5s linear infinite;
+  pointer-events: none;
+}
+
+.reflection:hover::after {
+  opacity: 1;
+}
