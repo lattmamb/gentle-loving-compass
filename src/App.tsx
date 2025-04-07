@@ -11,7 +11,6 @@ import VehicleDetail from "./pages/VehicleDetail";
 import BookVehicle from "./pages/BookVehicle";
 import Dashboard from "./pages/Dashboard";
 import Pricing from "./pages/Pricing";
-import Locations from "./pages/Locations";
 import React from "react";
 
 // Create a client
@@ -21,10 +20,10 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/vehicles" element={<VehiclesList />} />
@@ -32,12 +31,11 @@ function App() {
             <Route path="/book/:id" element={<BookVehicle />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/locations" element={<Locations />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </TooltipProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }

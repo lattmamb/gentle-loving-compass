@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -46,13 +45,6 @@
     --neo-shadow-light: 220 10% 16%;
     --neo-shadow-dark: 220 10% 8%;
     --neo-highlight: 220 10% 20%;
-    
-    /* 3D effect variables */
-    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    --card-shadow-hover: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
-    --card-shadow-active: 0 5px 10px -5px rgba(0, 0, 0, 0.3);
-    --mouse-x: 50%;
-    --mouse-y: 50%;
   }
 }
 
@@ -72,47 +64,25 @@
   html {
     @apply scroll-smooth;
   }
-  
-  /* Enhanced button and input styles */
-  button, 
-  .button {
-    @apply transition-all duration-200 ease-out active:scale-95;
-  }
-  
-  input,
-  select,
-  textarea {
-    @apply focus:ring-2 focus:ring-blue-500/50 outline-none transition-shadow duration-200;
-  }
 }
 
 @layer utilities {
-  /* Scrollbar utilities */
-  .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 
   /* Previous glass utilities */
-  .glass {
-    @apply bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-60 border border-white/20;
-  }
-  
   .glass-card {
-    @apply relative overflow-hidden rounded-2xl p-6;
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
   }
   
-  .glass-card::before {
-    content: "";
-    @apply absolute top-0 left-0 w-full h-full bg-white opacity-10 rounded-2xl z-0;
-  }
-  
-  .glass-card > * {
-    @apply relative z-10;
+  .neo-blur {
+    @apply backdrop-blur-2xl bg-black/40 border border-white/10;
   }
   
   /* Neomorphism utilities */
@@ -133,14 +103,6 @@
                 -5px -5px 10px #1e2430;
   }
   
-  .neo-shadow {
-    box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.28);
-  }
-  
-  .neo-shadow-hover {
-    box-shadow: -20px 30px 45px rgba(0, 0, 0, 0.35);
-  }
-  
   .neo-button {
     @apply neo-elevated transition-all duration-200 hover:scale-105 active:neo-pressed;
   }
@@ -153,19 +115,13 @@
     @apply neo-elevated p-6 relative overflow-hidden;
   }
   
-  /* Enhanced glow effects */
   .neo-glow {
     @apply relative;
-    background: linear-gradient(
-      145deg, 
-      rgba(255, 255, 255, 0.03), 
-      rgba(0, 0, 0, 0.2)
-    );
   }
   
   .neo-glow::before {
     content: '';
-    @apply absolute -inset-0.5 rounded-xl;
+    @apply absolute top-0 left-0 right-0 bottom-0 rounded-xl;
     background: linear-gradient(225deg, #1a2030, #0c0f15);
     z-index: -1;
     filter: blur(24px);
@@ -177,39 +133,9 @@
   
   .neo-glow-blue::before {
     content: '';
-    @apply absolute -inset-1 rounded-xl;
-    background: radial-gradient(
-      circle at var(--mouse-x) var(--mouse-y),
-      rgba(10, 132, 255, 0.5),
-      rgba(10, 132, 255, 0) 70%
-    );
+    @apply absolute -inset-1 rounded-xl bg-blue-500/20;
     z-index: -1;
     filter: blur(16px);
-  }
-  
-  /* Enhanced 3D effects */
-  .transform-3d {
-    transform-style: preserve-3d;
-  }
-  
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  
-  .perspective-2000 {
-    perspective: 2000px;
-  }
-  
-  .translate-z-10 {
-    transform: translateZ(10px);
-  }
-  
-  .translate-z-20 {
-    transform: translateZ(20px);
-  }
-  
-  .translate-z-30 {
-    transform: translateZ(30px);
   }
 
   /* Text styling utilities */
@@ -222,25 +148,13 @@
   }
 
   /* Scrollbar utilities */
-  /* Works on Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #8f54a0 #141821;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
-  /* Works on Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  *::-webkit-scrollbar-track {
-    background: #141821;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background-color: rgb(148 163 184/0.3);
-    border-radius: 10px;
-    border: 1px solid #ffffff08;
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   
   /* Uiverse inspired utilities */
@@ -278,37 +192,8 @@
     z-index: -1;
   }
   
-  /* Enhanced 3D card */
-  .card-3d {
-    @apply rounded-xl neo-elevated transition-all duration-300;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-  }
-  
-  .card-3d-content {
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  .card-3d:hover .card-3d-content {
-    transform: translateZ(30px);
-  }
-  
-  .card-3d::before {
-    content: '';
-    @apply absolute -inset-0.5 rounded-xl opacity-0 transition-opacity duration-300;
-    background: linear-gradient(
-      45deg,
-      rgba(10, 132, 255, 0.5),
-      rgba(94, 92, 230, 0.5),
-      rgba(10, 132, 255, 0)
-    );
-    z-index: -1;
-    filter: blur(8px);
-  }
-  
-  .card-3d:hover::before {
-    opacity: 1;
+  .ui-card-3d {
+    @apply rounded-2xl neo-elevated transition-all duration-300 transform perspective-1000;
   }
   
   .ui-range {
@@ -318,6 +203,11 @@
   .ui-range::-webkit-slider-thumb {
     @apply appearance-none w-4 h-4 rounded-full bg-blue-500 cursor-pointer;
     box-shadow: -100vw 0 0 100vw #0a84ff;
+  }
+  
+  /* 3D transform utility for ThreeDMarquee */
+  .transform-3d {
+    transform-style: preserve-3d;
   }
   
   /* Size utility for ThreeDMarquee */
@@ -361,42 +251,6 @@
   .rotate-3d:hover {
     transform: rotateX(10deg) rotateY(-10deg);
   }
-  
-  /* Enhanced 3D shadow effect */
-  .shadow-3d {
-    position: relative;
-  }
-  
-  .shadow-3d::after {
-    content: '';
-    position: absolute;
-    left: 20px;
-    bottom: -30px;
-    width: 80%;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.2);
-    filter: blur(15px);
-    transform: perspective(100px) rotateX(60deg);
-    z-index: -1;
-    border-radius: 50%;
-    transform-origin: center;
-  }
-  
-  /* New 3D text effect */
-  .text-3d {
-    text-shadow: 0 1px 0 #ccc,
-                0 2px 0 #c9c9c9,
-                0 3px 0 #bbb,
-                0 4px 0 #b9b9b9,
-                0 5px 0 #aaa,
-                0 6px 1px rgba(0,0,0,.1),
-                0 0 5px rgba(0,0,0,.1),
-                0 1px 3px rgba(0,0,0,.3),
-                0 3px 5px rgba(0,0,0,.2),
-                0 5px 10px rgba(0,0,0,.25),
-                0 10px 10px rgba(0,0,0,.2),
-                0 20px 20px rgba(0,0,0,.15);
-  }
 }
 
 @keyframes slideUp {
@@ -435,46 +289,4 @@
   50% {
     transform: translateY(-10px);
   }
-}
-
-/* Enhanced reflections for 3D cards */
-@keyframes reflectionMove {
-  0% {
-    background-position: -100% -100%;
-  }
-  50% {
-    background-position: 200% 200%;
-  }
-  100% {
-    background-position: -100% -100%;
-  }
-}
-
-.reflection {
-  position: relative;
-  overflow: hidden;
-}
-
-.reflection::after {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  opacity: 0;
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transition: opacity 0.3s;
-  transform: rotate(45deg);
-  animation: reflectionMove 5s linear infinite;
-  pointer-events: none;
-}
-
-.reflection:hover::after {
-  opacity: 1;
 }

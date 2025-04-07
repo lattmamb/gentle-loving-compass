@@ -17,13 +17,6 @@ import {
   SheetTrigger 
 } from "@/components/ui/sheet";
 import AIAssistant from "@/components/AIAssistant";
-import VehicleHeroSection from "@/components/VehicleHeroSection";
-import { Checkbox } from "@/components/ui/checkbox";
-import NeoCard from "@/components/NeoCard";
-import { motion } from "framer-motion";
-import VehicleCardsCarousel from "@/components/VehicleCardsCarousel";
-import AnimatedBackground from "@/components/AnimatedBackground";
-import ParticleAnimation from "@/components/ParticleAnimation";
 
 const VehiclesList = () => {
   const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>(vehicles);
@@ -92,40 +85,36 @@ const VehiclesList = () => {
   };
 
   return (
-    <AnimatedBackground intensity="low">
-      <div className="min-h-screen">
-        <Header />
-        
-        <VehicleHeroSection 
-          onSearchChange={setSearchQuery}
-          searchValue={searchQuery}
-        />
-        
-        {/* Featured Vehicles Carousel */}
-        <VehicleCardsCarousel 
-          title="Featured Vehicles"
-          subtitle="Explore our most popular Tesla models available for subscription"
-          vehiclesToShow={vehicles.filter(v => v.status === "available").slice(0, 4)}
-        />
-        
-        <main className="pt-8 pb-16 px-6 relative">
-          <ParticleAnimation count={20} speed="slow" />
-          
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-end justify-between mb-8">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2">
-                  Available Vehicles
-                </h2>
-                <p className="text-white/70">
-                  {filteredVehicles.length} vehicles available for subscription
-                </p>
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      
+      <main className="pt-24 pb-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between mb-8">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                Tesla Vehicles
+              </h1>
+              <p className="text-white/70">
+                {filteredVehicles.length} vehicles available for subscription
+              </p>
+            </div>
+            
+            <div className="flex items-center mt-4 md:mt-0">
+              <div className="relative flex-1 mr-2">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50" size={18} />
+                <Input
+                  placeholder="Search vehicles..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-white/5 border-white/10 text-white w-full"
+                />
               </div>
               
               {/* Mobile Filter Button */}
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className="md:hidden neo-button border-white/10 text-white hover:bg-white/10">
+                  <Button variant="outline" className="md:hidden border-white/10 text-white hover:bg-white/10">
                     <SlidersHorizontal size={18} className="mr-2" />
                     Filters
                   </Button>
@@ -150,77 +139,57 @@ const VehiclesList = () => {
                 </SheetContent>
               </Sheet>
             </div>
-            
-            <div className="flex flex-col md:flex-row gap-8">
-              {/* Desktop Filter Sidebar */}
-              <aside className="hidden md:block w-64 shrink-0">
-                <NeoCard 
-                  variant="elevated"
-                  glow={true}
-                  className="sticky top-24 h-auto"
-                >
-                  <FilterContent 
-                    vehicleTypes={vehicleTypes} 
-                    selectedTypes={selectedTypes} 
-                    toggleType={toggleType}
-                    allFeatures={allFeatures}
-                    selectedFeatures={selectedFeatures}
-                    toggleFeature={toggleFeature}
-                    priceRange={priceRange}
-                    setPriceRange={setPriceRange}
-                    resetFilters={resetFilters}
-                  />
-                </NeoCard>
-              </aside>
-              
-              {/* Vehicle Grid */}
-              <div className="flex-1">
-                {filteredVehicles.length === 0 ? (
-                  <NeoCard 
-                    variant="pressed"
-                    className="flex flex-col items-center justify-center h-64 text-center"
-                  >
-                    <div className="text-5xl mb-4">🔍</div>
-                    <h2 className="text-xl font-bold mb-2">No vehicles found</h2>
-                    <p className="text-white/70 mb-4">
-                      Try adjusting your search criteria to find more options.
-                    </p>
-                    <Button onClick={resetFilters} className="bg-blue-600 hover:bg-blue-700 neo-button">
-                      Reset Filters
-                    </Button>
-                  </NeoCard>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                  >
-                    {filteredVehicles.map((vehicle, index) => (
-                      <motion.div
-                        key={vehicle.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1, duration: 0.4 }}
-                      >
-                        <VehicleCard vehicle={vehicle} />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                )}
+          </div>
+          
+          <div className="flex flex-col md:flex-row gap-8">
+            {/* Desktop Filter Sidebar */}
+            <aside className="hidden md:block w-64 shrink-0">
+              <div className="sticky top-24 backdrop-blur-xl bg-white/5 rounded-lg border border-white/10 p-6">
+                <FilterContent 
+                  vehicleTypes={vehicleTypes} 
+                  selectedTypes={selectedTypes} 
+                  toggleType={toggleType}
+                  allFeatures={allFeatures}
+                  selectedFeatures={selectedFeatures}
+                  toggleFeature={toggleFeature}
+                  priceRange={priceRange}
+                  setPriceRange={setPriceRange}
+                  resetFilters={resetFilters}
+                />
               </div>
+            </aside>
+            
+            {/* Vehicle Grid */}
+            <div className="flex-1">
+              {filteredVehicles.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-64 text-center backdrop-blur-xl bg-white/5 rounded-lg border border-white/10 p-6">
+                  <div className="text-5xl mb-4">🔍</div>
+                  <h2 className="text-xl font-bold mb-2">No vehicles found</h2>
+                  <p className="text-white/70 mb-4">
+                    Try adjusting your search criteria to find more options.
+                  </p>
+                  <Button onClick={resetFilters} className="bg-blue-600 hover:bg-blue-700">
+                    Reset Filters
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {filteredVehicles.map((vehicle) => (
+                    <VehicleCard key={vehicle.id} vehicle={vehicle} />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-        </main>
-        
-        <Footer />
-        <AIAssistant />
-      </div>
-    </AnimatedBackground>
+        </div>
+      </main>
+      
+      <Footer />
+      <AIAssistant />
+    </div>
   );
 };
 
-// Separate the FilterContent component for better organization
 function FilterContent({
   vehicleTypes,
   selectedTypes,
@@ -267,13 +236,14 @@ function FilterContent({
         <h3 className="font-medium text-lg mb-3 text-white">Vehicle Type</h3>
         <div className="space-y-2">
           {vehicleTypes.map((type) => (
-            <label key={type} className="flex items-center cursor-pointer group">
-              <Checkbox
+            <label key={type} className="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                className="rounded text-blue-600 focus:ring-blue-500 border-white/20 bg-transparent"
                 checked={selectedTypes.includes(type)}
-                onCheckedChange={() => toggleType(type)}
-                className="ui-checkbox"
+                onChange={() => toggleType(type)}
               />
-              <span className="ml-2 text-white/80 group-hover:text-white transition-colors">{type}</span>
+              <span className="ml-2 text-white/80">{type}</span>
             </label>
           ))}
         </div>
@@ -283,13 +253,14 @@ function FilterContent({
         <h3 className="font-medium text-lg mb-3 text-white">Features</h3>
         <div className="space-y-2">
           {allFeatures.slice(0, 5).map((feature) => (
-            <label key={feature} className="flex items-center cursor-pointer group">
-              <Checkbox
+            <label key={feature} className="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                className="rounded text-blue-600 focus:ring-blue-500 border-white/20 bg-transparent"
                 checked={selectedFeatures.includes(feature)}
-                onCheckedChange={() => toggleFeature(feature)}
-                className="ui-checkbox"
+                onChange={() => toggleFeature(feature)}
               />
-              <span className="ml-2 text-white/80 group-hover:text-white transition-colors">{feature}</span>
+              <span className="ml-2 text-white/80">{feature}</span>
             </label>
           ))}
         </div>
@@ -298,7 +269,7 @@ function FilterContent({
       <Button 
         variant="outline" 
         onClick={resetFilters}
-        className="w-full mt-4 neo-button border-white/10 text-white hover:bg-white/10"
+        className="w-full mt-4 border-white/10 text-white hover:bg-white/10"
       >
         Reset Filters
       </Button>

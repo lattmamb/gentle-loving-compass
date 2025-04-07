@@ -20,7 +20,7 @@ export const ThreeDMarquee = ({
   return (
     <div
       className={cn(
-        "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100 neo-card",
+        "mx-auto block h-[600px] overflow-hidden rounded-2xl max-sm:h-100",
         className,
       )}
     >
@@ -29,10 +29,8 @@ export const ThreeDMarquee = ({
           <div
             style={{
               transform: "rotateX(55deg) rotateY(0deg) rotateZ(-45deg)",
-              perspective: "1000px",
-              transformStyle: "preserve-3d",
             }}
-            className="relative top-96 right-[50%] grid size-full origin-top-left grid-cols-4 gap-8"
+            className="relative top-96 right-[50%] grid size-full origin-top-left grid-cols-4 gap-8 transform-3d"
           >
             {chunks.map((subarray, colIndex) => (
               <motion.div
@@ -52,7 +50,6 @@ export const ThreeDMarquee = ({
                     <motion.img
                       whileHover={{
                         y: -10,
-                        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
                       }}
                       transition={{
                         duration: 0.3,
@@ -61,7 +58,7 @@ export const ThreeDMarquee = ({
                       key={imageIndex + image}
                       src={image}
                       alt={`Tesla Image ${imageIndex + 1}`}
-                      className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl neo-glow-blue"
+                      className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl"
                       width={970}
                       height={700}
                     />
