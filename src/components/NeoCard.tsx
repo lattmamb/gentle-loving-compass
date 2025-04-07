@@ -6,6 +6,7 @@ interface NeoCardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "flat" | "elevated" | "pressed";
   glow?: boolean;
   glowColor?: "blue" | "green" | "purple";
+  hover3D?: boolean;
 }
 
 const NeoCard = ({ 
@@ -14,6 +15,7 @@ const NeoCard = ({
   variant = "elevated", 
   glow = false,
   glowColor = "blue",
+  hover3D = false,
   ...props 
 }: NeoCardProps) => {
   let variantClass = "";
@@ -46,10 +48,12 @@ const NeoCard = ({
         break;
     }
   }
+
+  const hover3DClass = hover3D ? "transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg" : "";
   
   return (
     <div 
-      className={cn("p-6 rounded-xl", variantClass, glowClass, className)} 
+      className={cn("p-6 rounded-xl", variantClass, glowClass, hover3DClass, className)} 
       {...props}
     >
       {children}
