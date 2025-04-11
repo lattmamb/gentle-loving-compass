@@ -85,17 +85,33 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-subtle': {
+					'0%, 100%': { opacity: 1 },
+					'50%': { opacity: 0.8 }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 5s ease-in-out infinite',
+				'pulse-subtle': 'pulse-subtle 3s ease-in-out infinite'
 			},
 			perspective: {
 				'none': 'none',
 				'500': '500px',
 				'1000': '1000px',
 				'2000': '2000px',
+			},
+			boxShadow: {
+				'neo-flat': 'none',
+				'neo-pressed': 'inset 5px 5px 10px var(--neo-shadow-dark), inset -5px -5px 10px var(--neo-shadow-light)',
+				'neo-elevated': '5px 5px 10px var(--neo-shadow-dark), -5px -5px 10px var(--neo-shadow-light)',
+				'neo-apple': '0 8px 30px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
 			}
 		}
 	},
