@@ -1,0 +1,95 @@
+
+@layer utilities {
+  /* Neomorphism utilities */
+  .neo-flat {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: none;
+  }
+  
+  .neo-pressed {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: inset 5px 5px 10px #0a0c12,
+                inset -5px -5px 10px #1e2430;
+  }
+  
+  .neo-elevated {
+    @apply bg-[#141821] rounded-xl;
+    box-shadow: 5px 5px 10px #0a0c12,
+                -5px -5px 10px #1e2430;
+  }
+
+  /* Apple Intelligence inspired utilities */
+  .apple-card {
+    @apply bg-[#1c2030] rounded-2xl shadow-neo-apple border border-white/5;
+    backdrop-filter: blur(20px);
+  }
+  
+  .apple-button {
+    @apply bg-gradient-to-b from-[#2c3a5a] to-[#1c293e] rounded-xl px-6 py-3 font-medium text-white/90 
+           shadow-[0_2px_4px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.1)] 
+           hover:from-[#324267] hover:to-[#212f45] transition-all duration-200;
+  }
+  
+  .apple-input {
+    @apply bg-[#141821]/80 backdrop-blur-md rounded-lg border border-white/10 px-4 py-3 
+           focus:ring-2 focus:ring-blue-500/30 outline-none;
+  }
+  
+  /* 3D Foam block UI */
+  .foam-block {
+    @apply relative rounded-2xl bg-gradient-to-br from-[#1e2432] to-[#141821] p-6 
+           shadow-[0_8px_16px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.07)]
+           before:absolute before:inset-0 before:rounded-2xl before:p-[1px] 
+           before:bg-gradient-to-b before:from-white/10 before:to-transparent before:-z-10;
+  }
+  
+  .foam-block-hover {
+    @apply transition-all duration-300 hover:translate-y-[-4px] 
+           hover:shadow-[0_14px_28px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.1)];
+  }
+  
+  /* UI Component utilities */
+  .neo-button {
+    @apply neo-elevated transition-all duration-200 hover:scale-105 active:neo-pressed;
+  }
+  
+  .neo-input {
+    @apply neo-pressed focus:ring-2 focus:ring-blue-500/50 outline-none;
+  }
+  
+  .neo-card {
+    @apply neo-elevated p-6 relative overflow-hidden;
+  }
+  
+  .neo-glow {
+    @apply relative;
+  }
+  
+  .neo-glow::before {
+    content: '';
+    @apply absolute top-0 left-0 right-0 bottom-0 rounded-xl;
+    background: linear-gradient(225deg, #1a2030, #0c0f15);
+    z-index: -1;
+    filter: blur(24px);
+  }
+  
+  .neo-glow-blue {
+    @apply relative;
+  }
+  
+  .neo-glow-blue::before {
+    content: '';
+    @apply absolute -inset-1 rounded-xl bg-blue-500/20;
+    z-index: -1;
+    filter: blur(16px);
+  }
+
+  /* Text styling utilities */
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-blue {
+    @apply bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent;
+  }
+}

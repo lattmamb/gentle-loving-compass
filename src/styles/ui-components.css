@@ -1,0 +1,46 @@
+
+@layer utilities {
+  /* Uiverse inspired utilities */
+  .ui-checkbox {
+    @apply appearance-none h-5 w-5 neo-pressed rounded cursor-pointer checked:bg-blue-500 transition-all duration-300 relative;
+  }
+  
+  .ui-checkbox:checked::before {
+    content: '✓';
+    @apply absolute inset-0 text-white flex items-center justify-center text-xs font-bold;
+  }
+  
+  .ui-toggle {
+    @apply relative inline-flex h-6 w-12 items-center rounded-full neo-pressed transition-colors focus:outline-none;
+  }
+  
+  .ui-toggle-thumb {
+    @apply inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200;
+  }
+  
+  .ui-glow-button {
+    @apply relative inline-flex overflow-hidden rounded-full p-[2px];
+  }
+  
+  .ui-glow-button::before {
+    @apply absolute inset-0 rounded-full;
+    content: '';
+    background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+    z-index: -2;
+  }
+  
+  .ui-glow-button::after {
+    @apply absolute inset-[2px] rounded-full bg-[#141821];
+    content: '';
+    z-index: -1;
+  }
+  
+  .ui-range {
+    @apply neo-pressed rounded-full h-2 w-full overflow-hidden appearance-none;
+  }
+  
+  .ui-range::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full bg-blue-500 cursor-pointer;
+    box-shadow: -100vw 0 0 100vw #0a84ff;
+  }
+}

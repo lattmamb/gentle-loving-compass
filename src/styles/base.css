@@ -1,0 +1,90 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 10% 10%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 10% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 10% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 220 100% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 225 30% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 225 30% 18%;
+    --muted-foreground: 215 20% 75%;
+
+    --accent: 217 50% 25%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 225 30% 18%;
+    --input: 225 30% 18%;
+    --ring: 213 27% 84%;
+    
+    --sidebar-background: 220 10% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 220 60% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 10% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 220 10% 15%;
+    --sidebar-ring: 220 60% 50%;
+
+    /* Neomorphism specific variables */
+    --neo-bg: 220 10% 12%;
+    --neo-shadow-light: rgba(30, 36, 50, 0.7);
+    --neo-shadow-dark: rgba(10, 12, 18, 0.9);
+    --neo-highlight: 220 10% 20%;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border selection:bg-blue-900/30 selection:text-white;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    background-color: #141821;
+    background-image: radial-gradient(circle at center top, #1e2432, #0f131c);
+    background-attachment: fixed;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Glass utilities */
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+  }
+  
+  .neo-blur {
+    @apply backdrop-blur-2xl bg-black/40 border border-white/10;
+  }
+}
