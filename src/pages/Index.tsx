@@ -10,10 +10,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ThreeDMarquee from "@/components/ThreeDMarquee";
 import { marqueeImages } from "@/data/marqueeImages";
+import GridBackgroundDemo from "@/components/ui/grid-background-demo";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen text-white overflow-x-hidden relative">
+      <GridBackgroundDemo />
       <Header />
       <HeroSection />
       
@@ -37,7 +39,7 @@ const Index = () => {
       <FeaturedVehicles />
       
       {/* Key Features Section */}
-      <section className="py-16 px-6 bg-gradient-to-b from-black to-blue-950/50">
+      <section className="py-16 px-6 bg-gradient-to-b from-transparent to-blue-950/30 relative">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
             Premium Electric Experience
@@ -82,7 +84,7 @@ const Index = () => {
       </section>
       
       {/* How It Works Section */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6 relative">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-white">
             How It Works
