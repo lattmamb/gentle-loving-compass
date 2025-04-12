@@ -1,123 +1,68 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Vehicle } from "@/types";
-import { cn, formatCurrency } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { formatCurrency } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { ArrowRight, Battery, Gauge, Clock } from "lucide-react";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
-  className?: string;
-  featured?: boolean;
 }
 
-export default function VehicleCard({
-  vehicle,
-  className,
-  featured = false,
-}: VehicleCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  
+const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
   return (
-    <Card
-      className={cn(
-        "overflow-hidden transition-all duration-300 ease-out border-0 backdrop-blur-xl bg-white/5 hover:bg-white/10 border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] group",
-        isHovered && "scale-[1.02]",
-        featured ? "col-span-2 md:col-span-2" : "",
-        className
-      )}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="relative w-full pt-[56.25%]">
-        <div className="absolute inset-0 overflow-hidden">
+    <Link to={`/vehicles/${vehicle.id}`}>
+      <motion.div 
+        className="group h-full neo-blur rounded-2xl overflow-hidden border border-white/10 transition-all duration-500"
+        whileHover={{ 
+          scale: 1.02,
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)" 
+        }}
+      >
+        <div className="relative overflow-hidden aspect-[16/9]">
           <img
-            src={vehicle.image || "https://placehold.co/600x400?text=Tesla+Model"}
+            src={vehicle.image}
             alt={vehicle.model}
-            className={cn(
-              "w-full h-full object-cover transition-transform duration-700 ease-out",
-              isHovered && "scale-110"
-            )}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-        </div>
-        <div className="absolute top-4 right-4 z-10">
-          <Badge
-            className={cn(
-              "text-xs font-medium rounded-full px-3 py-1",
-              vehicle.status === "available"
-                ? "bg-green-500/20 text-green-400 border-green-500/50"
-                : "bg-amber-500/20 text-amber-400 border-amber-500/50"
-            )}
-          >
-            {vehicle.status === "available" ? "Available" : "Booked"}
-          </Badge>
-        </div>
-      </div>
-      
-      <CardContent className="p-6">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="text-xl font-bold text-white">Tesla {vehicle.model}</h3>
-          <div className="text-right">
-            <p className="text-xs text-white/60">From</p>
-            <p className="text-lg font-bold text-white">
-              {formatCurrency(vehicle.price.daily)}
-              <span className="text-xs text-white/60 ml-1">/day</span>
-            </p>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute top-4 right-4 bg-blue-600/90 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full">
+            {vehicle.type}
           </div>
         </div>
         
-        <div className="grid grid-cols-3 gap-4 my-6">
-          <Stat
-            label="Range"
-            value={vehicle.specs.range}
-            unit="mi"
-            icon="⚡"
-          />
-          <Stat
-            label="Top Speed"
-            value={vehicle.specs.topSpeed}
-            unit="mph"
-            icon="🏎️"
-          />
-          <Stat
-            label="0-60"
-            value={vehicle.specs.acceleration}
-            unit="sec"
-            icon="⏱️"
-          />
+        <div className="p-5">
+          <h3 className="font-bold text-xl mb-1 text-white">Tesla {vehicle.model}</h3>
+          
+          <div className="flex flex-wrap gap-3 mt-3 mb-4">
+            <div className="flex items-center text-white/70 text-sm">
+              <Battery size={16} className="mr-1" />
+              <span>{vehicle.range} mi</span>
+            </div>
+            <div className="flex items-center text-white/70 text-sm">
+              <Gauge size={16} className="mr-1" />
+              <span>{vehicle.acceleration}s 0-60</span>
+            </div>
+            <div className="flex items-center text-white/70 text-sm">
+              <Clock size={16} className="mr-1" />
+              <span>{vehicle.year}</span>
+            </div>
+          </div>
+          
+          <div className="flex justify-between items-center mt-4 pt-4 border-t border-white/10">
+            <div>
+              <p className="text-white/60 text-xs uppercase tracking-wider">Starting at</p>
+              <p className="font-semibold text-lg">{formatCurrency(vehicle.price.daily)}<span className="text-sm font-normal text-white/60">/day</span></p>
+            </div>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all">
+              <ArrowRight size={18} className="text-white/70 group-hover:text-blue-400 transition-colors" />
+            </div>
+          </div>
         </div>
-      </CardContent>
-      
-      <CardFooter className="px-6 pb-6 pt-0 flex justify-between">
-        <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10">
-          <Link to={`/vehicles/${vehicle.id}`}>Details</Link>
-        </Button>
-        <Button asChild className="bg-blue-600 hover:bg-blue-700">
-          <Link to={`/book/${vehicle.id}`}>Book Now</Link>
-        </Button>
-      </CardFooter>
-    </Card>
+      </motion.div>
+    </Link>
   );
-}
+};
 
-function Stat({
-  label,
-  value,
-  unit,
-  icon,
-}: {
-  label: string;
-  value: number;
-  unit: string;
-  icon: string;
-}) {
-  return (
-    <div className="flex flex-col items-center text-center">
-      <span className="text-lg mb-1">{icon}</span>
-      <p className="font-medium text-white/90 text-sm">{value} {unit}</p>
-      <p className="text-xs text-white/60">{label}</p>
-    </div>
-  );
-}
+export default VehicleCard;

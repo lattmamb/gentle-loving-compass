@@ -43,4 +43,99 @@
     @apply appearance-none w-4 h-4 rounded-full bg-blue-500 cursor-pointer;
     box-shadow: -100vw 0 0 100vw #0a84ff;
   }
+
+  /* Apple Intelligence inspired components */
+  .ai-card {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg transition-all duration-300 overflow-hidden;
+  }
+  
+  .ai-button {
+    @apply bg-gradient-to-b from-blue-600 to-blue-700 rounded-full px-6 py-3 text-white font-medium shadow-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300;
+  }
+  
+  .ai-input {
+    @apply rounded-full bg-white/5 border border-white/10 px-4 py-3 text-white focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 outline-none;
+  }
+  
+  .ai-glassmorphism {
+    @apply backdrop-blur-xl bg-black/30 border border-white/10 rounded-2xl overflow-hidden;
+  }
+  
+  .ai-gradient-text {
+    @apply bg-gradient-to-br from-blue-400 via-blue-500 to-purple-600 bg-clip-text text-transparent;
+  }
+  
+  .ai-floating-card {
+    @apply bg-gradient-to-br from-blue-900/20 to-purple-900/20 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .ai-icon-button {
+    @apply w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 hover:bg-white/10 transition-all;
+  }
+  
+  .ai-sidebar-item {
+    @apply flex items-center space-x-3 px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all;
+  }
+  
+  .ai-sidebar-item.active {
+    @apply bg-white/10 text-white border-l-2 border-blue-500;
+  }
+
+  /* 3D effects */
+  .effect-3d-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .effect-3d-floating {
+    animation: floating 6s ease-in-out infinite;
+  }
+  
+  .effect-3d-content {
+    transform: translateZ(20px);
+  }
+  
+  .effect-3d-shadow {
+    @apply absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30 -z-10;
+    transform: translateZ(-10px);
+  }
+
+  /* Holographic effects */
+  .holographic-glow {
+    @apply relative overflow-hidden;
+  }
+  
+  .holographic-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-purple-500/5 to-pink-500/10 opacity-70;
+    filter: blur(24px);
+    mix-blend-mode: overlay;
+  }
+  
+  .holographic-shine {
+    @apply relative overflow-hidden;
+  }
+  
+  .holographic-shine::after {
+    content: '';
+    @apply absolute top-0 left-0 right-0 bottom-0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 15%,
+      transparent 30%
+    );
+    animation: holographicScan 3s ease-in-out infinite;
+  }
+}
+
+@keyframes holographicScan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

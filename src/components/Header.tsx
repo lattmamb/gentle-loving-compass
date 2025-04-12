@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Menu, X, User, Car, Calendar, Map, CreditCard, Info } from "lucide-react";
+import { Menu, X, User, Car, Calendar, Map, CreditCard, Info, Sparkles } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { motion } from "framer-motion";
 
@@ -27,15 +27,15 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-6 py-4",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out px-6 py-4",
         scrolled
-          ? "backdrop-blur-xl border-b border-white/10"
+          ? "neo-blur border-b border-white/10"
           : "bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="text-white font-bold text-2xl">
-          <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+          <span className="ai-gradient-text">
             EonRides
           </span>
         </Link>
@@ -47,9 +47,10 @@ export default function Header() {
           <NavLink to="/locations" isActive={isActive("/locations")}>Locations</NavLink>
           <NavLink to="/about" isActive={isActive("/about")}>About</NavLink>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button asChild className="ui-glow-button">
+            <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-full px-5">
               <Link to="/dashboard">
-                <span className="py-2 px-4">Dashboard</span>
+                <User className="w-4 h-4 mr-2" />
+                <span>Dashboard</span>
               </Link>
             </Button>
           </motion.div>
@@ -62,7 +63,7 @@ export default function Header() {
               <Menu size={24} />
             </Button>
           </SheetTrigger>
-          <SheetContent className="w-80 backdrop-blur-2xl bg-black/80 border-white/10">
+          <SheetContent className="w-80 neo-blur border-white/10">
             <div className="flex flex-col space-y-6 mt-8">
               <MobileNavLink to="/vehicles" icon={<Car size={18} />} isActive={isActive("/vehicles")}>
                 Vehicles
@@ -79,9 +80,12 @@ export default function Header() {
               <MobileNavLink to="/dashboard" icon={<User size={18} />} isActive={isActive("/dashboard")}>
                 Dashboard
               </MobileNavLink>
-              <Button className="mt-4 w-full ui-glow-button">
-                <span className="py-2 px-4 w-full inline-block">Book Now</span>
-              </Button>
+              <div className="pt-4 mt-4 border-t border-white/10">
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-full">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  <span>Book Now</span>
+                </Button>
+              </div>
             </div>
           </SheetContent>
         </Sheet>
@@ -126,11 +130,11 @@ function MobileNavLink({
   return (
     <Link
       to={to}
-      className={`flex items-center space-x-2 text-lg ${
+      className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 ${
         isActive 
-          ? "neo-pressed text-blue-400" 
-          : "text-white/80 hover:text-white neo-elevated hover:scale-[1.02]"
-      } p-3 rounded-md transition-all duration-200`}
+          ? "bg-white/10 text-blue-400 border-l-2 border-blue-500" 
+          : "text-white/80 hover:text-white hover:bg-white/5"
+      }`}
     >
       <span className={isActive ? "text-blue-400" : "text-white/60"}>{icon}</span>
       <span>{children}</span>

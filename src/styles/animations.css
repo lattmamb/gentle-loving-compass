@@ -27,6 +27,47 @@
   .rotate-3d:hover {
     transform: rotateX(10deg) rotateY(-10deg);
   }
+
+  .animate-bounce-subtle {
+    animation: bounceTiny 2s infinite;
+  }
+
+  .animate-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animate-shine::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to bottom right, 
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: shine 3s infinite;
+    transform: rotate(30deg);
+  }
+
+  .animate-pulse-ring {
+    animation: pulseRing 3s infinite;
+  }
+
+  .animate-tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+  }
+
+  .animate-tilt-3d:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
+  }
 }
 
 @keyframes slideUp {
@@ -64,5 +105,39 @@
   }
   50% {
     transform: translateY(-10px);
+  }
+}
+
+@keyframes bounceTiny {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes shine {
+  0% {
+    top: -50%;
+    left: -50%;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
   }
 }
