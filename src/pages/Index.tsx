@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 import ThreeDMarquee from "@/components/ThreeDMarquee";
 import { marqueeImages } from "@/data/marqueeImages";
 import GridBackgroundDemo from "@/components/ui/grid-background-demo";
+import LampDemo from "@/components/ui/lamp-demo";
+import { NavBarDemo } from "@/components/ui/navbar-demo";
 
 const Index = () => {
   return (
@@ -83,6 +85,9 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Lamp Demo Section */}
+      <LampDemo />
+      
       {/* How It Works Section */}
       <section className="py-16 px-6 relative">
         <div className="max-w-7xl mx-auto">
@@ -127,6 +132,7 @@ const Index = () => {
       
       <Footer />
       <AIAssistant />
+      <NavBarDemo />
     </div>
   );
 };
