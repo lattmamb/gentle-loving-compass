@@ -38,15 +38,15 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
           <div className="flex flex-wrap gap-3 mt-3 mb-4">
             <div className="flex items-center text-white/70 text-sm">
               <Battery size={16} className="mr-1" />
-              <span>{vehicle.range} mi</span>
+              <span>{vehicle.specs.range} mi</span>
             </div>
             <div className="flex items-center text-white/70 text-sm">
               <Gauge size={16} className="mr-1" />
-              <span>{vehicle.acceleration}s 0-60</span>
+              <span>{vehicle.specs.acceleration}s 0-60</span>
             </div>
             <div className="flex items-center text-white/70 text-sm">
               <Clock size={16} className="mr-1" />
-              <span>{vehicle.year}</span>
+              <span>{vehicle.status}</span>
             </div>
           </div>
           
