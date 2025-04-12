@@ -6,18 +6,14 @@ import FeaturedVehicles from "@/components/FeaturedVehicles";
 import SubscriptionPlans from "@/components/SubscriptionPlans";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import ThreeDMarquee from "@/components/ThreeDMarquee";
 import { marqueeImages } from "@/data/marqueeImages";
-import GridBackgroundDemo from "@/components/ui/grid-background-demo";
 import LampDemo from "@/components/ui/lamp-demo";
 import { NavBarDemo } from "@/components/ui/navbar-demo";
 
 const Index = () => {
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative">
-      <GridBackgroundDemo />
       <Header />
       <HeroSection />
       
@@ -117,18 +113,10 @@ const Index = () => {
               description="We'll deliver your Tesla to your door. Just drive and enjoy the experience."
             />
           </div>
-          
-          <div className="flex justify-center mt-12">
-            <Button asChild size="lg" className="text-lg bg-blue-600 hover:bg-blue-700">
-              <Link to="/vehicles">Get Started</Link>
-            </Button>
-          </div>
         </div>
       </section>
       
       <SubscriptionPlans />
-      
-      {/* Testimonials would go here */}
       
       <Footer />
       <AIAssistant />
