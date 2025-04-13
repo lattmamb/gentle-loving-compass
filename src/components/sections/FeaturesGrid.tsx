@@ -1,7 +1,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { SparklesCore } from "@/components/SparklesBackground";
+import { SparklesCore } from "@/components/particles/SparklesCore";
 import { ShieldCheck, Zap, Clock, HeartPulse, MapPin, ExternalLink } from "lucide-react";
 
 interface FeatureCardProps {
