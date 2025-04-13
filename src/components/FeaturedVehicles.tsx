@@ -5,7 +5,7 @@ import { Vehicle } from "@/types";
 import VehicleCard from "./VehicleCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, CarFront, Zap } from "lucide-react";
+import { ChevronLeft, ChevronRight, CarFront, Zap, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function FeaturedVehicles() {
@@ -42,7 +42,7 @@ export default function FeaturedVehicles() {
   
   return (
     <section className="py-28 px-6 relative">
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/20 via-red-900/5 to-black/20"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/20 via-red-900/10 to-black/20"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
@@ -54,11 +54,11 @@ export default function FeaturedVehicles() {
         >
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
-              <CarFront className="text-red-400" />
+              <CarFront className="text-red-500" />
               <span>Featured Vehicles</span>
               {model3 && (
-                <span className="bg-red-500/20 text-red-400 text-sm px-2 py-1 rounded-full flex items-center">
-                  <Zap size={12} className="mr-1" /> Model 3 Red
+                <span className="bg-red-600/30 text-red-400 text-sm px-3 py-1 rounded-full flex items-center">
+                  <Flame size={14} className="mr-1 animate-pulse-subtle" /> Model 3 Red
                 </span>
               )}
               {modelSPlaid && (
@@ -67,7 +67,7 @@ export default function FeaturedVehicles() {
                 </span>
               )}
             </h2>
-            <p className="text-white/60 mt-2">Experience the best of electric transportation</p>
+            <p className="text-white/60 mt-2">Experience the future of electric transportation</p>
           </div>
           <div className="flex gap-2">
             <Button 
@@ -103,7 +103,7 @@ export default function FeaturedVehicles() {
               className={`min-w-[320px] md:min-w-[400px] w-4/5 md:w-[400px] flex-shrink-0 snap-center ${
                 vehicle.model.includes("Plaid") ? "relative z-10 transform -rotate-1" : ""
               } ${
-                vehicle.id === "model-3" ? "relative z-20 transform rotate-1 scale-105" : ""
+                vehicle.id === "model-3" ? "relative z-20 transform rotate-1 scale-110" : ""
               }`}
             >
               <VehicleCard vehicle={vehicle} />
@@ -118,7 +118,7 @@ export default function FeaturedVehicles() {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <Button asChild className="bg-red-600 hover:bg-red-700 rounded-full px-8">
+          <Button asChild className="bg-red-600 hover:bg-red-700 rounded-full px-8 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
             <Link to="/vehicles">View All Vehicles</Link>
           </Button>
         </motion.div>
