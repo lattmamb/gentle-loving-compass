@@ -43,7 +43,7 @@ export default function BackgroundBoxesDemo() {
           <button className="px-8 py-3 text-base font-medium rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all">
             Learn More
           </button>
-        </div>
+        </motion.div>
       </div>
       
       {/* Scroll indicator */}
