@@ -16,7 +16,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
     switch (vehicle.status) {
       case "available":
         return { 
-          color: "bg-emerald-600/90", 
+          color: vehicle.id === "model-3" ? "bg-red-600/90" : "bg-emerald-600/90", 
           icon: <ShieldCheck size={12} className="mr-1" />,
           label: "Available Now"
         };
@@ -46,18 +46,23 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
   // Check if it's the Model S Plaid or Model 3 to highlight it
   const isModelSPlaid = vehicle.model.includes("Plaid");
   const isModel3 = vehicle.id === "model-3";
+  
+  // Special effects for Model 3
+  const cardGlowClass = isModel3 ? 
+    'shadow-[0_0_15px_rgba(255,0,0,0.15)] hover:shadow-[0_0_25px_rgba(255,0,0,0.25)]' : '';
 
   return (
     <Link to={`/vehicles/${vehicle.id}`}>
       <motion.div 
         className={`group h-full neo-blur rounded-2xl overflow-hidden border ${
           isModelSPlaid ? 'border-blue-400/30' : 
-          isModel3 ? 'border-red-400/30' : 
+          isModel3 ? 'border-red-400/40' : 
           'border-white/10'
-        } transition-all duration-500`}
+        } transition-all duration-500 ${cardGlowClass}`}
         whileHover={{ 
-          scale: 1.02,
-          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)" 
+          scale: isModel3 ? 1.03 : 1.02,
+          boxShadow: isModel3 ? "0 20px 25px -5px rgba(220, 38, 38, 0.2), 0 10px 10px -5px rgba(220, 38, 38, 0.1)" :
+            "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)"
         }}
       >
         <div className="relative overflow-hidden aspect-[16/9]">
@@ -67,7 +72,9 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent ${
+            isModel3 ? 'via-red-900/10' : ''
+          }`} />
           
           {/* Vehicle type badge */}
           <div className={`absolute top-4 right-4 ${
@@ -91,28 +98,40 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
             {vehicle.colorVariants.slice(0, 5).map((variant, index) => (
               <div 
                 key={index}
-                className="w-4 h-4 rounded-full border border-white/50"
+                className={`w-4 h-4 rounded-full border ${
+                  isModel3 && variant.color === "#a82a2a" ? "border-red-300 w-5 h-5" : "border-white/50"
+                }`}
                 style={{ backgroundColor: variant.color }}
                 title={variant.name}
               />
             ))}
           </div>
+          
+          {/* Special highlight for Model 3 */}
+          {isModel3 && (
+            <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-red-500/10 via-red-500/5 to-transparent rounded-full blur-xl"></div>
+          )}
         </div>
         
         <div className="p-5">
-          <h3 className="font-bold text-xl mb-1 text-white">Tesla {vehicle.model}</h3>
+          <h3 className={`font-bold text-xl mb-1 ${isModel3 ? 'text-red-400' : 'text-white'}`}>
+            Tesla {vehicle.model}
+            {isModel3 && <span className="ml-1 text-sm font-normal inline-flex items-center">
+              <Zap size={12} className="mx-1 text-red-400" /> Red
+            </span>}
+          </h3>
           
           <div className="flex flex-wrap gap-3 mt-3 mb-4">
             <div className="flex items-center text-white/70 text-sm">
-              <Battery size={16} className="mr-1" />
+              <Battery size={16} className={`mr-1 ${isModel3 ? 'text-red-400' : ''}`} />
               <span>{vehicle.specs.range} mi</span>
             </div>
             <div className="flex items-center text-white/70 text-sm">
-              <Gauge size={16} className="mr-1" />
+              <Gauge size={16} className={`mr-1 ${isModel3 ? 'text-red-400' : ''}`} />
               <span>{vehicle.specs.acceleration}s 0-60</span>
             </div>
             <div className="flex items-center text-white/70 text-sm">
-              <Clock size={16} className="mr-1" />
+              <Clock size={16} className={`mr-1 ${isModel3 ? 'text-red-400' : ''}`} />
               <span>{vehicle.status === "available" ? "Ready to go" : vehicle.status}</span>
             </div>
           </div>

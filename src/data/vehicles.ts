@@ -1,4 +1,3 @@
-
 import { Vehicle } from "../types";
 
 export const vehicles: Vehicle[] = [
@@ -37,11 +36,11 @@ export const vehicles: Vehicle[] = [
   },
   {
     id: "model-3",
-    model: "Model 3",
+    model: "Model 3 Performance",
     type: "Sedan",
-    image: "/tesla-model-3-red.png", // Updated to red model 3 image
+    image: "/tesla-model-3-red.png",
     colorVariants: [
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-3-red.png" }, // Making red the first/default
+      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-3-red.png" },
       { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-3-white.png" },
       { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-3-silver.png" },
       { name: "Solid Black", color: "#000000", image: "/tesla-model-3-black.png" },
@@ -54,15 +53,17 @@ export const vehicles: Vehicle[] = [
     },
     specs: {
       range: 358,
-      topSpeed: 145,
-      acceleration: 4.2
+      topSpeed: 162,
+      acceleration: 3.1
     },
     features: [
+      "Dual Motor All-Wheel Drive",
       "Autopilot",
-      "Rear-Wheel Drive",
-      "Premium Interior",
-      "18\" Wheels",
-      "Supercharger Access"
+      "Premium Red Interior",
+      "20\" Performance Wheels",
+      "Supercharger Access",
+      "Performance Brakes",
+      "Carbon Fiber Spoiler"
     ],
     status: "available"
   },
