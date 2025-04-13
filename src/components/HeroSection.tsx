@@ -4,7 +4,7 @@ import BackgroundBoxesDemo from "@/components/ui/background-boxes-demo";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Zap, Repeat, Sparkles } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -12,10 +12,10 @@ export default function HeroSection() {
       <BackgroundBoxesDemo />
       
       <motion.div 
-        className="absolute bottom-8 left-0 right-0 flex justify-center"
+        className="absolute bottom-10 left-0 right-0 flex justify-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
+        transition={{ delay: 0.7, duration: 0.6 }}
       >
         <Link to="/vehicles">
           <Button className="bg-blue-600 hover:bg-blue-700 group">
@@ -31,17 +31,17 @@ export default function HeroSection() {
           {[
             { 
               title: "Premium Fleet", 
-              icon: "⚡", 
+              icon: <Zap className="text-blue-400" size={28} />, 
               description: "Access to all Tesla models with unlimited supercharging" 
             },
             { 
               title: "Flexible Plans", 
-              icon: "🔄", 
+              icon: <Repeat className="text-emerald-400" size={28} />, 
               description: "Daily, weekly or monthly subscriptions with no commitment" 
             },
             { 
               title: "Concierge Service", 
-              icon: "✨", 
+              icon: <Sparkles className="text-amber-400" size={28} />, 
               description: "White-glove delivery and 24/7 roadside assistance" 
             },
           ].map((card, index) => (
@@ -50,9 +50,14 @@ export default function HeroSection() {
               className="foam-block foam-block-hover neo-glow-blue flex-1 p-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 + index * 0.2, duration: 0.6 }}
+              transition={{ delay: 0.8 + index * 0.2, duration: 0.6 }}
+              whileHover={{ 
+                y: -5,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
+                transition: { duration: 0.2 }
+              }}
             >
-              <div className="text-3xl mb-4">{card.icon}</div>
+              <div className="mb-4">{card.icon}</div>
               <h3 className="text-xl font-bold mb-2 text-white">{card.title}</h3>
               <p className="text-white/70">{card.description}</p>
             </motion.div>

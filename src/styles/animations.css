@@ -57,7 +57,19 @@
   }
 
   .animate-pulse-ring {
-    animation: pulseRing 3s infinite;
+    position: relative;
+  }
+  
+  .animate-pulse-ring::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 9999px;
+    border: 2px solid rgba(59, 130, 246, 0.5);
+    animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
   }
 
   .animate-tilt-3d {
@@ -67,6 +79,35 @@
 
   .animate-tilt-3d:hover {
     transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
+  }
+  
+  .animate-float-slow {
+    animation: floatSlow 6s ease-in-out infinite;
+  }
+  
+  .animate-blur-in {
+    animation: blurIn 1s ease-out forwards;
+  }
+  
+  .parallax {
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+  }
+  
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 15px 2px rgba(59, 130, 246, 0.5);
   }
 }
 
@@ -130,14 +171,40 @@
 
 @keyframes pulseRing {
   0% {
-    transform: scale(0.5);
+    transform: scale(0.8);
     opacity: 0.3;
   }
   50% {
     opacity: 0.1;
   }
   100% {
-    transform: scale(1.2);
+    transform: scale(1.1);
     opacity: 0;
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+  }
+  25% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0);
+  }
+  75% {
+    transform: translateY(8px) rotate(-1deg);
+  }
+}
+
+@keyframes blurIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
   }
 }

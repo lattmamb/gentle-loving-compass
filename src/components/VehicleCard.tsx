@@ -4,13 +4,45 @@ import { Link } from "react-router-dom";
 import { Vehicle } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ArrowRight, Battery, Gauge, Clock } from "lucide-react";
+import { ArrowRight, Battery, Gauge, Clock, ShieldCheck, HeartPulse, Shield } from "lucide-react";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
 }
 
 const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
+  // Determine status badge styling
+  const getStatusBadge = () => {
+    switch (vehicle.status) {
+      case "available":
+        return { 
+          color: "bg-emerald-600/90", 
+          icon: <ShieldCheck size={12} className="mr-1" />,
+          label: "Available Now"
+        };
+      case "booked":
+        return { 
+          color: "bg-amber-600/90", 
+          icon: <HeartPulse size={12} className="mr-1" />,
+          label: "Reserved"
+        };
+      case "maintenance":
+        return { 
+          color: "bg-blue-600/90", 
+          icon: <Shield size={12} className="mr-1" />,
+          label: "In Service"
+        };
+      default:
+        return { 
+          color: "bg-blue-600/90", 
+          icon: null,
+          label: vehicle.status
+        };
+    }
+  };
+
+  const statusBadge = getStatusBadge();
+
   return (
     <Link to={`/vehicles/${vehicle.id}`}>
       <motion.div 
@@ -25,10 +57,31 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
             src={vehicle.image}
             alt={vehicle.model}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          
+          {/* Vehicle type badge */}
           <div className="absolute top-4 right-4 bg-blue-600/90 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full">
             {vehicle.type}
+          </div>
+          
+          {/* Status badge */}
+          <div className={`absolute top-4 left-4 ${statusBadge.color} backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full flex items-center`}>
+            {statusBadge.icon}
+            {statusBadge.label}
+          </div>
+          
+          {/* Color variants preview */}
+          <div className="absolute bottom-4 left-4 flex space-x-1">
+            {vehicle.colorVariants.slice(0, 5).map((variant, index) => (
+              <div 
+                key={index}
+                className="w-4 h-4 rounded-full border border-white/50"
+                style={{ backgroundColor: variant.color }}
+                title={variant.name}
+              />
+            ))}
           </div>
         </div>
         
@@ -46,7 +99,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
             </div>
             <div className="flex items-center text-white/70 text-sm">
               <Clock size={16} className="mr-1" />
-              <span>{vehicle.status}</span>
+              <span>{vehicle.status === "available" ? "Ready to go" : vehicle.status}</span>
             </div>
           </div>
           
