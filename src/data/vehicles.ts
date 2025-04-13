@@ -1,3 +1,4 @@
+
 import { Vehicle } from "../types";
 
 export const vehicles: Vehicle[] = [
@@ -38,13 +39,13 @@ export const vehicles: Vehicle[] = [
     id: "model-3",
     model: "Model 3",
     type: "Sedan",
-    image: "/tesla-model-3.png",
+    image: "/tesla-model-3-red.png", // Updated to red model 3 image
     colorVariants: [
+      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-3-red.png" }, // Making red the first/default
       { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-3-white.png" },
       { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-3-silver.png" },
       { name: "Solid Black", color: "#000000", image: "/tesla-model-3-black.png" },
-      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-3-blue.png" },
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-3-red.png" }
+      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-3-blue.png" }
     ],
     price: {
       daily: 149,

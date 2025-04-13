@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Vehicle } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ArrowRight, Battery, Gauge, Clock, ShieldCheck, HeartPulse, Shield } from "lucide-react";
+import { ArrowRight, Battery, Gauge, Clock, ShieldCheck, HeartPulse, Shield, Zap } from "lucide-react";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -43,13 +43,18 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
 
   const statusBadge = getStatusBadge();
   
-  // Check if it's the Model S Plaid to highlight it
+  // Check if it's the Model S Plaid or Model 3 to highlight it
   const isModelSPlaid = vehicle.model.includes("Plaid");
+  const isModel3 = vehicle.id === "model-3";
 
   return (
     <Link to={`/vehicles/${vehicle.id}`}>
       <motion.div 
-        className={`group h-full neo-blur rounded-2xl overflow-hidden border ${isModelSPlaid ? 'border-blue-400/30' : 'border-white/10'} transition-all duration-500`}
+        className={`group h-full neo-blur rounded-2xl overflow-hidden border ${
+          isModelSPlaid ? 'border-blue-400/30' : 
+          isModel3 ? 'border-red-400/30' : 
+          'border-white/10'
+        } transition-all duration-500`}
         whileHover={{ 
           scale: 1.02,
           boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)" 
@@ -65,8 +70,14 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
           
           {/* Vehicle type badge */}
-          <div className={`absolute top-4 right-4 ${isModelSPlaid ? 'bg-blue-600' : 'bg-blue-600/90'} backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full`}>
-            {vehicle.type} {isModelSPlaid && "• Plaid"}
+          <div className={`absolute top-4 right-4 ${
+            isModelSPlaid ? 'bg-blue-600' : 
+            isModel3 ? 'bg-red-600' : 
+            'bg-blue-600/90'
+          } backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full`}>
+            {vehicle.type} 
+            {isModelSPlaid && "• Plaid"}
+            {isModel3 && "• Performance"}
           </div>
           
           {/* Status badge */}
@@ -111,8 +122,14 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
               <p className="text-white/60 text-xs uppercase tracking-wider">Starting at</p>
               <p className="font-semibold text-lg">{formatCurrency(vehicle.price.daily)}<span className="text-sm font-normal text-white/60">/day</span></p>
             </div>
-            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-all">
-              <ArrowRight size={18} className="text-white/70 group-hover:text-blue-400 transition-colors" />
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 
+              ${isModelSPlaid ? 'group-hover:bg-blue-600/20 group-hover:border-blue-500/30' : 
+                isModel3 ? 'group-hover:bg-red-600/20 group-hover:border-red-500/30' : 
+                'group-hover:bg-blue-600/20 group-hover:border-blue-500/30'} transition-all`}>
+              <ArrowRight size={18} className={`text-white/70 
+                ${isModelSPlaid ? 'group-hover:text-blue-400' : 
+                  isModel3 ? 'group-hover:text-red-400' : 
+                  'group-hover:text-blue-400'} transition-colors`} />
             </div>
           </div>
         </div>

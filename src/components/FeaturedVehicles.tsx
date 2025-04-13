@@ -9,12 +9,22 @@ import { ChevronLeft, ChevronRight, CarFront, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function FeaturedVehicles() {
-  // Ensure the Model S Plaid is the first featured vehicle
+  // Ensure the Model 3 is prominently featured alongside Model S Plaid
   const modelSPlaid = vehicles.find(v => v.id === "model-s");
-  const otherVehicles = vehicles.filter(v => v.id !== "model-s").slice(0, 3);
-  const featuredVehicles: Vehicle[] = modelSPlaid 
-    ? [modelSPlaid, ...otherVehicles]
-    : vehicles.slice(0, 4);
+  const model3 = vehicles.find(v => v.id === "model-3");
+  const otherVehicles = vehicles.filter(v => v.id !== "model-s" && v.id !== "model-3").slice(0, 2);
+  
+  // Arrange featured vehicles with Model S Plaid first, then Model 3, then others
+  const featuredVehicles: Vehicle[] = [];
+  
+  if (modelSPlaid) featuredVehicles.push(modelSPlaid);
+  if (model3) featuredVehicles.push(model3);
+  featuredVehicles.push(...otherVehicles);
+  
+  // If somehow the main vehicles aren't found, use first 4 vehicles
+  if (featuredVehicles.length < 2) {
+    featuredVehicles.push(...vehicles.slice(0, 4 - featuredVehicles.length));
+  }
   
   const scrollRef = useRef<HTMLDivElement>(null);
   
@@ -49,6 +59,11 @@ export default function FeaturedVehicles() {
               {modelSPlaid && (
                 <span className="bg-blue-500/20 text-blue-400 text-sm px-2 py-1 rounded-full flex items-center">
                   <Zap size={12} className="mr-1" /> New Plaid
+                </span>
+              )}
+              {model3 && (
+                <span className="bg-red-500/20 text-red-400 text-sm px-2 py-1 rounded-full flex items-center">
+                  <Zap size={12} className="mr-1" /> Model 3
                 </span>
               )}
             </h2>
@@ -87,6 +102,8 @@ export default function FeaturedVehicles() {
               key={vehicle.id} 
               className={`min-w-[320px] md:min-w-[400px] w-4/5 md:w-[400px] flex-shrink-0 snap-center ${
                 vehicle.model.includes("Plaid") ? "relative z-10 transform -rotate-1" : ""
+              } ${
+                vehicle.id === "model-3" ? "relative z-10 transform rotate-1" : ""
               }`}
             >
               <VehicleCard vehicle={vehicle} />
