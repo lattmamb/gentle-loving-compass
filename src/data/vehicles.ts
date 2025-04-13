@@ -1,35 +1,36 @@
-
 import { Vehicle } from "../types";
 
 export const vehicles: Vehicle[] = [
   {
     id: "model-s",
-    model: "Model S",
+    model: "Model S Plaid",
     type: "Sedan",
-    image: "/tesla-model-s.png",
+    image: "/tesla-model-s-plaid.png",
     colorVariants: [
-      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-s-white.png" },
-      { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-s-silver.png" },
-      { name: "Solid Black", color: "#000000", image: "/tesla-model-s-black.png" },
-      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-s-blue.png" },
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-s-red.png" }
+      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-s-plaid-white.png" },
+      { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-s-plaid-silver.png" },
+      { name: "Solid Black", color: "#000000", image: "/tesla-model-s-plaid-black.png" },
+      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-s-plaid-blue.png" },
+      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-s-plaid-red.png" }
     ],
     price: {
-      daily: 199,
-      monthly: 3999,
-      yearly: 39999
+      daily: 249,
+      monthly: 4999,
+      yearly: 49999
     },
     specs: {
-      range: 405,
-      topSpeed: 155,
-      acceleration: 3.1
+      range: 396,
+      topSpeed: 200,
+      acceleration: 1.99
     },
     features: [
+      "Tri Motor All-Wheel Drive",
       "Autopilot",
-      "Dual Motor All-Wheel Drive",
       "Premium Interior",
-      "20\" Wheels",
-      "Supercharger Access"
+      "21\" Arachnid Wheels",
+      "Supercharger Access",
+      "Plaid Track Mode",
+      "Carbon Fiber Spoiler"
     ],
     status: "available"
   },

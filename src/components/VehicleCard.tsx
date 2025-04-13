@@ -42,11 +42,14 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
   };
 
   const statusBadge = getStatusBadge();
+  
+  // Check if it's the Model S Plaid to highlight it
+  const isModelSPlaid = vehicle.model.includes("Plaid");
 
   return (
     <Link to={`/vehicles/${vehicle.id}`}>
       <motion.div 
-        className="group h-full neo-blur rounded-2xl overflow-hidden border border-white/10 transition-all duration-500"
+        className={`group h-full neo-blur rounded-2xl overflow-hidden border ${isModelSPlaid ? 'border-blue-400/30' : 'border-white/10'} transition-all duration-500`}
         whileHover={{ 
           scale: 1.02,
           boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1)" 
@@ -62,8 +65,8 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ vehicle }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
           
           {/* Vehicle type badge */}
-          <div className="absolute top-4 right-4 bg-blue-600/90 backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full">
-            {vehicle.type}
+          <div className={`absolute top-4 right-4 ${isModelSPlaid ? 'bg-blue-600' : 'bg-blue-600/90'} backdrop-blur-md text-white text-xs font-medium px-3 py-1 rounded-full`}>
+            {vehicle.type} {isModelSPlaid && "• Plaid"}
           </div>
           
           {/* Status badge */}

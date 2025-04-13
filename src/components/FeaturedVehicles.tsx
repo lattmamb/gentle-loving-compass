@@ -5,11 +5,17 @@ import { Vehicle } from "@/types";
 import VehicleCard from "./VehicleCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, CarFront } from "lucide-react";
+import { ChevronLeft, ChevronRight, CarFront, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function FeaturedVehicles() {
-  const featuredVehicles: Vehicle[] = vehicles.slice(0, 4);
+  // Ensure the Model S Plaid is the first featured vehicle
+  const modelSPlaid = vehicles.find(v => v.id === "model-s");
+  const otherVehicles = vehicles.filter(v => v.id !== "model-s").slice(0, 3);
+  const featuredVehicles: Vehicle[] = modelSPlaid 
+    ? [modelSPlaid, ...otherVehicles]
+    : vehicles.slice(0, 4);
+  
   const scrollRef = useRef<HTMLDivElement>(null);
   
   const scrollLeft = () => {
@@ -40,6 +46,11 @@ export default function FeaturedVehicles() {
             <h2 className="text-3xl md:text-4xl font-bold text-white flex items-center gap-3">
               <CarFront className="text-blue-400" />
               <span>Featured Vehicles</span>
+              {modelSPlaid && (
+                <span className="bg-blue-500/20 text-blue-400 text-sm px-2 py-1 rounded-full flex items-center">
+                  <Zap size={12} className="mr-1" /> New Plaid
+                </span>
+              )}
             </h2>
             <p className="text-white/60 mt-2">Experience the best of electric transportation</p>
           </div>
@@ -71,10 +82,12 @@ export default function FeaturedVehicles() {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          {featuredVehicles.map((vehicle) => (
+          {featuredVehicles.map((vehicle, index) => (
             <div 
               key={vehicle.id} 
-              className="min-w-[320px] md:min-w-[400px] w-4/5 md:w-[400px] flex-shrink-0 snap-center"
+              className={`min-w-[320px] md:min-w-[400px] w-4/5 md:w-[400px] flex-shrink-0 snap-center ${
+                vehicle.model.includes("Plaid") ? "relative z-10 transform -rotate-1" : ""
+              }`}
             >
               <VehicleCard vehicle={vehicle} />
             </div>
