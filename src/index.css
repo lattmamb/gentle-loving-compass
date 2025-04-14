@@ -13,3 +13,6 @@
 
 /* Import UI component utilities */
 @import './styles/ui-components.css';
+
+/* Import car color utilities */
+@import './styles/car-colors.css';

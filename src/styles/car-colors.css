@@ -1,0 +1,70 @@
+
+@layer utilities {
+  /* Tesla Model color variants */
+  .color-red {
+    @apply bg-[#a82a2a];
+  }
+  
+  .color-blue {
+    @apply bg-[#0a3d62];
+  }
+  
+  .color-white {
+    @apply bg-[#f5f6fa];
+  }
+  
+  .color-black {
+    @apply bg-[#1e272e];
+  }
+  
+  .color-silver {
+    @apply bg-[#a5b1c2];
+  }
+  
+  .color-gray {
+    @apply bg-[#778ca3];
+  }
+  
+  .color-midnight {
+    @apply bg-[#2c3e50];
+  }
+  
+  .color-tosca {
+    @apply bg-[#218c74];
+  }
+  
+  /* Color effects */
+  .color-swatch {
+    @apply w-8 h-8 rounded-full cursor-pointer transition-transform duration-300;
+    position: relative;
+  }
+  
+  .color-swatch:hover {
+    transform: scale(1.15);
+  }
+  
+  .color-swatch.selected {
+    @apply ring-2 ring-offset-2 ring-blue-500;
+  }
+  
+  .color-swatch.selected::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    @apply animate-pulse rounded-full;
+    box-shadow: 0 0 15px 5px rgba(10, 120, 255, 0.3);
+  }
+  
+  /* Special Model 3 Red color effects */
+  .color-swatch.model3-red {
+    @apply ring-2 ring-offset-2 ring-red-500;
+  }
+  
+  .color-swatch.model3-red::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    @apply animate-pulse rounded-full;
+    box-shadow: 0 0 15px 5px rgba(220, 38, 38, 0.4);
+  }
+}

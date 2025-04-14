@@ -1,28 +1,37 @@
 
-import React from "react";
-import HeroSection from "@/components/HeroSection";
+import React, { Suspense } from "react";
 import Header from "@/components/Header";
-import FeaturedVehicles from "@/components/FeaturedVehicles";
-import SubscriptionPlans from "@/components/SubscriptionPlans";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
-import LampDemo from "@/components/ui/lamp-demo";
-import { NavBarDemo } from "@/components/ui/navbar-demo";
 import FeaturesGrid from "@/components/sections/FeaturesGrid";
 import MarqueeSection from "@/components/sections/MarqueeSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
+import { NavBarDemo } from "@/components/ui/navbar-demo";
+import HeroSection3D from "@/components/sections/HeroSection3D";
+import SubscriptionPlans from "@/components/SubscriptionPlans";
+import FeaturedVehiclesCarousel from "@/components/vehicles/FeaturedVehiclesCarousel";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import ModelHighlight from "@/components/sections/ModelHighlight";
+import BackgroundParticles from "@/components/particles/BackgroundParticles";
 
 const Index = () => {
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative">
+      <BackgroundParticles />
+      
       <Header />
-      <HeroSection />
-      <FeaturesGrid />
-      <MarqueeSection />
-      <FeaturedVehicles />
-      <LampDemo />
-      <HowItWorksSection />
-      <SubscriptionPlans />
+      
+      <main className="relative z-10">
+        <HeroSection3D />
+        <FeaturesGrid />
+        <ModelHighlight />
+        <MarqueeSection />
+        <FeaturedVehiclesCarousel />
+        <HowItWorksSection />
+        <TestimonialsSection />
+        <SubscriptionPlans />
+      </main>
+      
       <Footer />
       <AIAssistant />
       <NavBarDemo />
