@@ -16,3 +16,38 @@
 
 /* Import car color utilities */
 @import './styles/car-colors.css';
+
+/* Global styles for consistency */
+.app-container {
+  @apply min-h-screen text-white overflow-x-hidden relative;
+  background-color: #141821;
+  background-image: radial-gradient(circle at center top, #1e2432, #0f131c);
+  background-attachment: fixed;
+}
+
+.section-container {
+  @apply max-w-7xl mx-auto py-16 px-6 relative z-10;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+}
+
+.text-gradient-blue {
+  @apply bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent;
+}
+
+/* Enhance vehicle pricing component */
+.pricing-card {
+  @apply neo-card transition-all duration-300 hover:translate-y-[-4px];
+}
+
+/* Style enhancements for vehicle cards */
+.vehicle-card {
+  @apply foam-block foam-block-hover;
+}
+
+/* Enhance buttons */
+.primary-button {
+  @apply ui-glow-button text-white font-medium transition-all duration-300;
+}
