@@ -1,5 +1,5 @@
 
-import React, { Suspense } from "react";
+import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
@@ -12,13 +12,10 @@ import SubscriptionPlans from "@/components/SubscriptionPlans";
 import FeaturedVehiclesCarousel from "@/components/vehicles/FeaturedVehiclesCarousel";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ModelHighlight from "@/components/sections/ModelHighlight";
-import BackgroundParticles from "@/components/particles/BackgroundParticles";
 
 const Index = () => {
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative">
-      <BackgroundParticles />
-      
       <Header />
       
       <main className="relative z-10">

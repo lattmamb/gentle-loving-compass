@@ -13,7 +13,8 @@ export const initializeParticles = (
   canvas: HTMLCanvasElement,
   count: number,
   particleSize: number = 2,
-  particleColor?: string
+  particleColor?: string,
+  speed: number = 0.3
 ): Particle[] => {
   const particles: Particle[] = [];
   
@@ -22,9 +23,9 @@ export const initializeParticles = (
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * particleSize + particleSize / 2,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5,
-      opacity: Math.random() * 0.5 + 0.1,
+      speedX: (Math.random() - 0.5) * speed,
+      speedY: (Math.random() - 0.5) * speed,
+      opacity: Math.random() * 0.3 + 0.1, // More subtle opacity
       color: particleColor,
     });
   }

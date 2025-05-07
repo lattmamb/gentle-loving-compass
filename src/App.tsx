@@ -13,7 +13,8 @@ import BackgroundParticles from "@/components/particles/BackgroundParticles";
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-[#141821] text-white overflow-hidden relative">
+      <div className="min-h-screen text-white overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1e2432] to-[#0f131c] z-0"></div>
         <BackgroundParticles />
         <div className="relative z-10">
           <Routes>

@@ -6,12 +6,14 @@ interface UseParticleAnimationProps {
   particleDensity: number;
   particleSize: number;
   particleColor?: string;
+  particleSpeed?: number;
 }
 
 export const useParticleAnimation = ({
   particleDensity,
   particleSize,
-  particleColor,
+  particleColor = "#ffffff",
+  particleSpeed = 0.3
 }: UseParticleAnimationProps) => {
   const [mounted, setMounted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,7 +31,7 @@ export const useParticleAnimation = ({
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      particles = initializeParticles(canvas, particleDensity, particleSize, particleColor);
+      particles = initializeParticles(canvas, particleDensity, particleSize, particleColor, particleSpeed);
     };
 
     const animate = () => {
@@ -45,7 +47,7 @@ export const useParticleAnimation = ({
     return () => {
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, [particleDensity, particleSize, particleColor]);
+  }, [particleDensity, particleSize, particleColor, particleSpeed]);
 
   return { canvasRef, mounted };
 };

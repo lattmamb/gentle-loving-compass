@@ -10,8 +10,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "neo-elevated bg-blue-600 text-white hover:bg-blue-700",
-        destructive: "neo-elevated bg-red-600 text-white hover:bg-red-700",
+        default: "neo-elevated bg-gradient-to-b from-blue-600 to-blue-700 text-white hover:from-blue-500 hover:to-blue-600",
+        destructive: "neo-elevated bg-gradient-to-b from-red-600 to-red-700 text-white hover:from-red-500 hover:to-red-600",
         outline: "neo-elevated border border-white/10 bg-transparent hover:bg-white/5",
         secondary: "neo-elevated bg-white/10 text-white hover:bg-white/15",
         ghost: "hover:bg-white/5 hover:text-white",
