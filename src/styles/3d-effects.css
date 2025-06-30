@@ -22,4 +22,43 @@
     transform-style: preserve-3d;
     perspective: 1000px;
   }
+
+  /* Interactive 3D Button Effects */
+  .transform-gpu {
+    transform-style: preserve-3d;
+  }
+
+  .perspective-\[180px\] {
+    perspective: 180px;
+  }
+
+  .perspective-\[80px\] {
+    perspective: 80px;
+  }
+
+  .rotate-x-\[60deg\] {
+    transform: perspective(180px) rotateX(60deg) translateY(2px);
+  }
+
+  .rotate-x-\[-60deg\] {
+    transform: perspective(80px) rotateX(-60deg) translateY(2px) translateZ(10px);
+  }
+
+  .translate3d-\[0px\,20px\,30px\] {
+    transform: translate3d(0px, 20px, 30px);
+  }
+
+  .translate-z-\[10px\] {
+    transform: translateZ(10px);
+  }
+
+  /* Enhanced 3D hover effects for cards */
+  .card-3d-hover {
+    @apply transition-all duration-300 transform-gpu;
+    transform-style: preserve-3d;
+  }
+
+  .card-3d-hover:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-5px);
+  }
 }

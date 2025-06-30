@@ -20,7 +20,7 @@ const LuxuryVehicleCard: React.FC<LuxuryVehicleCardProps> = ({ vehicle, index })
       className="group cursor-pointer"
     >
       <Link to={`/vehicles/${vehicle.id}`}>
-        <div className="relative overflow-hidden bg-black border border-white/10 hover:border-white/20 transition-all duration-500">
+        <div className="relative overflow-hidden bg-black border border-white/10 hover:border-white/20 transition-all duration-500 card-3d-hover">
           {/* Image Container */}
           <div className="relative aspect-[4/3] overflow-hidden">
             <img
@@ -82,7 +82,7 @@ const LuxuryVehicleCard: React.FC<LuxuryVehicleCardProps> = ({ vehicle, index })
               <div className="text-white/40 text-xs uppercase tracking-wider">
                 Learn More
               </div>
-              <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/40 group-hover:bg-white/5 transition-all duration-300">
+              <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/40 group-hover:bg-white/5 transition-all duration-300 transform group-hover:scale-110">
                 <ArrowRight size={16} className="text-white/60 group-hover:text-white transition-colors" />
               </div>
             </div>

@@ -1,14 +1,12 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
 import { NavBarDemo } from "@/components/ui/navbar-demo";
-import LuxuryHeroSection from "@/components/luxury/LuxuryHeroSection";
 import LuxuryVehicleCard from "@/components/luxury/LuxuryVehicleCard";
 import UnityFleetPlans from "@/components/subscriptions/UnityFleetPlans";
 import RuralImpactDashboard from "@/components/rural/RuralImpactDashboard";
-import AppleWatchShowcase from "@/components/mobile/AppleWatchShowcase";
+import InteractiveButton from "@/components/ui/interactive-button";
 import { vehicles } from "@/data/vehicles";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -55,19 +53,21 @@ const Index = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+                className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
               >
-                <Button asChild className="bg-white text-black hover:bg-white/90 rounded-none px-12 py-4 text-lg font-medium">
-                  <Link to="/vehicles">
-                    <span>Explore Vehicles</span>
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="border-white/40 bg-transparent text-white hover:bg-white/10 rounded-none px-12 py-4 text-lg font-medium">
-                  <Link to="/dashboard">
+                <Link to="/vehicles">
+                  <InteractiveButton variant="blue" className="text-white">
+                    <span className="flex items-center space-x-2">
+                      <span>Explore Vehicles</span>
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </span>
+                  </InteractiveButton>
+                </Link>
+                <Link to="/dashboard">
+                  <InteractiveButton variant="magenta" className="text-white">
                     <span>View Impact</span>
-                  </Link>
-                </Button>
+                  </InteractiveButton>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
@@ -94,19 +94,19 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="grid grid-cols-2 md:grid-cols-4 gap-8"
             >
-              <div className="text-center">
+              <div className="text-center card-3d-hover">
                 <div className="text-4xl md:text-5xl font-light text-green-400 mb-2">247</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Jobs Created</div>
               </div>
-              <div className="text-center">
+              <div className="text-center card-3d-hover">
                 <div className="text-4xl md:text-5xl font-light text-blue-400 mb-2">15</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Communities Served</div>
               </div>
-              <div className="text-center">
+              <div className="text-center card-3d-hover">
                 <div className="text-4xl md:text-5xl font-light text-purple-400 mb-2">$2.8M</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Economic Impact</div>
               </div>
-              <div className="text-center">
+              <div className="text-center card-3d-hover">
                 <div className="text-4xl md:text-5xl font-light text-yellow-400 mb-2">156</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Training Graduates</div>
               </div>
@@ -134,11 +134,12 @@ const Index = () => {
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {vehicles.slice(0, 3).map((vehicle, index) => (
-                <LuxuryVehicleCard
-                  key={vehicle.id}
-                  vehicle={vehicle}
-                  index={index}
-                />
+                <div key={vehicle.id} className="card-3d-hover">
+                  <LuxuryVehicleCard
+                    vehicle={vehicle}
+                    index={index}
+                  />
+                </div>
               ))}
             </div>
 
@@ -148,17 +149,14 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-center mt-16"
             >
-              <Button asChild variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10 rounded-none px-8 py-3">
-                <Link to="/vehicles">
-                  <span>View All Vehicles</span>
-                </Link>
-              </Button>
+              <Link to="/vehicles">
+                <InteractiveButton variant="black" className="text-white">
+                  View All Vehicles
+                </InteractiveButton>
+              </Link>
             </motion.div>
           </div>
         </section>
-
-        {/* Apple Watch Mobile Showcase */}
-        <AppleWatchShowcase />
 
         {/* Subscription Plans Section */}
         <section className="py-32 px-6 bg-gradient-to-b from-black to-gray-900/50">
@@ -232,9 +230,9 @@ const Index = () => {
                   </div>
                 </div>
 
-                <Button className="bg-green-600 hover:bg-green-700 rounded-none px-8 py-3">
+                <InteractiveButton variant="facebook" className="text-white">
                   Learn About Token Ownership
-                </Button>
+                </InteractiveButton>
               </motion.div>
               
               <motion.div

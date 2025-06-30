@@ -1,8 +1,7 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import InteractiveButton from "@/components/ui/interactive-button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Zap, Users, Leaf, Star, GraduationCap } from "lucide-react";
 
@@ -60,6 +59,8 @@ const mockData: SubscriptionPlan[] = [
 ];
 
 const UnityFleetPlans: React.FC = () => {
+  const buttonVariants = ["blue", "magenta", "facebook"] as const;
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {mockData.map((plan, index) => (
@@ -70,7 +71,7 @@ const UnityFleetPlans: React.FC = () => {
           transition={{ duration: 0.4, delay: index * 0.1 }}
           className="relative"
         >
-          <Card className={`h-full bg-black border-white/10 hover:border-white/20 transition-all duration-300 ${
+          <Card className={`h-full bg-black border-white/10 hover:border-white/20 transition-all duration-300 card-3d-hover ${
             plan.popular ? 'border-green-500/50 shadow-lg shadow-green-500/10' : ''
           }`}>
             {plan.badge && (
@@ -108,15 +109,12 @@ const UnityFleetPlans: React.FC = () => {
               </ul>
               
               {/* CTA Button */}
-              <Button 
-                className={`w-full mt-8 rounded-none py-3 font-medium transition-all duration-300 ${
-                  plan.popular 
-                    ? 'bg-green-600 hover:bg-green-700 text-white' 
-                    : 'bg-transparent border border-white/30 text-white hover:bg-white hover:text-black'
-                }`}
+              <InteractiveButton 
+                variant={buttonVariants[index]}
+                className="w-full text-white"
               >
                 Get Started
-              </Button>
+              </InteractiveButton>
             </CardContent>
           </Card>
         </motion.div>
