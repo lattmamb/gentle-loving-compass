@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,6 +18,7 @@ interface SubscriptionPlan {
   price: number;
   features: PlanFeature[];
   badge?: string;
+  popular?: boolean;
 }
 
 const mockData: SubscriptionPlan[] = [
@@ -41,7 +43,8 @@ const mockData: SubscriptionPlan[] = [
       { icon: <Leaf className="h-4 w-4 text-green-400" />, text: "Unlimited mileage" },
       { icon: <Star className="h-4 w-4 text-green-400" />, text: "Priority booking" },
     ],
-    badge: "Most Popular"
+    badge: "Most Popular",
+    popular: true
   },
   {
     id: "all-access",
@@ -58,43 +61,62 @@ const mockData: SubscriptionPlan[] = [
 
 const UnityFleetPlans: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {mockData.map((plan, index) => (
         <motion.div
           key={plan.id}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: index * 0.1 }}
+          className="relative"
         >
-          <Card className="luxury-card h-full">
-            <CardHeader>
-              <CardTitle className="text-2xl font-semibold text-white">{plan.name}</CardTitle>
+          <Card className={`h-full bg-black border-white/10 hover:border-white/20 transition-all duration-300 ${
+            plan.popular ? 'border-green-500/50 shadow-lg shadow-green-500/10' : ''
+          }`}>
+            {plan.badge && (
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <Badge className="bg-green-500 text-white px-4 py-1 text-xs font-medium rounded-full">
+                  {plan.badge}
+                </Badge>
+              </div>
+            )}
+            
+            <CardHeader className="text-center pb-8">
+              <CardTitle className="text-2xl font-light text-white mb-2">{plan.name}</CardTitle>
+              <p className="text-white/60 text-sm leading-relaxed">{plan.description}</p>
             </CardHeader>
             
-            <CardContent className="space-y-4">
-              <div className="text-white/70">{plan.description}</div>
+            <CardContent className="space-y-8">
+              {/* Pricing */}
+              <div className="text-center border-b border-white/10 pb-8">
+                <div className="flex items-baseline justify-center">
+                  <span className="text-4xl font-light text-white">${plan.price}</span>
+                  <span className="text-white/40 ml-2">/month</span>
+                </div>
+              </div>
               
-              <div className="text-4xl font-bold text-green-400">${plan.price}</div>
-              <div className="text-white/60">per month</div>
-              
-              <ul className="space-y-2 mt-4">
+              {/* Features */}
+              <ul className="space-y-4">
                 {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-center space-x-2 text-white/80">
-                    {feature.icon}
-                    <span>{feature.text}</span>
+                  <li key={i} className="flex items-start space-x-3">
+                    <div className="flex-shrink-0 mt-0.5">
+                      {feature.icon}
+                    </div>
+                    <span className="text-white/80 text-sm leading-relaxed">{feature.text}</span>
                   </li>
                 ))}
               </ul>
               
-              <Button className="w-full bg-green-600 hover:bg-green-700 mt-6">
+              {/* CTA Button */}
+              <Button 
+                className={`w-full mt-8 rounded-none py-3 font-medium transition-all duration-300 ${
+                  plan.popular 
+                    ? 'bg-green-600 hover:bg-green-700 text-white' 
+                    : 'bg-transparent border border-white/30 text-white hover:bg-white hover:text-black'
+                }`}
+              >
                 Get Started
               </Button>
-
-              {plan.badge && (
-                <Badge className="absolute top-4 right-4 bg-blue-500 text-white">
-                  {plan.badge}
-                </Badge>
-              )}
             </CardContent>
           </Card>
         </motion.div>
