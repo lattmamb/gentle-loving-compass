@@ -82,3 +82,76 @@ export interface CorporateSubscription {
     renewableEnergyPercent: number;
   };
 }
+
+export interface CommunityAsset {
+  id: string;
+  name: string;
+  location: string;
+  type: "charging_hub" | "solar_farm" | "community_center";
+  totalTokens: number;
+  availableTokens: number;
+  tokenPrice: number;
+  monthlyRevenue: number;
+  status: "active" | "construction" | "planned";
+  communityBenefits: string[];
+}
+
+export interface GovernanceProposal {
+  id: string;
+  title: string;
+  description: string;
+  type: "infrastructure" | "community" | "operational";
+  status: "active" | "passed" | "rejected";
+  votesFor: number;
+  votesAgainst: number;
+  totalEligibleVotes: number;
+  endDate: Date;
+  proposer: string;
+  requiredMajority: number;
+}
+
+export interface CommunityMember {
+  id: string;
+  name: string;
+  location: string;
+  role: "member" | "coordinator" | "leader";
+  tokensOwned: number;
+  votingPower: number;
+  joinDate: Date;
+  contributionScore: number;
+}
+
+export interface WorkforceTraining {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  certification: string;
+  location: string;
+  capacity: number;
+  enrolled: number;
+  startDate: Date;
+  instructor: string;
+  jobPlacementRate: number;
+}
+
+export interface EconomicImpact {
+  jobsCreated: number;
+  localSpending: number;
+  trainingGraduates: number;
+  communityProjects: number;
+  carbonOffset: number;
+  renewableEnergyGeneration: number;
+}
+
+export interface UnityFleetSubscription {
+  id: string;
+  type: "FlexRide" | "Take-Home" | "All-Access";
+  userId: string;
+  startDate: Date;
+  monthlyFee: number;
+  features: string[];
+  communityBenefits: string[];
+  tokenEarnings?: number;
+  votingRights: boolean;
+}
