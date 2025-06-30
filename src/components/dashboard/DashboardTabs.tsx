@@ -5,21 +5,33 @@ import LuxuryDashboard from "@/components/luxury/LuxuryDashboard";
 import TokenizedAssets from "@/components/community/TokenizedAssets";
 import CommunityGovernance from "@/components/community/CommunityGovernance";
 import RuralImpactDashboard from "@/components/rural/RuralImpactDashboard";
+import SocialTransitNetwork from "@/components/community/SocialTransitNetwork";
+import LocalBusinessIntegration from "@/components/community/LocalBusinessIntegration";
+import GamifiedSustainability from "@/components/community/GamifiedSustainability";
 
 const DashboardTabs: React.FC = () => {
   return (
     <Tabs defaultValue="overview" className="mb-8">
-      <TabsList className="bg-white/5 border border-white/10 grid w-full grid-cols-4">
-        <TabsTrigger value="overview" className="data-[state=active]:bg-green-600">
+      <TabsList className="bg-white/5 border border-white/10 grid w-full grid-cols-7">
+        <TabsTrigger value="overview" className="data-[state=active]:bg-green-600 text-xs">
           Overview
         </TabsTrigger>
-        <TabsTrigger value="assets" className="data-[state=active]:bg-green-600">
-          My Assets
+        <TabsTrigger value="social" className="data-[state=active]:bg-green-600 text-xs">
+          Social
         </TabsTrigger>
-        <TabsTrigger value="governance" className="data-[state=active]:bg-green-600">
+        <TabsTrigger value="business" className="data-[state=active]:bg-green-600 text-xs">
+          Business
+        </TabsTrigger>
+        <TabsTrigger value="gaming" className="data-[state=active]:bg-green-600 text-xs">
+          Gaming
+        </TabsTrigger>
+        <TabsTrigger value="assets" className="data-[state=active]:bg-green-600 text-xs">
+          Assets
+        </TabsTrigger>
+        <TabsTrigger value="governance" className="data-[state=active]:bg-green-600 text-xs">
           Governance
         </TabsTrigger>
-        <TabsTrigger value="impact" className="data-[state=active]:bg-green-600">
+        <TabsTrigger value="impact" className="data-[state=active]:bg-green-600 text-xs">
           Impact
         </TabsTrigger>
       </TabsList>
@@ -30,6 +42,18 @@ const DashboardTabs: React.FC = () => {
           milesElectric={12450}
           activeBookings={2}
         />
+      </TabsContent>
+      
+      <TabsContent value="social" className="mt-6">
+        <SocialTransitNetwork />
+      </TabsContent>
+      
+      <TabsContent value="business" className="mt-6">
+        <LocalBusinessIntegration />
+      </TabsContent>
+      
+      <TabsContent value="gaming" className="mt-6">
+        <GamifiedSustainability />
       </TabsContent>
       
       <TabsContent value="assets" className="mt-6">

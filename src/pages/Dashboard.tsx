@@ -19,6 +19,9 @@ const Dashboard = () => {
   const mockUser = {
     name: "Alex Chen",
     email: "alex@example.com",
+    subscription: "Unity FlexRide",
+    location: "Carbondale, IL",
+    communityRole: "Community Coordinator",
     totalRides: 47,
     carbonSaved: 2847,
     memberSince: "2024"
