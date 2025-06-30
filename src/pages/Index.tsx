@@ -7,11 +7,14 @@ import LuxuryVehicleCard from "@/components/luxury/LuxuryVehicleCard";
 import UnityFleetPlans from "@/components/subscriptions/UnityFleetPlans";
 import RuralImpactDashboard from "@/components/rural/RuralImpactDashboard";
 import InteractiveButton from "@/components/ui/interactive-button";
+import NeuralTransitAssistant from "@/components/ai/NeuralTransitAssistant";
+import AdvancedVehicleInterface from "@/components/vehicles/AdvancedVehicleInterface";
+import FleetIntelligenceDashboard from "@/components/fleet/FleetIntelligenceDashboard";
 import { vehicles } from "@/data/vehicles";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Users, Shield, Star } from "lucide-react";
+import { ArrowRight, Zap, Users, Shield, Star, Brain, Cpu, Globe } from "lucide-react";
 
 const Index = () => {
   return (
@@ -39,13 +42,13 @@ const Index = () => {
             >
               <div className="space-y-6">
                 <h1 className="text-5xl md:text-7xl font-light tracking-tight leading-tight">
-                  Unity Fleet &amp; The Link
+                  Neural Transit
                   <br />
-                  <span className="text-green-400 font-normal">Ecosystem</span>
+                  <span className="text-green-400 font-normal">Revolution 2025</span>
                 </h1>
                 <p className="text-xl md:text-2xl font-light text-white/80 max-w-3xl mx-auto leading-relaxed">
-                  Transforming rural Illinois through community-owned electric transportation, 
-                  sustainable charging infrastructure, and workforce empowerment.
+                  AI-powered autonomous vehicle ecosystem with neural routing, holographic interfaces, 
+                  and community-owned infrastructure transforming rural transportation.
                 </p>
               </div>
               
@@ -58,14 +61,18 @@ const Index = () => {
                 <Link to="/vehicles">
                   <InteractiveButton variant="blue" className="text-white">
                     <span className="flex items-center space-x-2">
-                      <span>Explore Vehicles</span>
+                      <Brain className="w-5 h-5" />
+                      <span>Neural Fleet</span>
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </span>
                   </InteractiveButton>
                 </Link>
                 <Link to="/dashboard">
                   <InteractiveButton variant="magenta" className="text-white">
-                    <span>View Impact</span>
+                    <span className="flex items-center space-x-2">
+                      <Cpu className="w-5 h-5" />
+                      <span>AI Dashboard</span>
+                    </span>
                   </InteractiveButton>
                 </Link>
               </motion.div>
@@ -85,7 +92,117 @@ const Index = () => {
           </motion.div>
         </section>
 
-        {/* Stats Section - Tesla-style clean metrics */}
+        {/* Neural Transit Assistant Section */}
+        <section className="py-32 px-6 bg-gradient-to-b from-black to-gray-900/50">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-4xl md:text-6xl font-light mb-6">
+                AI Transit Assistant
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto font-light">
+                Conversational AI that understands your transport needs, predicts optimal routes, 
+                and manages your entire mobility experience.
+              </p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <NeuralTransitAssistant />
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="space-y-6"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">Neural Language Processing</h3>
+                    <p className="text-white/60">Understands natural conversation and context</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center">
+                    <Zap className="w-6 h-6 text-green-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">Predictive Intelligence</h3>
+                    <p className="text-white/60">Anticipates needs and optimizes experiences</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center">
+                    <Globe className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-white">Real-time Integration</h3>
+                    <p className="text-white/60">Connected to live traffic, weather, and fleet data</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Advanced Vehicle Interface Section */}
+        <section className="py-32 px-6 bg-black">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-20"
+            >
+              <h2 className="text-4xl md:text-6xl font-light mb-6">
+                Holographic Vehicle Interface
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto font-light">
+                Revolutionary 3D holographic displays with neural integration, 
+                predictive analytics, and real-time vehicle consciousness.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-4xl mx-auto"
+            >
+              <AdvancedVehicleInterface vehicle={vehicles[0]} />
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Fleet Intelligence Dashboard Section */}
+        <section className="py-32 px-6 bg-gradient-to-b from-gray-900/50 to-black">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-20"
+            >
+              <FleetIntelligenceDashboard />
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Stats Section - Enhanced with Neural Metrics */}
         <section className="py-24 px-6 bg-black border-t border-white/10">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -95,20 +212,20 @@ const Index = () => {
               className="grid grid-cols-2 md:grid-cols-4 gap-8"
             >
               <div className="text-center card-3d-hover">
-                <div className="text-4xl md:text-5xl font-light text-green-400 mb-2">247</div>
-                <div className="text-sm text-white/60 uppercase tracking-wider">Jobs Created</div>
+                <div className="text-4xl md:text-5xl font-light text-green-400 mb-2">99.7%</div>
+                <div className="text-sm text-white/60 uppercase tracking-wider">Neural Accuracy</div>
               </div>
               <div className="text-center card-3d-hover">
-                <div className="text-4xl md:text-5xl font-light text-blue-400 mb-2">15</div>
-                <div className="text-sm text-white/60 uppercase tracking-wider">Communities Served</div>
+                <div className="text-4xl md:text-5xl font-light text-blue-400 mb-2">12ms</div>
+                <div className="text-sm text-white/60 uppercase tracking-wider">AI Response Time</div>
               </div>
               <div className="text-center card-3d-hover">
-                <div className="text-4xl md:text-5xl font-light text-purple-400 mb-2">$2.8M</div>
-                <div className="text-sm text-white/60 uppercase tracking-wider">Economic Impact</div>
+                <div className="text-4xl md:text-5xl font-light text-purple-400 mb-2">247</div>
+                <div className="text-sm text-white/60 uppercase tracking-wider">Autonomous Vehicles</div>
               </div>
               <div className="text-center card-3d-hover">
-                <div className="text-4xl md:text-5xl font-light text-yellow-400 mb-2">156</div>
-                <div className="text-sm text-white/60 uppercase tracking-wider">Training Graduates</div>
+                <div className="text-4xl md:text-5xl font-light text-yellow-400 mb-2">85.3%</div>
+                <div className="text-sm text-white/60 uppercase tracking-wider">Energy Efficiency</div>
               </div>
             </motion.div>
           </div>

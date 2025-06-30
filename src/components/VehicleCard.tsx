@@ -8,7 +8,7 @@ import VehicleCardImage from "./vehicles/VehicleCardImage";
 import VehicleCardDetails from "./vehicles/VehicleCardDetails";
 import VehicleDetailModal from "./vehicles/VehicleDetailModal";
 import FavoriteToggle from "./vehicles/FavoriteToggle";
-import { info } from "lucide-react";
+import { Info } from "lucide-react";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -89,7 +89,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({
                 onClick={handleDetailsClick}
                 className="bg-white/10 border-white/20 text-white hover:bg-white/20"
               >
-                <info size={16} className="mr-1" />
+                <Info size={16} className="mr-1" />
                 Details
               </Button>
               <Button

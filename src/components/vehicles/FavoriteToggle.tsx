@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { heart } from "lucide-react";
+import { Heart } from "lucide-react";
 
 interface FavoriteToggleProps {
   vehicleId: string;
@@ -33,7 +33,7 @@ const FavoriteToggle: React.FC<FavoriteToggleProps> = ({
             onClick={handleToggle}
             className="absolute top-4 left-4 bg-black/20 backdrop-blur-sm hover:bg-black/40 transition-all duration-300"
           >
-            <heart
+            <Heart
               size={20}
               className={`transition-all duration-300 ${
                 isFavorite
