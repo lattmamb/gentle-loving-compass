@@ -1,0 +1,138 @@
+
+@layer utilities {
+  /* Premium Glassmorphism Effects */
+  .glass-luxury {
+    @apply backdrop-blur-xl bg-white/[0.08] border border-white/[0.12];
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-2xl bg-gradient-to-br from-white/[0.12] to-white/[0.06] border border-white/[0.15];
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+  
+  .glass-panel {
+    @apply backdrop-blur-3xl bg-black/[0.15] border border-white/[0.08];
+    box-shadow: 
+      0 16px 48px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Tesla-Style Premium Buttons */
+  .tesla-button {
+    @apply relative px-8 py-4 rounded-full font-medium transition-all duration-300;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: #1a1a1a;
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  
+  .tesla-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      0 6px 24px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  
+  .tesla-button-dark {
+    @apply relative px-8 py-4 rounded-full font-medium transition-all duration-300;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 4px 16px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Premium Progress Indicators */
+  .luxury-progress {
+    @apply relative h-2 rounded-full overflow-hidden;
+    background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  }
+  
+  .luxury-progress-bar {
+    @apply h-full rounded-full transition-all duration-700 ease-out;
+    background: linear-gradient(90deg, #00d4ff 0%, #0066cc 100%);
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.4);
+  }
+
+  /* Sophisticated Cards */
+  .luxury-card {
+    @apply glass-card p-6 rounded-2xl transition-all duration-500;
+    transform-style: preserve-3d;
+  }
+  
+  .luxury-card:hover {
+    transform: translateY(-4px) rotateX(2deg);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  /* Premium Typography */
+  .tesla-heading {
+    @apply text-4xl md:text-5xl font-light tracking-tight;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .tesla-subheading {
+    @apply text-xl md:text-2xl font-light tracking-wide text-white/80;
+  }
+
+  /* Charging Animation */
+  .charging-pulse {
+    animation: chargingPulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes chargingPulse {
+    0%, 100% { 
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Ambient Lighting Effects */
+  .ambient-glow {
+    position: relative;
+  }
+  
+  .ambient-glow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    animation: ambientRotate 20s linear infinite;
+    z-index: -1;
+  }
+  
+  @keyframes ambientRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Mobile-First Premium Interfaces */
+  .mobile-luxury-header {
+    @apply glass-luxury backdrop-blur-xl fixed top-0 left-0 right-0 z-50 p-4;
+    background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+  }
+  
+  .mobile-luxury-nav {
+    @apply glass-panel fixed bottom-0 left-0 right-0 z-50 p-4;
+    background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 100%);
+  }
+}
