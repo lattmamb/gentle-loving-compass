@@ -1,4 +1,3 @@
-
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,6 +9,7 @@ import { vehicles } from "@/data/vehicles";
 import { Link } from "react-router-dom";
 import { CalendarIcon, Car, Clock, MapPin } from "lucide-react";
 import AIAssistant from "@/components/AIAssistant";
+import EnergyDashboard from "@/components/clean-energy/EnergyDashboard";
 
 // Mock data for demonstration
 const bookings = [
@@ -33,14 +33,17 @@ const bookings = [
   }
 ];
 
-// Mock user data
+// Update mock user data to include clean energy metrics
 const user = {
   name: "Alex Johnson",
   email: "alex@example.com",
-  subscription: "Monthly Plan",
+  subscription: "Illinois Clean Transit Monthly",
   nextPayment: new Date("2025-05-01"),
   paymentAmount: 3999,
   credits: 500,
+  carbonSavings: 2847, // kg CO2 saved
+  milesElectric: 12450,
+  renewablePercent: 78
 };
 
 const Dashboard = () => {
@@ -56,23 +59,38 @@ const Dashboard = () => {
                 Welcome, {user.name}
               </h1>
               <p className="text-white/70">
-                Current Plan: <span className="text-blue-400">{user.subscription}</span>
+                Current Plan: <span className="text-green-400">{user.subscription}</span>
+              </p>
+              <p className="text-sm text-white/60">
+                Saving the environment, one mile at a time in Illinois
               </p>
             </div>
             
-            <div className="mt-4 md:mt-0">
-              <Button asChild className="bg-blue-600 hover:bg-blue-700">
-                <Link to="/vehicles">Book New Vehicle</Link>
+            <div className="mt-4 md:mt-0 flex space-x-3">
+              <Button asChild variant="outline" className="border-white/10 text-white hover:bg-white/10">
+                <Link to="/locations">View Locations</Link>
+              </Button>
+              <Button asChild className="bg-green-600 hover:bg-green-700">
+                <Link to="/vehicles">Book Clean Transit</Link>
               </Button>
             </div>
           </div>
           
-          {/* Account Overview Cards */}
+          {/* Clean Energy Dashboard */}
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold mb-6">Your Clean Energy Impact</h2>
+            <EnergyDashboard 
+              userCarbonSavings={user.carbonSavings}
+              milesElectric={user.milesElectric}
+            />
+          </div>
+          
+          {/* Account Overview Cards - Updated */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <StatCard
               title="Current Plan"
               value={user.subscription}
-              icon={<Clock className="h-5 w-5 text-blue-400" />}
+              icon={<Clock className="h-5 w-5 text-green-400" />}
             />
             
             <StatCard
@@ -82,50 +100,53 @@ const Dashboard = () => {
             />
             
             <StatCard
-              title="Active Bookings"
+              title="Active Routes"
               value={bookings.filter(b => b.status === "confirmed").length.toString()}
-              icon={<Car className="h-5 w-5 text-blue-400" />}
+              icon={<Car className="h-5 w-5 text-purple-400" />}
             />
             
             <StatCard
-              title="Reward Credits"
+              title="Clean Credits"
               value={formatCurrency(user.credits)}
-              icon={<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="m16 8-8 8"/>
-              <path d="m8 8 8 8"/>
-             </svg>}
+              icon={<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-400">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>}
             />
           </div>
           
-          {/* Main Dashboard Tabs */}
+          {/* Main Dashboard Tabs - Updated labels */}
           <Tabs defaultValue="bookings" className="mb-8">
             <TabsList className="bg-white/5 border border-white/10">
-              <TabsTrigger value="bookings" className="data-[state=active]:bg-blue-600">
-                My Bookings
+              <TabsTrigger value="bookings" className="data-[state=active]:bg-green-600">
+                My Transit Bookings
               </TabsTrigger>
-              <TabsTrigger value="account" className="data-[state=active]:bg-blue-600">
-                Account
+              <TabsTrigger value="account" className="data-[state=active]:bg-green-600">
+                Account & Sustainability
               </TabsTrigger>
-              <TabsTrigger value="history" className="data-[state=active]:bg-blue-600">
-                History
+              <TabsTrigger value="history" className="data-[state=active]:bg-green-600">
+                Impact History
               </TabsTrigger>
             </TabsList>
             
             <TabsContent value="bookings" className="mt-6">
               <div className="backdrop-blur-xl bg-white/5 rounded-xl border border-white/10 p-6">
-                <h2 className="text-xl font-bold mb-6">Your Current Bookings</h2>
+                <h2 className="text-xl font-bold mb-6">Your Illinois Transit Bookings</h2>
                 
                 {bookings.length === 0 ? (
                   <div className="text-center py-8">
-                    <div className="text-5xl mb-4">🚗</div>
-                    <h3 className="text-lg font-bold mb-2">No Bookings Yet</h3>
+                    <div className="text-5xl mb-4">🚐</div>
+                    <h3 className="text-lg font-bold mb-2">No Clean Transit Bookings Yet</h3>
                     <p className="text-white/70 mb-4">
-                      You haven't made any bookings yet. Ready to experience Tesla?
+                      Start your clean energy journey across Illinois. Book sustainable transit today!
                     </p>
-                    <Button asChild className="bg-blue-600 hover:bg-blue-700">
-                      <Link to="/vehicles">Browse Vehicles</Link>
-                    </Button>
+                    <div className="flex justify-center space-x-3">
+                      <Button asChild className="bg-green-600 hover:bg-green-700">
+                        <Link to="/vehicles">Browse Clean Vehicles</Link>
+                      </Button>
+                      <Button asChild variant="outline" className="border-white/10 text-white hover:bg-white/10">
+                        <Link to="/locations">View Illinois Locations</Link>
+                      </Button>
+                    </div>
                   </div>
                 ) : (
                   <div className="space-y-6">
@@ -154,9 +175,12 @@ const Dashboard = () => {
                                   <h3 className="text-xl font-bold mb-1">
                                     Tesla {vehicle?.model || "Vehicle"}
                                   </h3>
-                                  <div className="flex items-center text-white/70 mb-4">
+                                  <div className="flex items-center text-white/70 mb-2">
                                     <MapPin size={14} className="mr-1" />
                                     <span className="text-sm">{booking.location}</span>
+                                  </div>
+                                  <div className="flex items-center text-green-400 mb-4">
+                                    <span className="text-sm">🌱 Clean Energy Powered</span>
                                   </div>
                                 </div>
                                 

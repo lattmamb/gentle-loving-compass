@@ -1,50 +1,97 @@
-import { Vehicle } from "../types";
+export interface Vehicle {
+  id: string;
+  model: string;
+  type: "Sedan" | "SUV" | "Truck" | "Sports";
+  image: string;
+  colorVariants: ColorVariant[];
+  price: {
+    daily: number;
+    monthly: number;
+    yearly: number;
+  };
+  specs: {
+    range: number;
+    topSpeed: number;
+    acceleration: number;
+  };
+  features: string[];
+  status: "available" | "booked" | "maintenance";
+  location?: string;
+  carbonSavings?: number; // kg CO2 saved per year
+}
+
+export interface ColorVariant {
+  name: string;
+  color: string;
+  image: string;
+}
 
 export const vehicles: Vehicle[] = [
   {
     id: "model-s",
-    model: "Model S Plaid",
+    model: "Model S",
     type: "Sedan",
-    image: "/tesla-model-s-plaid.png",
+    image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80",
     colorVariants: [
-      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-s-plaid-white.png" },
-      { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-s-plaid-silver.png" },
-      { name: "Solid Black", color: "#000000", image: "/tesla-model-s-plaid-black.png" },
-      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-s-plaid-blue.png" },
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-s-plaid-red.png" }
+      {
+        name: "Pearl White",
+        color: "#FFFFFF",
+        image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Midnight Silver",
+        color: "#393c41",
+        image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Deep Blue",
+        color: "#1e3a8a",
+        image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=80"
+      }
     ],
     price: {
-      daily: 249,
-      monthly: 4999,
-      yearly: 49999
+      daily: 199,
+      monthly: 3999,
+      yearly: 39999
     },
     specs: {
-      range: 396,
+      range: 405,
       topSpeed: 200,
-      acceleration: 1.99
+      acceleration: 3.1
     },
     features: [
-      "Tri Motor All-Wheel Drive",
-      "Autopilot",
+      "Autopilot Included",
       "Premium Interior",
-      "21\" Arachnid Wheels",
-      "Supercharger Access",
-      "Plaid Track Mode",
-      "Carbon Fiber Spoiler"
+      "Glass Roof",
+      "Illinois Clean Energy Certified",
+      "Chicago Weather Package",
+      "Midwest Road Trip Ready"
     ],
-    status: "available"
+    status: "available",
+    location: "Chicago Loop Clean Energy Hub",
+    carbonSavings: 4200
   },
   {
     id: "model-3",
-    model: "Model 3 Performance",
-    type: "Sedan",
-    image: "/tesla-model-3-red.png",
+    model: "Model 3",
+    type: "Sedan", 
+    image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80",
     colorVariants: [
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-3-red.png" },
-      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-3-white.png" },
-      { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-3-silver.png" },
-      { name: "Solid Black", color: "#000000", image: "/tesla-model-3-black.png" },
-      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-3-blue.png" }
+      {
+        name: "Pearl White",
+        color: "#FFFFFF",
+        image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Midnight Silver",
+        color: "#393c41", 
+        image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Red Multi-Coat",
+        color: "#cc0000",
+        image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=80"
+      }
     ],
     price: {
       daily: 149,
@@ -54,90 +101,36 @@ export const vehicles: Vehicle[] = [
     specs: {
       range: 358,
       topSpeed: 162,
-      acceleration: 3.1
+      acceleration: 5.3
     },
     features: [
-      "Dual Motor All-Wheel Drive",
-      "Autopilot",
-      "Premium Red Interior",
-      "20\" Performance Wheels",
-      "Supercharger Access",
-      "Performance Brakes",
-      "Carbon Fiber Spoiler"
+      "Standard Autopilot",
+      "Premium Audio",
+      "Mobile Connector",
+      "Illinois Wind Energy Powered",
+      "Winter Weather Optimized",
+      "Suburban Route Ready"
     ],
-    status: "available"
+    status: "available",
+    location: "Naperville Solar Transit Center",
+    carbonSavings: 3800
   },
   {
     id: "model-x",
     model: "Model X",
     type: "SUV",
-    image: "/tesla-model-x.png",
+    image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=80",
     colorVariants: [
-      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-x-white.png" },
-      { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-x-silver.png" },
-      { name: "Solid Black", color: "#000000", image: "/tesla-model-x-black.png" },
-      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-x-blue.png" },
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-x-red.png" }
-    ],
-    price: {
-      daily: 249,
-      monthly: 4999,
-      yearly: 49999
-    },
-    specs: {
-      range: 351,
-      topSpeed: 155,
-      acceleration: 2.5
-    },
-    features: [
-      "Autopilot",
-      "Falcon Wing Doors",
-      "Tri-Zone Climate Control",
-      "Premium Interior",
-      "22\" Wheels",
-      "Supercharger Access"
-    ],
-    status: "available"
-  },
-  {
-    id: "model-y",
-    model: "Model Y",
-    type: "SUV",
-    image: "/tesla-model-y.png",
-    colorVariants: [
-      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-model-y-white.png" },
-      { name: "Midnight Silver", color: "#393c41", image: "/tesla-model-y-silver.png" },
-      { name: "Solid Black", color: "#000000", image: "/tesla-model-y-black.png" },
-      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-model-y-blue.png" },
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-model-y-red.png" }
-    ],
-    price: {
-      daily: 179,
-      monthly: 3599,
-      yearly: 35999
-    },
-    specs: {
-      range: 330,
-      topSpeed: 135,
-      acceleration: 4.8
-    },
-    features: [
-      "Autopilot",
-      "All-Wheel Drive",
-      "Panoramic Glass Roof",
-      "Premium Interior",
-      "19\" Wheels",
-      "Supercharger Access"
-    ],
-    status: "available"
-  },
-  {
-    id: "cybertruck",
-    model: "Cybertruck",
-    type: "Truck",
-    image: "/tesla-cybertruck.png",
-    colorVariants: [
-      { name: "Stainless Steel", color: "#d1d1d1", image: "/tesla-cybertruck.png" }
+      {
+        name: "Pearl White",
+        color: "#FFFFFF",
+        image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Midnight Silver",
+        color: "#393c41",
+        image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80"
+      }
     ],
     price: {
       daily: 299,
@@ -145,50 +138,59 @@ export const vehicles: Vehicle[] = [
       yearly: 59999
     },
     specs: {
-      range: 500,
-      topSpeed: 130,
-      acceleration: 2.9
+      range: 348,
+      topSpeed: 163,
+      acceleration: 3.8
     },
     features: [
-      "Autopilot",
-      "Adaptive Air Suspension",
-      "Ultra-Hard Stainless Steel Exoskeleton",
-      "Tesla Armor Glass",
-      "Supercharger Access"
+      "Falcon Wing Doors",
+      "Full Self-Driving Capability",
+      "Premium Interior",
+      "Solar Charging Compatible",
+      "Family Road Trip Package",
+      "Illinois State Park Access"
     ],
-    status: "available"
+    status: "available",
+    location: "Springfield Capitol Clean Hub",
+    carbonSavings: 5100
   },
   {
-    id: "roadster",
-    model: "Roadster",
-    type: "Sports",
-    image: "/tesla-roadster.png",
+    id: "model-y",
+    model: "Model Y",
+    type: "SUV",
+    image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&q=80",
     colorVariants: [
-      { name: "Red Multi-Coat", color: "#a82a2a", image: "/tesla-roadster-red.png" },
-      { name: "Midnight Silver", color: "#393c41", image: "/tesla-roadster-silver.png" },
-      { name: "Deep Blue", color: "#1f3a4d", image: "/tesla-roadster-blue.png" },
-      { name: "Pearl White", color: "#f2f2f2", image: "/tesla-roadster-white.png" }
+      {
+        name: "Pearl White",
+        color: "#FFFFFF",
+        image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Midnight Silver",
+        color: "#393c41",
+        image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80"
+      }
     ],
     price: {
-      daily: 399,
-      monthly: 7999,
-      yearly: 79999
+      daily: 249,
+      monthly: 4999,
+      yearly: 49999
     },
     specs: {
-      range: 620,
-      topSpeed: 250,
-      acceleration: 1.9
+      range: 326,
+      topSpeed: 155,
+      acceleration: 4.8
     },
     features: [
-      "0-60 mph in 1.9 seconds",
-      "Top speed over 250 mph",
-      "620 mile range",
-      "Removable Glass Roof",
-      "All-Wheel Drive",
-      "Torque Vectoring",
-      "Premium Sound System",
-      "Exclusive Supercharger Access"
+      "Glass Roof",
+      "Autopilot Included", 
+      "Premium Audio",
+      "100% Renewable Energy",
+      "University Campus Ready",
+      "Corporate Fleet Approved"
     ],
-    status: "available"
+    status: "available",
+    location: "Rockford Wind Energy Station",
+    carbonSavings: 4600
   }
 ];

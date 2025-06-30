@@ -1,4 +1,3 @@
-
 export interface Vehicle {
   id: string;
   model: string;
@@ -17,6 +16,8 @@ export interface Vehicle {
   };
   features: string[];
   status: "available" | "booked" | "maintenance";
+  location?: string;
+  carbonSavings?: number; // kg CO2 saved per year
 }
 
 export interface ColorVariant {
@@ -51,4 +52,33 @@ export interface Location {
     lng: number;
   };
   availableVehicles: string[];
+  energySource?: "solar" | "wind" | "grid" | "mixed";
+  fastCharging?: boolean;
+}
+
+export interface TransitRoute {
+  id: string;
+  name: string;
+  description: string;
+  stops: string[];
+  duration: string;
+  frequency: string;
+  carbonSavings: number;
+  price: {
+    single: number;
+    daily: number;
+    monthly: number;
+  };
+}
+
+export interface CorporateSubscription {
+  id: string;
+  companyName: string;
+  employeeCount: number;
+  routePreferences: string[];
+  monthlyBudget: number;
+  sustainabilityGoals: {
+    carbonReduction: number;
+    renewableEnergyPercent: number;
+  };
 }

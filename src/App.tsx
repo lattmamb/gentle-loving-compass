@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
@@ -9,6 +8,7 @@ import BookVehicle from "@/pages/BookVehicle";
 import Dashboard from "@/pages/Dashboard";
 import About from "@/pages/About";
 import BackgroundParticles from "@/components/particles/BackgroundParticles";
+import Locations from "@/pages/Locations";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
             <Route path="/book/:id" element={<BookVehicle />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
+            <Route path="/locations" element={<Locations />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
