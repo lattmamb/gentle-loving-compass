@@ -20,6 +20,9 @@
 /* Import luxury design utilities */
 @import './styles/luxury-design.css';
 
+/* Import Apple Watch styles */
+@import './styles/watch-styles.css';
+
 /* Global styles for consistency */
 .app-container {
   @apply min-h-screen text-white overflow-x-hidden relative;

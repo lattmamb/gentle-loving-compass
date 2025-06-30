@@ -8,6 +8,7 @@ import LuxuryHeroSection from "@/components/luxury/LuxuryHeroSection";
 import LuxuryVehicleCard from "@/components/luxury/LuxuryVehicleCard";
 import UnityFleetPlans from "@/components/subscriptions/UnityFleetPlans";
 import RuralImpactDashboard from "@/components/rural/RuralImpactDashboard";
+import AppleWatchShowcase from "@/components/mobile/AppleWatchShowcase";
 import { vehicles } from "@/data/vehicles";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -155,6 +156,9 @@ const Index = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* Apple Watch Mobile Showcase */}
+        <AppleWatchShowcase />
 
         {/* Subscription Plans Section */}
         <section className="py-32 px-6 bg-gradient-to-b from-black to-gray-900/50">
