@@ -22,8 +22,8 @@ const DashboardTabs: React.FC = () => {
         <TabsTrigger value="business" className="data-[state=active]:bg-green-600 text-xs">
           Business
         </TabsTrigger>
-        <TabsTrigger value="gaming" className="data-[state=active]:bg-green-600 text-xs">
-          Gaming
+        <TabsTrigger value="rewards" className="data-[state=active]:bg-green-600 text-xs">
+          Rewards
         </TabsTrigger>
         <TabsTrigger value="assets" className="data-[state=active]:bg-green-600 text-xs">
           Assets
@@ -52,7 +52,7 @@ const DashboardTabs: React.FC = () => {
         <LocalBusinessIntegration />
       </TabsContent>
       
-      <TabsContent value="gaming" className="mt-6">
+      <TabsContent value="rewards" className="mt-6">
         <GamifiedSustainability />
       </TabsContent>
       

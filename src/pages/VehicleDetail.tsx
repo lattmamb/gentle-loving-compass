@@ -11,9 +11,6 @@ import VehicleHero from "@/components/vehicles/VehicleHero";
 import VehicleBreadcrumbs from "@/components/vehicles/VehicleBreadcrumbs";
 import VehicleTabs from "@/components/vehicles/VehicleTabs";
 import RelatedVehicles from "@/components/vehicles/RelatedVehicles";
-import AdvancedVehicleInterface from "@/components/vehicles/AdvancedVehicleInterface";
-import HolographicPreview from "@/components/vehicles/HolographicPreview";
-import BiometricAuth from "@/components/auth/BiometricAuth";
 
 const VehicleDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,8 +19,6 @@ const VehicleDetail = () => {
   const [selectedColor, setSelectedColor] = useState<ColorVariant>(
     vehicle?.colorVariants[0] || { name: "", color: "", image: "" }
   );
-  const [isHologramActive, setIsHologramActive] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   if (!vehicle) {
     return (
@@ -50,31 +45,12 @@ const VehicleDetail = () => {
         <div className="max-w-7xl mx-auto">
           <VehicleBreadcrumbs vehicleModel={vehicle.model} />
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            <div className="lg:col-span-2">
-              <VehicleHero 
-                vehicle={vehicle} 
-                selectedColor={selectedColor} 
-                setSelectedColor={setSelectedColor} 
-              />
-            </div>
-            <div className="space-y-6">
-              <HolographicPreview 
-                vehicle={vehicle} 
-                isActive={isHologramActive}
-                onToggle={() => setIsHologramActive(!isHologramActive)}
-              />
-              {!isAuthenticated && (
-                <BiometricAuth 
-                  onAuthSuccess={() => setIsAuthenticated(true)}
-                  onAuthFailed={(error) => console.log("Auth failed:", error)}
-                />
-              )}
-            </div>
-          </div>
-          
           <div className="mb-12">
-            <AdvancedVehicleInterface vehicle={vehicle} />
+            <VehicleHero 
+              vehicle={vehicle} 
+              selectedColor={selectedColor} 
+              setSelectedColor={setSelectedColor} 
+            />
           </div>
           
           <VehicleTabs 
