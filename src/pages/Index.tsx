@@ -9,11 +9,12 @@ import UnityFleetPlans from "@/components/subscriptions/UnityFleetPlans";
 import RuralImpactDashboard from "@/components/rural/RuralImpactDashboard";
 import InteractiveButton from "@/components/ui/interactive-button";
 import FleetIntelligenceDashboard from "@/components/fleet/FleetIntelligenceDashboard";
+import BackgroundBoxesDemo from "@/components/ui/background-boxes-demo";
 import { vehicles } from "@/data/vehicles";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Users, Shield, Star, Car, MapPin, Globe } from "lucide-react";
+import { ArrowRight, Zap, Users, Shield, Star, Car, MapPin } from "lucide-react";
 
 const Index = () => {
   return (
@@ -21,73 +22,33 @@ const Index = () => {
       <Header />
       
       <main className="relative z-10">
-        {/* Hero Section - Tesla-style full viewport */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <img
-              src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=2000&q=80"
-              alt="Rural Illinois Electric Transportation"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80" />
-          </div>
+        {/* Hero Section with BackgroundBoxes */}
+        <section className="relative">
+          <BackgroundBoxesDemo />
           
-          <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="space-y-8"
-            >
-              <div className="space-y-6">
-                <h1 className="text-5xl md:text-7xl font-light tracking-tight leading-tight">
-                  Unity Fleet
-                  <br />
-                  <span className="text-green-400 font-normal">Transportation</span>
-                </h1>
-                <p className="text-xl md:text-2xl font-light text-white/80 max-w-3xl mx-auto leading-relaxed">
-                  Community-owned electric vehicle fleet serving rural Illinois with 
-                  sustainable transportation solutions and local economic development.
-                </p>
-              </div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
-              >
-                <Link to="/vehicles">
-                  <InteractiveButton variant="blue" className="text-white">
-                    <span className="flex items-center space-x-2">
-                      <Car className="w-5 h-5" />
-                      <span>Browse Vehicles</span>
-                      <ArrowRight className="ml-2 w-5 h-5" />
-                    </span>
-                  </InteractiveButton>
-                </Link>
-                <Link to="/dashboard">
-                  <InteractiveButton variant="magenta" className="text-white">
-                    <span className="flex items-center space-x-2">
-                      <MapPin className="w-5 h-5" />
-                      <span>My Dashboard</span>
-                    </span>
-                  </InteractiveButton>
-                </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Scroll indicator */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="absolute bottom-10 left-0 right-0 flex justify-center gap-4"
           >
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce" />
-            </div>
+            <Link to="/vehicles">
+              <InteractiveButton variant="blue" className="text-white">
+                <span className="flex items-center space-x-2">
+                  <Car className="w-5 h-5" />
+                  <span>Browse Vehicles</span>
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </span>
+              </InteractiveButton>
+            </Link>
+            <Link to="/dashboard">
+              <InteractiveButton variant="magenta" className="text-white">
+                <span className="flex items-center space-x-2">
+                  <MapPin className="w-5 h-5" />
+                  <span>My Dashboard</span>
+                </span>
+              </InteractiveButton>
+            </Link>
           </motion.div>
         </section>
 
@@ -100,7 +61,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-20"
             >
-              <h2 className="text-4xl md:text-6xl font-light mb-6">
+              <h2 className="text-4xl md:text-6xl font-light mb-6 text-gradient">
                 Fleet Management
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto font-light">
@@ -109,14 +70,7 @@ const Index = () => {
               </p>
             </motion.div>
             
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
-              <FleetIntelligenceDashboard />
-            </motion.div>
+            <FleetIntelligenceDashboard />
           </div>
         </section>
 
@@ -129,19 +83,19 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="grid grid-cols-2 md:grid-cols-4 gap-8"
             >
-              <div className="text-center card-3d-hover">
+              <div className="text-center luxury-card">
                 <div className="text-4xl md:text-5xl font-light text-green-400 mb-2">247</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Active Vehicles</div>
               </div>
-              <div className="text-center card-3d-hover">
+              <div className="text-center luxury-card">
                 <div className="text-4xl md:text-5xl font-light text-blue-400 mb-2">98%</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Availability Rate</div>
               </div>
-              <div className="text-center card-3d-hover">
+              <div className="text-center luxury-card">
                 <div className="text-4xl md:text-5xl font-light text-purple-400 mb-2">1,247</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Community Members</div>
               </div>
-              <div className="text-center card-3d-hover">
+              <div className="text-center luxury-card">
                 <div className="text-4xl md:text-5xl font-light text-yellow-400 mb-2">85%</div>
                 <div className="text-sm text-white/60 uppercase tracking-wider">Carbon Reduction</div>
               </div>
@@ -158,7 +112,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-20"
             >
-              <h2 className="text-4xl md:text-6xl font-light mb-6">
+              <h2 className="text-4xl md:text-6xl font-light mb-6 text-gradient">
                 Available Vehicles
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto font-light">
@@ -202,7 +156,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-20"
             >
-              <h2 className="text-4xl md:text-6xl font-light mb-6">
+              <h2 className="text-4xl md:text-6xl font-light mb-6 text-gradient">
                 Choose Your Plan
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto font-light">
@@ -223,7 +177,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-4xl md:text-5xl font-light mb-8">
+                <h2 className="text-4xl md:text-5xl font-light mb-8 text-gradient">
                   The Link
                   <br />
                   <span className="text-green-400">Charging Network</span>
@@ -296,7 +250,7 @@ const Index = () => {
               transition={{ duration: 0.8 }}
               className="text-center mb-20"
             >
-              <h2 className="text-4xl md:text-6xl font-light mb-6">
+              <h2 className="text-4xl md:text-6xl font-light mb-6 text-gradient">
                 Community Impact
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto font-light">

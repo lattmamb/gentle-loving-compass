@@ -11,6 +11,7 @@ import VehicleHero from "@/components/vehicles/VehicleHero";
 import VehicleBreadcrumbs from "@/components/vehicles/VehicleBreadcrumbs";
 import VehicleTabs from "@/components/vehicles/VehicleTabs";
 import RelatedVehicles from "@/components/vehicles/RelatedVehicles";
+import { motion } from "framer-motion";
 
 const VehicleDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,12 +24,18 @@ const VehicleDetail = () => {
   if (!vehicle) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Vehicle Not Found</h1>
-          <Button asChild className="bg-blue-600 hover:bg-blue-700">
+        <motion.div 
+          className="text-center luxury-card"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-3xl font-bold mb-4 text-gradient">Vehicle Not Found</h1>
+          <p className="text-white/70 mb-6">The vehicle you're looking for doesn't exist or has been removed.</p>
+          <Button asChild className="tesla-button">
             <Link to="/vehicles">Browse Vehicles</Link>
           </Button>
-        </div>
+        </motion.div>
       </div>
     );
   }
@@ -43,23 +50,46 @@ const VehicleDetail = () => {
       
       <main className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <VehicleBreadcrumbs vehicleModel={vehicle.model} />
-          
-          <div className="mb-12">
-            <VehicleHero 
-              vehicle={vehicle} 
-              selectedColor={selectedColor} 
-              setSelectedColor={setSelectedColor} 
-            />
-          </div>
-          
-          <VehicleTabs 
-            vehicle={vehicle} 
-            selectedTab={selectedTab} 
-            setSelectedTab={setSelectedTab} 
-          />
-          
-          <RelatedVehicles vehicles={relatedVehicles} />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <VehicleBreadcrumbs vehicleModel={vehicle.model} />
+            
+            <motion.div 
+              className="mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <VehicleHero 
+                vehicle={vehicle} 
+                selectedColor={selectedColor} 
+                setSelectedColor={setSelectedColor} 
+              />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <VehicleTabs 
+                vehicle={vehicle} 
+                selectedTab={selectedTab} 
+                setSelectedTab={setSelectedTab} 
+              />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <RelatedVehicles vehicles={relatedVehicles} />
+            </motion.div>
+          </motion.div>
         </div>
       </main>
       
