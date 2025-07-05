@@ -1,6 +1,7 @@
 export interface Vehicle {
   id: string;
   model: string;
+  brand?: string;
   type: "Sedan" | "SUV" | "Truck" | "Sports";
   image: string;
   colorVariants: ColorVariant[];
@@ -15,9 +16,15 @@ export interface Vehicle {
     acceleration: number;
   };
   features: string[];
-  status: "available" | "booked" | "maintenance";
+  status: "available" | "booked" | "maintenance" | "arriving-soon";
   location?: string;
   carbonSavings?: number; // kg CO2 saved per year
+  availability?: {
+    eta: string;
+    inTransit: boolean;
+    batteryLevel?: number;
+  };
+  rating?: number;
 }
 
 export interface ColorVariant {

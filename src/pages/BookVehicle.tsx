@@ -84,7 +84,7 @@ const BookVehicle = () => {
       <UnifiedHeader 
         variant="solid" 
         showProgress={true} 
-        currentStep={bookingStep} 
+        currentStep={1} 
         totalSteps={3} 
       />
       

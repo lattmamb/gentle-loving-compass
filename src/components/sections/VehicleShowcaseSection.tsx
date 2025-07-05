@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import VehicleShowcase from "@/components/automotive/VehicleShowcase";
+import { EnhancedVehicleCard } from "@/components/ui/enhanced-vehicle-card";
 import { vehicles } from "@/data/vehicles";
 
 const VehicleShowcaseSection: React.FC = () => {
@@ -29,10 +29,23 @@ const VehicleShowcaseSection: React.FC = () => {
           </p>
         </motion.div>
         
-        <VehicleShowcase 
-          vehicles={vehicles} 
-          onVehicleSelect={handleVehicleSelect}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {vehicles.map((vehicle, index) => (
+            <motion.div
+              key={vehicle.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <EnhancedVehicleCard
+                vehicle={vehicle}
+                variant="featured"
+                showRideshareFeatures={true}
+                onRent={() => handleVehicleSelect(vehicle)}
+              />
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
