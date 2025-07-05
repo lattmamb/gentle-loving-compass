@@ -87,6 +87,14 @@ const VehiclesList = () => {
                   <option value="price">Sort by Price</option>
                   <option value="range">Sort by Range</option>
                 </select>
+
+                {/* Map View Toggle */}
+                <Link to="/vehicles/map">
+                  <FoamButton variant="secondary">
+                    <MapPin className="w-4 h-4 mr-2" />
+                    Map View
+                  </FoamButton>
+                </Link>
               </div>
             </div>
           </FoamCard>
