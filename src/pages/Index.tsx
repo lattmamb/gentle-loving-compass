@@ -1,6 +1,6 @@
 
 import React from "react";
-import Header from "@/components/Header";
+import UnifiedHeader from "@/components/ui/unified-header";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
 import { NavBarDemo } from "@/components/ui/navbar-demo";
@@ -13,7 +13,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 const Index = () => {
   return (
     <div className="min-h-screen text-white overflow-x-hidden relative bg-black">
-      <Header />
+      <UnifiedHeader />
       
       <main className="relative z-10">
         <HeroSection />

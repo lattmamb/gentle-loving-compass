@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
+import UnifiedHeader from "@/components/ui/unified-header";
 import Footer from "@/components/Footer";
 import { vehicles } from "@/data/vehicles";
 import { Button } from "@/components/ui/button";
@@ -81,7 +81,12 @@ const BookVehicle = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Header />
+      <UnifiedHeader 
+        variant="solid" 
+        showProgress={true} 
+        currentStep={bookingStep} 
+        totalSteps={3} 
+      />
       
       <main className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
