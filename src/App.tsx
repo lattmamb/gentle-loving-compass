@@ -7,6 +7,8 @@ import Pricing from "@/pages/Pricing";
 import BookVehicle from "@/pages/BookVehicle";
 import Dashboard from "@/pages/Dashboard";
 import About from "@/pages/About";
+import HowItWorks from "@/pages/HowItWorks";
+import BookingSuccess from "@/pages/BookingSuccess";
 import BackgroundParticles from "@/components/particles/BackgroundParticles";
 import Locations from "@/pages/Locations";
 
@@ -25,6 +27,8 @@ function App() {
             <Route path="/book/:id" element={<BookVehicle />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/about" element={<About />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/booking-success" element={<BookingSuccess />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

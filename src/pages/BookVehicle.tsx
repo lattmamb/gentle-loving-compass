@@ -129,7 +129,13 @@ const BookVehicle = () => {
         endDate={endDate}
         onConfirm={() => {
           setIsConfirmModalOpen(false);
-          navigate('/dashboard');
+          navigate('/booking-success', { 
+            state: { 
+              vehicleName: `${vehicle.brand} ${vehicle.model}`,
+              startDate: startDate?.toLocaleDateString(),
+              endDate: endDate?.toLocaleDateString()
+            }
+          });
         }}
       />
     </div>

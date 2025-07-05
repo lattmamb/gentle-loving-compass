@@ -3,7 +3,7 @@ import React from "react";
 import { Flame, HeartPulse, Shield, ShieldCheck } from "lucide-react";
 
 interface StatusBadgeProps {
-  status: "available" | "booked" | "maintenance";
+  status: "available" | "booked" | "maintenance" | "arriving-soon";
   vehicleId: string;
 }
 
@@ -28,6 +28,12 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status, vehicleId }) => {
           color: "bg-blue-600/90", 
           icon: <Shield size={12} className="mr-1" />,
           label: "In Service"
+        };
+      case "arriving-soon":
+        return { 
+          color: "bg-purple-600/90", 
+          icon: <Shield size={12} className="mr-1" />,
+          label: "Arriving Soon"
         };
       default:
         return { 
