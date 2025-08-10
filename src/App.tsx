@@ -12,6 +12,10 @@ import HowItWorks from "@/pages/HowItWorks";
 import BookingSuccess from "@/pages/BookingSuccess";
 import Locations from "@/pages/Locations";
 import MainLayout from "@/layouts/MainLayout";
+import Advertising from "@/pages/Advertising";
+import ChargingStations from "@/pages/ChargingStations";
+import Profile from "@/pages/Profile";
+import Support from "@/pages/Support";
 
 function App() {
   return (
@@ -29,6 +33,10 @@ function App() {
           <Route path="how-it-works" element={<HowItWorks />} />
           <Route path="booking-success" element={<BookingSuccess />} />
           <Route path="locations" element={<Locations />} />
+          <Route path="advertising" element={<Advertising />} />
+          <Route path="charging-stations" element={<ChargingStations />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="support" element={<Support />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

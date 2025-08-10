@@ -15,7 +15,10 @@ import {
   Sparkles, 
   Battery,
   Zap,
-  Home
+  Home,
+  Megaphone,
+  PlugZap,
+  LifeBuoy
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CommandPalette from "@/components/dashboard/CommandPalette";
@@ -76,6 +79,10 @@ export default function UnifiedHeader({
     { path: "/vehicles", label: "Fleet", icon: Car },
     { path: "/pricing", label: "Plans", icon: CreditCard },
     { path: "/locations", label: "Locations", icon: Map },
+    { path: "/advertising", label: "Advertising", icon: Megaphone },
+    { path: "/charging-stations", label: "Charging", icon: PlugZap },
+    { path: "/support", label: "Support", icon: LifeBuoy },
+    { path: "/profile", label: "Profile", icon: User },
     { path: "/about", label: "About", icon: Info },
   ];
 
@@ -102,7 +109,7 @@ export default function UnifiedHeader({
             />
           </motion.div>
           <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            EonRides
+            Unity Fleet
           </span>
         </Link>
 
