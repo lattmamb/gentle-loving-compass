@@ -18,6 +18,7 @@ import {
   Home
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import CommandPalette from "@/components/dashboard/CommandPalette";
 import { VehicleAvailabilityPulse, ETATimerLoader } from "./loading-animations";
 
 interface UnifiedHeaderProps {
@@ -35,6 +36,7 @@ export default function UnifiedHeader({
 }: UnifiedHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [cmdOpen, setCmdOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -132,7 +134,7 @@ export default function UnifiedHeader({
         </AnimatePresence>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-4">
           {navigationItems.map((item) => (
             <NavLink 
               key={item.path}
@@ -143,6 +145,16 @@ export default function UnifiedHeader({
               {item.label}
             </NavLink>
           ))}
+
+          {/* Command Palette Trigger */}
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" onClick={() => setCmdOpen(true)} className="rounded-full">
+              <Sparkles className="w-4 h-4 mr-2" />
+              <span className="hidden lg:inline">Command</span>
+              <kbd className="ml-2 hidden xl:inline-flex items-center rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">⌘K</kbd>
+            </Button>
+            <CommandPalette open={cmdOpen} onOpenChange={setCmdOpen} />
+          </div>
           
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button 

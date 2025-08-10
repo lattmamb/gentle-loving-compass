@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import ActivityFeed from "@/components/dashboard/ActivityFeed";
 import { 
   Zap, 
   TrendingUp, 
@@ -166,7 +167,9 @@ const RightDataPanel: React.FC = () => {
         </CardContent>
       </Card>
 
-      {/* Recent Bookings */}
+      {/* Activity Feed */}
+      <ActivityFeed />
+
       <Card className="glass-card">
         <CardHeader className="pb-3">
           <CardTitle className="text-lg text-white flex items-center justify-between">

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { SegmentedControl } from "@/components/ui/segmented-control";
 import { 
   Car, 
   Zap, 
@@ -35,6 +36,7 @@ const VehicleShowcase3D: React.FC = () => {
   const [selectedVehicle, setSelectedVehicle] = useState(0);
   const [isRotating, setIsRotating] = useState(false);
   const [viewAngle, setViewAngle] = useState(0);
+  const [viewMode, setViewMode] = useState<"3d" | "specs" | "map">("3d");
 
   const vehicles: Vehicle[] = [
     {
@@ -109,10 +111,23 @@ const VehicleShowcase3D: React.FC = () => {
       <Card className="glass-card h-96 mb-6 overflow-hidden">
         <CardContent className="p-0 h-full relative">
           {/* Vehicle Display Area */}
-          <div className="relative h-full bg-gradient-to-br from-gray-900 to-black">
+          <div className="relative h-full bg-gradient-to-br from-background to-black/60">
+            {/* Segmented Control */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10">
+              <SegmentedControl
+                options={[
+                  { label: "3D", value: "3d" },
+                  { label: "Specs", value: "specs" },
+                  { label: "Map", value: "map" },
+                ]}
+                value={viewMode}
+                onChange={(val) => setViewMode(val)}
+              />
+            </div>
+
             <motion.div 
               className="absolute inset-0 flex items-center justify-center"
-              animate={{ rotateY: viewAngle }}
+              animate={{ rotateY: viewMode === "3d" ? viewAngle : 0 }}
               transition={{ duration: 0.1 }}
               style={{ perspective: "1000px" }}
             >
@@ -134,20 +149,20 @@ const VehicleShowcase3D: React.FC = () => {
               </Badge>
             </div>
 
-            {/* Controls Overlay */}
             <div className="absolute top-4 right-4 flex space-x-2">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsRotating(!isRotating)}
-                className="bg-black/30 backdrop-blur-sm text-white hover:bg-black/50"
+                className="bg-black/30 backdrop-blur-sm text-foreground hover:bg-black/50"
+                disabled={viewMode !== "3d"}
               >
                 <RotateCcw className="w-4 h-4" />
               </Button>
               <Button
                 variant="ghost"
                 size="sm"
-                className="bg-black/30 backdrop-blur-sm text-white hover:bg-black/50"
+                className="bg-black/30 backdrop-blur-sm text-foreground hover:bg-black/50"
               >
                 <Camera className="w-4 h-4" />
               </Button>
@@ -159,7 +174,7 @@ const VehicleShowcase3D: React.FC = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setSelectedVehicle(prev => prev > 0 ? prev - 1 : vehicles.length - 1)}
-                className="bg-black/30 backdrop-blur-sm text-white hover:bg-black/50"
+                className="bg-black/30 backdrop-blur-sm text-foreground hover:bg-black/50"
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
@@ -178,7 +193,7 @@ const VehicleShowcase3D: React.FC = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setSelectedVehicle(prev => prev < vehicles.length - 1 ? prev + 1 : 0)}
-                className="bg-black/30 backdrop-blur-sm text-white hover:bg-black/50"
+                className="bg-black/30 backdrop-blur-sm text-foreground hover:bg-black/50"
               >
                 <ChevronRight className="w-4 h-4" />
               </Button>
