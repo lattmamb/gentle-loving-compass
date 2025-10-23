@@ -88,12 +88,12 @@ export default function UnifiedHeader({
 
   return (
     <header className={getHeaderClasses()}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex items-center justify-between liquid-glass-strong rounded-2xl px-6 py-4">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="relative"
+            className="relative liquid-glow"
           >
             <Zap className="w-8 h-8 text-primary" />
             <motion.div
@@ -108,7 +108,7 @@ export default function UnifiedHeader({
               }}
             />
           </motion.div>
-          <span className="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          <span className="text-xl font-bold text-liquid-gradient">
             Unity Fleet
           </span>
         </Link>
@@ -155,10 +155,10 @@ export default function UnifiedHeader({
 
           {/* Command Palette Trigger */}
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" onClick={() => setCmdOpen(true)} className="rounded-full">
+            <Button variant="ghost" onClick={() => setCmdOpen(true)} className="rounded-full liquid-glass-button">
               <Sparkles className="w-4 h-4 mr-2" />
               <span className="hidden lg:inline">Command</span>
-              <kbd className="ml-2 hidden xl:inline-flex items-center rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">⌘K</kbd>
+              <kbd className="ml-2 hidden xl:inline-flex items-center rounded-lg liquid-glass px-2 py-1 text-[10px] text-muted-foreground">⌘K</kbd>
             </Button>
             <CommandPalette open={cmdOpen} onOpenChange={setCmdOpen} />
           </div>
@@ -166,7 +166,8 @@ export default function UnifiedHeader({
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button 
               asChild 
-              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 rounded-full px-5 shadow-lg hover:shadow-primary/25"
+              variant="glow"
+              className="liquid-glow rounded-full px-5"
             >
               <Link to="/dashboard">
                 <User className="w-4 h-4 mr-2" />
@@ -210,7 +211,7 @@ export default function UnifiedHeader({
             </Button>
           </SheetTrigger>
           <SheetContent 
-            className="w-80 bg-background/95 backdrop-blur-xl border-border/50"
+            className="w-80 liquid-glass-strong border-border"
             side="right"
           >
             <div className="flex flex-col space-y-6 mt-8">
@@ -257,7 +258,8 @@ export default function UnifiedHeader({
               {/* Mobile CTA */}
               <div className="pt-4 mt-4 border-t border-border/50 space-y-3">
                 <Button 
-                  className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 rounded-full shadow-lg"
+                  variant="glow"
+                  className="w-full liquid-glow rounded-full"
                   onClick={() => {
                     setIsOpen(false);
                     navigate("/dashboard");
@@ -330,13 +332,13 @@ function MobileNavLink({
     <Link
       to={to}
       onClick={onClick}
-      className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 ${
+      className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-300 ${
         isActive 
-          ? "bg-primary/10 text-primary border border-primary/20" 
-          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+          ? "liquid-glass-button liquid-primary border border-primary/30" 
+          : "text-muted-foreground hover:text-foreground liquid-glass-button"
       }`}
     >
-      <span className={isActive ? "text-primary" : "text-muted-foreground"}>{icon}</span>
+      <span className={isActive ? "text-white" : "text-muted-foreground"}>{icon}</span>
       <span>{children}</span>
     </Link>
   );

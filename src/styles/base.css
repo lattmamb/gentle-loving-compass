@@ -1,53 +1,70 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .app-container {
+    @apply min-h-screen text-foreground overflow-x-hidden relative;
+  }
+}
+
 @layer base {
   :root {
-    --background: 220 10% 10%;
+    --background: 220 15% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 220 10% 12%;
+    --card: 220 20% 12%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 220 10% 12%;
+    --popover: 220 20% 12%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 220 100% 60%;
+    --primary: 211 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 225 30% 18%;
+    --secondary: 220 25% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 225 30% 18%;
-    --muted-foreground: 215 20% 75%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 215 15% 70%;
 
-    --accent: 217 50% 25%;
+    --accent: 211 100% 45%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 63% 31%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 225 30% 18%;
-    --input: 225 30% 18%;
-    --ring: 213 27% 84%;
+    --border: 220 25% 20%;
+    --input: 220 25% 15%;
+    --ring: 211 100% 50%;
     
-    --sidebar-background: 220 10% 10%;
+    --sidebar-background: 220 15% 8%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 220 60% 50%;
+    --sidebar-primary: 211 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 10% 15%;
+    --sidebar-accent: 220 20% 12%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 220 10% 15%;
-    --sidebar-ring: 220 60% 50%;
+    --sidebar-border: 220 25% 20%;
+    --sidebar-ring: 211 100% 50%;
 
-    /* Neomorphism specific variables */
-    --neo-bg: 220 10% 12%;
-    --neo-shadow-light: rgba(30, 36, 50, 0.7);
-    --neo-shadow-dark: rgba(10, 12, 18, 0.9);
-    --neo-highlight: 220 10% 20%;
-    --radius: 1rem;
+    /* Apple iOS Liquid Glass Design Tokens */
+    --liquid-glass-bg: 220 20% 12%;
+    --liquid-glass-border: 220 30% 25%;
+    --liquid-glass-glow: 211 100% 50%;
+    --liquid-glass-shine: 0 0% 100%;
+    
+    /* Liquid Glass Shadows */
+    --shadow-soft: 0 4px 24px -8px hsl(220 40% 5% / 0.4);
+    --shadow-medium: 0 8px 32px -12px hsl(220 40% 5% / 0.5);
+    --shadow-strong: 0 16px 48px -16px hsl(220 40% 5% / 0.6);
+    --shadow-glow: 0 0 32px hsl(var(--liquid-glass-glow) / 0.3);
+    
+    /* Liquid Glass Gradients */
+    --gradient-glass: linear-gradient(135deg, hsl(220 25% 18% / 0.8), hsl(220 20% 12% / 0.6));
+    --gradient-shine: linear-gradient(180deg, hsl(0 0% 100% / 0.1), transparent);
+    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(var(--liquid-glass-glow) / 0.15), transparent 70%);
+
+    --radius: 1.25rem;
   }
 }
 

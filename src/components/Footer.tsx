@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-black/30 backdrop-blur-lg border-t border-white/10 text-white py-12 px-6">
+    <footer className="liquid-glass-strong border-t border-border text-foreground py-12 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="col-span-2">
@@ -92,7 +92,7 @@ function SocialIcon({ href, icon }: { href: string; icon: string }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-white/10 hover:bg-white/20 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+      className="liquid-glass-button w-11 h-11 rounded-xl flex items-center justify-center transition-all liquid-glow"
     >
       <span className="sr-only">{icon}</span>
       {icon === "twitter" && (

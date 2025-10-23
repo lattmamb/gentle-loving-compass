@@ -33,7 +33,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white flex relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground flex relative overflow-hidden">
       {/* Background Map */}
       <EnhancedMapBackground 
         className="absolute inset-0 z-0 opacity-30" 
@@ -55,7 +55,7 @@ const Dashboard = () => {
             transition={{ duration: 0.5 }}
             className="mb-6"
           >
-            <div className="glass-luxury p-4 rounded-lg border border-border">
+            <div className="liquid-glass-strong p-6 rounded-2xl border border-border">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-bold text-foreground">Unity Fleet Dashboard</h1>

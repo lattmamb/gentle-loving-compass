@@ -6,24 +6,25 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "neo-elevated bg-gradient-to-b from-blue-600 to-blue-700 text-white hover:from-blue-500 hover:to-blue-600",
-        destructive: "neo-elevated bg-gradient-to-b from-red-600 to-red-700 text-white hover:from-red-500 hover:to-red-600",
-        outline: "neo-elevated border border-white/10 bg-transparent hover:bg-white/5",
-        secondary: "neo-elevated bg-white/10 text-white hover:bg-white/15",
-        ghost: "hover:bg-white/5 hover:text-white",
-        link: "text-blue-400 underline-offset-4 hover:underline",
+        default: "liquid-glass-button liquid-primary rounded-xl",
+        destructive: "liquid-glass-button rounded-xl bg-gradient-to-b from-red-500 to-red-600 text-white hover:from-red-400 hover:to-red-500 border-red-500/30",
+        outline: "liquid-glass-button rounded-xl text-foreground hover:text-primary",
+        secondary: "liquid-glass-button liquid-secondary rounded-xl",
+        ghost: "hover:liquid-glass rounded-lg text-foreground/80 hover:text-foreground",
+        link: "text-primary underline-offset-4 hover:underline hover:text-primary/80",
         neo: "neo-button",
-        glow: "ui-glow-button",
+        glow: "liquid-glass-button liquid-primary liquid-glow rounded-xl",
+        glass: "liquid-glass-card rounded-xl text-foreground",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        default: "h-11 px-6 py-2.5",
+        sm: "h-9 rounded-lg px-4 text-xs",
+        lg: "h-13 rounded-xl px-10 text-base",
+        icon: "h-11 w-11",
       },
     },
     defaultVariants: {

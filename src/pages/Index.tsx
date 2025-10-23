@@ -28,7 +28,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen text-white overflow-x-hidden relative bg-black">
+    <div className="min-h-screen text-foreground overflow-x-hidden relative bg-background">
       <UnifiedHeader />
       
       <main className="relative z-10">

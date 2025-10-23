@@ -2,6 +2,9 @@
 /* Import base styles and CSS variables */
 @import './styles/base.css';
 
+/* Import liquid glass morphism utilities */
+@import './styles/liquid-glass.css';
+
 /* Import neomorphic utilities */
 @import './styles/neomorphic.css';
 
@@ -48,17 +51,43 @@
 
 /* Enhance vehicle pricing component */
 .pricing-card {
-  @apply luxury-card transition-all duration-300 hover:translate-y-[-4px];
+  position: relative;
+  background: var(--gradient-glass);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid hsl(var(--liquid-glass-border) / 0.3);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease-out;
+  box-shadow: var(--shadow-medium), inset 0 1px 0 hsl(var(--liquid-glass-shine) / 0.1);
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
 }
 
 /* Style enhancements for vehicle cards */
 .vehicle-card {
-  @apply luxury-card;
+  position: relative;
+  background: var(--gradient-glass);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid hsl(var(--liquid-glass-border) / 0.3);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-medium), inset 0 1px 0 hsl(var(--liquid-glass-shine) / 0.1);
 }
 
 /* Enhance buttons */
 .primary-button {
-  @apply tesla-button text-white font-medium transition-all duration-300;
+  background: linear-gradient(135deg, hsl(211 100% 55%), hsl(211 100% 45%));
+  color: hsl(0 0% 100%);
+  border: 1px solid hsl(211 100% 60% / 0.5);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-soft), 0 0 20px hsl(211 100% 50% / 0.3);
 }
 
 /* Scrollbar Styling */

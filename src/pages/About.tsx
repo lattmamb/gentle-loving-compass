@@ -30,10 +30,7 @@ const About = () => {
                 We're on a mission to make luxury electric vehicles accessible through 
                 a seamless, flexible subscription service that puts you in control.
               </p>
-              <FoamBlock 
-                variant="glow" 
-                className="py-8 px-6 md:p-10 max-w-4xl mx-auto"
-              >
+              <div className="liquid-glass-card liquid-glow py-8 px-6 md:p-10 max-w-4xl mx-auto">
                 <img 
                   src="/placeholder.svg" 
                   alt="Tesla Experience" 
@@ -44,7 +41,7 @@ const About = () => {
                   is not just a choice for the few, but an accessible luxury for the many."
                 </p>
                 <p className="mt-4 font-medium">— Emma Wright, Founder & CEO</p>
-              </FoamBlock>
+              </div>
             </div>
           </motion.section>
           
@@ -69,19 +66,15 @@ const About = () => {
                   and plans for international expansion.
                 </p>
                 
-                <Link 
-                  to="/vehicles" 
-                  className="apple-button inline-flex items-center"
-                >
-                  Explore Our Fleet
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                <Link to="/vehicles">
+                  <Button variant="glow" className="inline-flex items-center liquid-glow">
+                    Explore Our Fleet
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
                 </Link>
               </div>
               
-              <FoamBlock 
-                variant="interactive"
-                className="h-full"
-              >
+              <div className="liquid-glass-card h-full">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="aspect-square rounded-lg overflow-hidden">
                     <img 
@@ -105,7 +98,7 @@ const About = () => {
                     />
                   </div>
                 </div>
-              </FoamBlock>
+              </div>
             </div>
           </section>
           
@@ -143,7 +136,7 @@ const About = () => {
             </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <FoamBlock className="h-full">
+              <div className="liquid-glass-card h-full">
                 <div className="flex flex-col h-full">
                   <h3 className="text-2xl font-bold mb-6 text-gradient-blue">
                     Premium Fleet
@@ -156,18 +149,15 @@ const About = () => {
                     <FeatureItem>Pristine condition guaranteed</FeatureItem>
                   </ul>
                   
-                  <Link 
-                    to="/vehicles" 
-                    className="ui-glow-button mt-auto self-start"
-                  >
-                    <span className="block px-6 py-2.5 text-white font-medium">
+                  <Link to="/vehicles" className="mt-auto self-start block">
+                    <Button variant="glow" className="liquid-glow">
                       View Vehicles
-                    </span>
+                    </Button>
                   </Link>
                 </div>
-              </FoamBlock>
+              </div>
               
-              <FoamBlock className="h-full">
+              <div className="liquid-glass-card h-full">
                 <div className="flex flex-col h-full">
                   <h3 className="text-2xl font-bold mb-6 text-gradient-blue">
                     Flexible Subscriptions
@@ -180,16 +170,13 @@ const About = () => {
                     <FeatureItem>Concierge delivery and pick-up</FeatureItem>
                   </ul>
                   
-                  <Link 
-                    to="/pricing" 
-                    className="ui-glow-button mt-auto self-start"
-                  >
-                    <span className="block px-6 py-2.5 text-white font-medium">
+                  <Link to="/pricing" className="mt-auto self-start block">
+                    <Button variant="glow" className="liquid-glow">
                       View Plans
-                    </span>
+                    </Button>
                   </Link>
                 </div>
-              </FoamBlock>
+              </div>
             </div>
           </section>
           
@@ -228,7 +215,7 @@ const About = () => {
           
           {/* Join Us Section */}
           <section>
-            <FoamBlock className="text-center py-16">
+            <div className="liquid-glass-card liquid-glow text-center py-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gradient">
                 Ready to Experience Tesla Luxury?
               </h2>
@@ -239,23 +226,21 @@ const About = () => {
               </p>
               
               <div className="flex flex-wrap justify-center gap-6">
-                <Link 
-                  to="/vehicles" 
-                  className="apple-button inline-flex items-center"
-                >
-                  <Car className="mr-2 h-5 w-5" />
-                  Browse Vehicles
+                <Link to="/vehicles">
+                  <Button variant="glow" className="inline-flex items-center liquid-glow">
+                    <Car className="mr-2 h-5 w-5" />
+                    Browse Vehicles
+                  </Button>
                 </Link>
                 
-                <Link 
-                  to="/pricing" 
-                  className="apple-button inline-flex items-center"
-                >
-                  <CreditCard className="mr-2 h-5 w-5" />
-                  View Plans
+                <Link to="/pricing">
+                  <Button variant="glass" className="inline-flex items-center">
+                    <CreditCard className="mr-2 h-5 w-5" />
+                    View Plans
+                  </Button>
                 </Link>
               </div>
-            </FoamBlock>
+            </div>
           </section>
         </div>
       </main>
@@ -267,15 +252,17 @@ const About = () => {
 };
 
 // Helper Components
+import { Button } from "@/components/ui/button";
+
 const ValueCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => {
   return (
-    <FoamBlock variant="interactive" className="h-full flex flex-col items-center text-center">
+    <div className="liquid-glass-card h-full flex flex-col items-center text-center">
       <div className="mb-4 p-4 bg-blue-500/10 rounded-full">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-3 text-white">{title}</h3>
-      <p className="text-white/70">{description}</p>
-    </FoamBlock>
+      <h3 className="text-xl font-semibold mb-3 text-foreground">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
+    </div>
   );
 };
 
@@ -294,7 +281,7 @@ const FeatureItem = ({ children }: { children: React.ReactNode }) => {
 
 const TeamMember = ({ name, title, image }: { name: string; title: string; image: string }) => {
   return (
-    <FoamBlock variant="interactive" className="text-center">
+    <div className="liquid-glass-card text-center">
       <div className="h-48 w-48 rounded-full overflow-hidden mx-auto mb-6">
         <img 
           src={image} 
@@ -302,9 +289,9 @@ const TeamMember = ({ name, title, image }: { name: string; title: string; image
           className="w-full h-full object-cover"
         />
       </div>
-      <h3 className="text-lg font-semibold text-white">{name}</h3>
-      <p className="text-white/60">{title}</p>
-    </FoamBlock>
+      <h3 className="text-lg font-semibold text-foreground">{name}</h3>
+      <p className="text-muted-foreground">{title}</p>
+    </div>
   );
 };
 

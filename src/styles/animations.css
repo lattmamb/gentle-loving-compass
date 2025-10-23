@@ -1,114 +1,112 @@
 
-@layer utilities {
-  .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out;
-  }
-  
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-  
-  .pulse-glow {
-    animation: pulseGlow 2s infinite;
-  }
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
 
-  .floating {
-    animation: floating 3s ease-in-out infinite;
-  }
-  
-  .rotate-3d {
-    transition: transform 0.3s ease;
-  }
-  
-  .rotate-3d:hover {
-    transform: rotateX(10deg) rotateY(-10deg);
-  }
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
 
-  .animate-bounce-subtle {
-    animation: bounceTiny 2s infinite;
-  }
+.hover-scale {
+  @apply transition-transform duration-300 hover:scale-105;
+}
 
-  .animate-shine {
-    position: relative;
-    overflow: hidden;
-  }
+.pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
 
-  .animate-shine::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      to bottom right, 
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(255, 255, 255, 0) 60%,
-      rgba(255, 255, 255, 0) 100%
-    );
-    animation: shine 3s infinite;
-    transform: rotate(30deg);
-  }
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
 
-  .animate-pulse-ring {
-    position: relative;
-  }
-  
-  .animate-pulse-ring::after {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 9999px;
-    border: 2px solid rgba(59, 130, 246, 0.5);
-    animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
-  }
+.rotate-3d {
+  transition: transform 0.3s ease;
+}
 
-  .animate-tilt-3d {
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease;
-  }
+.rotate-3d:hover {
+  transform: rotateX(10deg) rotateY(-10deg);
+}
 
-  .animate-tilt-3d:hover {
-    transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
-  }
-  
-  .animate-float-slow {
-    animation: floatSlow 6s ease-in-out infinite;
-  }
-  
-  .animate-blur-in {
-    animation: blurIn 1s ease-out forwards;
-  }
-  
-  .parallax {
-    transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
-  }
-  
-  .hover-lift {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .hover-glow {
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .hover-glow:hover {
-    box-shadow: 0 0 15px 2px rgba(59, 130, 246, 0.5);
-  }
+.animate-bounce-subtle {
+  animation: bounceTiny 2s infinite;
+}
+
+.animate-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right, 
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shine 3s infinite;
+  transform: rotate(30deg);
+}
+
+.animate-pulse-ring {
+  position: relative;
+}
+
+.animate-pulse-ring::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 9999px;
+  border: 2px solid rgba(59, 130, 246, 0.5);
+  animation: pulseRing 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+.animate-tilt-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.animate-tilt-3d:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-blur-in {
+  animation: blurIn 1s ease-out forwards;
+}
+
+.parallax {
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 15px 2px rgba(59, 130, 246, 0.5);
 }
 
 @keyframes slideUp {
